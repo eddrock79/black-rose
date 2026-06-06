@@ -207,7 +207,8 @@
     host.innerHTML='<div class="state"><div class="spinner"></div>Loading recipes…</div>';
     try{
       const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),8000);
-      const res=await fetch(CSV_URL+'&_='+Date.now(),{signal:ctrl.signal});
+      const csvUrl='https://docs.google.com/spreadsheets/d/'+BL_CFG.cocktails+'/gviz/tq?tqx=out:csv&_='+Date.now();  // read live so it can't be the pre-config placeholder
+      const res=await fetch(csvUrl,{signal:ctrl.signal});
       clearTimeout(t);
       if(!res.ok) throw new Error('sheet not reachable');
       const rows=parseCSV(await res.text());
@@ -432,7 +433,7 @@
   }
  
   buildPhotos();
-  loadRecipes();
+  (window.BLConfig&&BLConfig.refresh?BLConfig.refresh():Promise.resolve()).catch(function(){}).then(loadRecipes);  // wait for config first
 </script>
 </body>
 </html>
