@@ -23,7 +23,7 @@
   // PINs come from bl-config.js via window.BL_CFG.
   const AUTH_KEY     = 'bl_auth_'+((window.BL_CFG&&BL_CFG.venueKey)||'v');        // VENUE-SCOPED {role, ts}
   const PIN_CACHE    = 'bl_pin_cache_'+((window.BL_CFG&&BL_CFG.venueKey)||'v');   // VENUE-SCOPED {staff, manager, ts}
-  try{localStorage.removeItem('bl_auth');localStorage.removeItem('bl_pin_cache');}catch(e){}  // wipe legacy shared keys (pre venue-scoping)
+  try{localStorage.removeItem('bl_auth');localStorage.removeItem('bl_pin_cache');}catch(e){}  // wipe legacy shared keys
   const FETCH_MS     = 7000;             // give up on the sheet after 7s
   const FALLBACK     = { staff: '1234', manager: '1111' };
 

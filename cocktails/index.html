@@ -126,12 +126,12 @@
   <div class="topbar-right"></div>
 </div>
 <div class="nav-bar">
-    <button class="nav-btn" type="button" onclick="try{var k=(window.BL_CFG&&BL_CFG.venueKey)||'v';localStorage.removeItem('bl_auth_'+k);localStorage.removeItem('bl_pin_cache_'+k);sessionStorage.clear();}catch(e){};location.href='/';" style="cursor:pointer">🏘️ Switch Venue</button>
   <a class="nav-btn" id="nav-home" href="../home">🏠 Home</a>
   <a class="nav-btn" href="../weekly-cleaning">📋 Weekly Jobs</a>
   <a class="nav-btn" href="../end-of-night">🌙 End Of Night</a>
   <a class="nav-btn" href="../rotas">📅 Rotas</a>
   <span class="nav-btn current">🍸 Cocktails</span>
+  <button class="nav-btn" type="button" onclick="try{var k=(window.BL_CFG&&BL_CFG.venueKey)||'v';localStorage.removeItem('bl_auth_'+k);localStorage.removeItem('bl_pin_cache_'+k);sessionStorage.clear();}catch(e){};location.href='/';" style="cursor:pointer">🏘️ Switch Venue</button>
 </div>
  
 <div class="wrap">
@@ -208,7 +208,7 @@
     host.innerHTML='<div class="state"><div class="spinner"></div>Loading recipes…</div>';
     try{
       const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),8000);
-      const csvUrl='https://docs.google.com/spreadsheets/d/'+BL_CFG.cocktails+'/gviz/tq?tqx=out:csv&_='+Date.now();  // config-authoritative, read live
+      const csvUrl='https://docs.google.com/spreadsheets/d/'+BL_CFG.cocktails+'/gviz/tq?tqx=out:csv&_='+Date.now();
       const res=await fetch(csvUrl,{signal:ctrl.signal});
       clearTimeout(t);
       if(!res.ok) throw new Error('sheet not reachable');
@@ -434,7 +434,7 @@
   }
  
   buildPhotos();
-  (window.BLConfig&&BLConfig.refresh?BLConfig.refresh():Promise.resolve()).catch(function(){}).then(loadRecipes);  // wait for config first
+  (window.BLConfig&&BLConfig.refresh?BLConfig.refresh():Promise.resolve()).catch(function(){}).then(loadRecipes);
 </script>
 </body>
 </html>
