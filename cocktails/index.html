@@ -207,7 +207,7 @@
     host.innerHTML='<div class="state"><div class="spinner"></div>Loading recipes…</div>';
     try{
       const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),8000);
-      const csvUrl='https://docs.google.com/spreadsheets/d/'+BL_CFG.cocktails+'/gviz/tq?tqx=out:csv&_='+Date.now();  // read live so it can't be the pre-config placeholder
+      const csvUrl='https://docs.google.com/spreadsheets/d/'+BL_CFG.cocktails+'/gviz/tq?tqx=out:csv&_='+Date.now();  // config-authoritative, read live
       const res=await fetch(csvUrl,{signal:ctrl.signal});
       clearTimeout(t);
       if(!res.ok) throw new Error('sheet not reachable');
