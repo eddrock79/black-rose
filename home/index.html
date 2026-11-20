@@ -131,6 +131,17 @@
   .joke-btn:hover{color:var(--text);}
   .muted-text{font-size:13px;color:var(--muted);font-style:italic;}
   .tn-opening{background:transparent!important;color:#e8a93a!important;border:2px solid #e8a93a;margin-bottom:8px}
+  .gd-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.gd-line{font-size:16px}
+  .gd-badge{font:700 13px Outfit,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:2px solid currentColor}
+  .gd-badge.ok{color:#7ad38a}.gd-badge.amber{color:#e8a93a}.gd-badge.red{color:#ff6b8b}
+  .gd-now{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-bottom:12px}.gd-now b{color:var(--text);font-size:16px}
+  .gd-chart{position:relative;display:flex;align-items:flex-end;gap:6px;height:120px;padding:0 0 18px;border-bottom:1px solid var(--border)}
+  .gd-b{flex:1;position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+  .gd-b i{display:block;width:100%;max-width:34px;border-radius:5px 5px 0 0}.gd-b i.ok{background:#7ad38a}.gd-b i.amber{background:#e8a93a}.gd-b i.red{background:#ff6b8b}
+  .gd-b u{position:absolute;bottom:-4px;width:70%;height:3px;background:#5aa9e6;border-radius:2px}.gd-b small{position:absolute;bottom:-18px;font-size:11px;color:var(--muted)}
+  .gd-lim{position:absolute;left:0;right:0;border-top:1px dashed #e8a93a99;pointer-events:none}.gd-lim.red{border-top-color:#ff6b8b99}
+  .gd-lim em{position:absolute;right:0;top:-15px;font:600 10px Outfit,sans-serif;font-style:normal;color:var(--muted)}
+  .gd-key{font-size:12px;color:var(--muted);margin-top:22px}.gd-notes{margin:10px 0 0;padding:0;list-style:none;font-size:15px;line-height:1.7}
   @media(min-width:1000px){.hm-cols{grid-template-columns:1fr!important}.hm-col:first-child{display:grid!important;grid-template-columns:1fr 1fr;align-items:start}}
 </style>
 <script src="../bl-config.js"></script>
@@ -184,7 +195,7 @@
     <a class="nav-btn" href="../end-of-night">End Of Night</a>
     <a class="nav-btn" id="nav-wj" href="#">Weekly Jobs</a>
     <a class="nav-btn" href="../cocktails">Cocktails</a>
-    <a class="nav-btn" href="http://eddrock79nas:8101/">Pub Dashboard</a>
+    <a class="nav-btn" href="http://eddrock79nas:8102/">Pub Dashboard</a>
     <a class="nav-btn mgr" id="nav-dash" href="../dashboard" style="display:none">Dashboard</a>
     <button class="nav-btn" type="button" onclick="BLAuth.switchVenue()" style="cursor:pointer">Switch Venue</button>
     <button class="nav-btn" onclick="logOut()" style="cursor:pointer;color:var(--red);border-color:var(--red)">Log Out</button>
@@ -208,6 +219,12 @@
       <a class="tn-eon tn-opening" href="../end-of-night/?mode=opening">☀ Opening checks<small id="tn-open-prog"></small></a>
       <a class="tn-eon" href="../end-of-night/">✓ Tick tonight's closing jobs<small id="tn-eon-prog"></small></a>
       <a class="tn-wj" href="../weekly-cleaning/" id="tn-wj" style="display:none"></a>
+    </div>
+
+    <!-- Beer garden: wind, rain, frost and dark -->
+    <div class="card gd-card">
+      <div class="card-title">🌹 Beer garden</div>
+      <div id="garden-content"><div class="muted-text">Loading the forecast…</div></div>
     </div>
 
     <div class="hm-cols"><div class="hm-col">
@@ -348,6 +365,54 @@ async function loadEvents(){ try{localStorage.setItem(EVENTS_CACHE,'[]');}catch(
     try{localStorage.setItem(EVENTS_CACHE,JSON.stringify(all));}catch(e){}}
   eventsFailed=ok.length<got.length;
   renderEvents();
+}
+
+// ── BEER GARDEN: wind, rain, frost and dark for the outside area ──
+// Same limits as the Black Rose report: gusts 19 mph = no parasols, 31 mph = caution. Garden 9am–9pm (Sunday 11am).
+const GD={amber:19,red:31,open:9,close:21,sunOpen:11,show:12};
+const GD_URL='https://api.open-meteo.com/v1/forecast?latitude=55.9526&longitude=-3.1990'
+  +'&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_gusts_10m,precipitation'
+  +'&hourly=temperature_2m,precipitation_probability,precipitation,wind_speed_10m,wind_gusts_10m'
+  +'&daily=sunrise,sunset&wind_speed_unit=mph&timezone=Europe%2FLondon&forecast_days=3';
+const GD_DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function gdStatus(g){return g>=GD.red?'red':g>=GD.amber?'amber':'ok';}
+function gdHM(iso){return iso.slice(11,16);}
+function gdOpenH(dayISO){return new Date(dayISO+'T12:00').getDay()===0?GD.sunOpen:GD.open;}
+function gdWhen(x,today){return x.day===today?gdHM(x.t):GD_DOW[new Date(x.day+'T12:00').getDay()]+' '+gdHM(x.t);}
+async function loadGarden(){
+  const el=document.getElementById('garden-content');if(!el)return;
+  try{
+    const r=await fetch(GD_URL);if(!r.ok)throw 0;const d=await r.json();
+    const now=new Date(),today=d.daily.time[0],nowH=now.getHours();
+    const H=d.hourly.time.map((t,i)=>({t,h:+t.slice(11,13),day:t.slice(0,10),g:d.hourly.wind_gusts_10m[i],w:d.hourly.wind_speed_10m[i],
+      p:d.hourly.precipitation_probability[i],mm:d.hourly.precipitation[i],T:d.hourly.temperature_2m[i]}));
+    const ahead=H.filter(x=>x.day>today||x.h>=nowH);
+    // the next garden opening hours, running on into tomorrow once today's are nearly over
+    const hrs=ahead.filter(x=>x.h>=gdOpenH(x.day)&&x.h<GD.close).slice(0,GD.show);
+    if(!hrs.length)throw 0;
+    const span=hrs[0].day===today?(hrs[hrs.length-1].day===today?'today':'today and tomorrow'):'tomorrow';
+    const peak=hrs.reduce((m,x)=>x.g>m.g?x:m,{g:-1});
+    const st=gdStatus(peak.g);
+    const badge={ok:'Wind OK',amber:'No parasols',red:'Caution'}[st];
+    const line=st==='ok'?`Gusts up to ${Math.round(peak.g)} mph ${span}, fine for parasols.`
+      :st==='amber'?`Gusts up to ${Math.round(peak.g)} mph around ${gdWhen(peak,today)}. Keep parasols down.`
+      :`Gusts up to ${Math.round(peak.g)} mph around ${gdWhen(peak,today)}. Check tables, chairs and parasols are secured.`;
+    const notes=[];
+    const wet=hrs.filter(x=>x.p>=50||x.mm>=0.3);
+    if(wet.length) notes.push(`🌧 Rain likely from ${gdWhen(wet[0],today)}: tarp on the outside tables.`);
+    const cold=ahead.slice(0,18).filter(x=>x.T<=1);
+    if(cold.length) notes.push(`❄ Frost or ice risk from ${gdWhen(cold[0],today)} (down to ${Math.round(Math.min(...cold.map(x=>x.T)))}°C): watch the steps and the garden.`);
+    const sunset=d.daily.sunset[0];
+    if(sunset&&sunset>now.toISOString().slice(0,11)) notes.push(new Date()<new Date(sunset)?`🌇 Sunset ${gdHM(sunset)}: candles out when it gets dark.`:`🌙 Sunset was ${gdHM(sunset)}: candles should be out.`);
+    const c=d.current;
+    const max=Math.max(GD.red+4,...hrs.map(x=>x.g));
+    const bars=hrs.map((x,i)=>`<div class="gd-b" title="${gdWhen(x,today)}: gusts ${Math.round(x.g)} mph, wind ${Math.round(x.w)} mph, rain ${x.p}%"><i class="${gdStatus(x.g)}" style="height:${Math.max(6,Math.round(x.g/max*100))}%"></i>${x.p>=50?'<u></u>':''}<small>${(i===0||x.day!==hrs[i-1].day)&&x.day!==today?GD_DOW[new Date(x.day+'T12:00').getDay()]+' ':''}${x.h}</small></div>`).join('');
+    el.innerHTML=`<div class="gd-top"><span class="gd-badge ${st}">${badge}</span><span class="gd-line">${line}</span></div>
+      <div class="gd-now"><span><b>${Math.round(c.temperature_2m)}°C</b> feels ${Math.round(c.apparent_temperature)}°</span><span>Wind <b>${Math.round(c.wind_speed_10m)}</b> mph</span><span>Gusts <b>${Math.round(c.wind_gusts_10m)}</b> mph</span><span>Garden ${gdOpenH(today)}am–${GD.close-12}pm</span></div>
+      <div class="gd-chart"><div class="gd-lim" style="bottom:${Math.round(GD.amber/max*100)}%"><em>${GD.amber} mph · no parasols</em></div><div class="gd-lim red" style="bottom:${Math.round(GD.red/max*100)}%"><em>${GD.red} mph · caution</em></div>${bars}</div>
+      <div class="gd-key">Gusts for the next garden hours (${span}) · a blue line under a bar means rain is likely</div>
+      ${notes.length?`<ul class="gd-notes">${notes.map(n=>`<li>${n}</li>`).join('')}</ul>`:''}`;
+  }catch(e){ el.innerHTML='<div class="muted-text">Couldn’t load the garden forecast.</div>'; }
 }
 
 // ── JOB PROGRESS: closing jobs (last night and tonight) and today's weekly jobs, read from the same sheets the job pages save to ──
@@ -512,6 +577,7 @@ function showApp(){
   loadTonight().then(buildTicker);
   loadWeather();
   loadJobProgress();
+  loadGarden();setInterval(loadGarden,30*60*1000);
   buildTicker();
   // pull the shared notice + handover from the sheet, then re-render
   fetchShared().then(()=>{ loadNotice(); renderHandover(); buildTicker(); });
@@ -651,11 +717,11 @@ const WX_DESC={0:'Clear',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog
 async function loadWeather(){
   const el=document.getElementById('wx-content');
   try{
-    const res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=55.9533&longitude=-3.1883&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m&timezone=Europe/London');
+    const res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=55.9533&longitude=-3.1883&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m&wind_speed_unit=mph&timezone=Europe/London');
     if(!res.ok)throw new Error();
     const d=await res.json();
     const c=d.current;
-    el.innerHTML=`<span class="tn-wxi">${WX_ICONS[c.weathercode]||'🌡'}</span><b>${Math.round(c.temperature_2m)}°C</b> ${WX_DESC[c.weathercode]||''}<small> · feels ${Math.round(c.apparent_temperature)}° · wind ${Math.round(c.windspeed_10m)} km/h</small>`;
+    el.innerHTML=`<span class="tn-wxi">${WX_ICONS[c.weathercode]||'🌡'}</span><b>${Math.round(c.temperature_2m)}°C</b> ${WX_DESC[c.weathercode]||''}<small> · feels ${Math.round(c.apparent_temperature)}° · wind ${Math.round(c.windspeed_10m)} mph</small>`;
   }catch(e){el.innerHTML='';}
 }
 
