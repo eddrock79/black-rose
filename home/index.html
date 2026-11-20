@@ -130,7 +130,10 @@
   .joke-btn{margin-top:10px;font-size:12px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;}
   .joke-btn:hover{color:var(--text);}
   .muted-text{font-size:13px;color:var(--muted);font-style:italic;}
-  .tn-opening{background:transparent!important;color:#e8a93a!important;border:2px solid #e8a93a;margin-bottom:8px}
+  .tn-opening{background:transparent!important;color:#a3c43a!important;border:2px solid #a3c43a;margin-bottom:8px}
+  .br-crew{margin:0 0 12px}.br-crew .tn-lbl span{font-weight:500;letter-spacing:0;text-transform:none}
+  #br-crew-chips{display:flex;flex-wrap:wrap;gap:6px}.br-c{font:600 14px Outfit,sans-serif;padding:7px 13px;border-radius:999px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer}
+  .br-c.on{background:#a3c43a;border-color:#a3c43a;color:#0a0a0b}.br-c.clr{background:transparent;color:var(--muted)}
   .gd-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.gd-line{font-size:16px}
   .gd-badge{font:700 13px Outfit,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:2px solid currentColor}
   .gd-badge.ok{color:#7ad38a}.gd-badge.amber{color:#f2b552}.gd-badge.red{color:#ff6b8b}
@@ -212,6 +215,7 @@
     <!-- Tonight: who's on, what's on, the weather in one line, and the closing jobs button -->
     <div class="card tn-card" id="tonight-card">
       <div class="tn-head"><div class="card-title" id="tonight-title" style="margin-bottom:0">Tonight</div><div class="tn-wx" id="wx-content"></div></div>
+      <div class="br-crew"><div class="tn-lbl">Working today <span id="br-crew-n"></span></div><div id="br-crew-chips"></div></div>
       <div class="tn-grid" style="display:none">
         <div><div class="tn-lbl">On shift</div><div id="tonight-content"><div class="muted-text">Loading the rota…</div></div></div>
         <div><div class="tn-lbl">On tonight</div><div id="tonight-events"><div class="muted-text">Loading…</div></div></div>
@@ -366,6 +370,23 @@ async function loadEvents(){ try{localStorage.setItem(EVENTS_CACHE,'[]');}catch(
   eventsFailed=ok.length<got.length;
   renderEvents();
 }
+
+
+// ── WORKING TODAY: pick who's in; the job pages then show only those names (kept on this iPad, resets at 7am) ──
+const BR_STAFF0=["Dave", "Keefe", "Callan", "Chloe", "Chaz", "Aaron", "Stuart", "Junior", "Alannah", "Laura", "Frank", "Scott M."];
+let brStaff=[];
+function brDay(){const n=new Date();if(n.getHours()<7)n.setDate(n.getDate()-1);return n.getFullYear()+'-'+(n.getMonth()+1)+'-'+n.getDate();}
+function brCrewGet(){try{const c=JSON.parse(localStorage.getItem('br_crew')||'null');return c&&c.d===brDay()&&Array.isArray(c.n)?c.n:[];}catch(e){return [];}}
+function brCrewSet(a){try{localStorage.setItem('br_crew',JSON.stringify({d:brDay(),n:a}));}catch(e){}renderBrCrew();}
+function brToggle(n){const s=brCrewGet();const i=s.indexOf(n);if(i>=0)s.splice(i,1);else s.push(n);brCrewSet(s);}
+async function loadBrStaff(){
+  try{const r=await fetch('https://docs.google.com/spreadsheets/d/'+BL_CFG.endOfNight+'/gviz/tq?tqx=out:csv&sheet=Staff&t='+Date.now(),{cache:'no-store'});
+    if(r.ok){const t=await r.text();brStaff=t.split('\n').slice(1).map(l=>l.split(',')[0].replace(/"/g,'').trim()).filter(n=>n&&!/set onshift/i.test(n));}}catch(e){}
+  if(!brStaff.length)brStaff=BR_STAFF0.slice();renderBrCrew();}
+function renderBrCrew(){const el=document.getElementById('br-crew-chips'),c=document.getElementById('br-crew-n');if(!el)return;const sel=brCrewGet().filter(n=>brStaff.includes(n));
+  el.innerHTML=brStaff.map(n=>`<button type="button" class="br-c${sel.includes(n)?' on':''}" data-n="${escHtml(n)}" onclick="brToggle(this.dataset.n)">${sel.includes(n)?'✓ ':''}${escHtml(n)}</button>`).join('')
+    +(sel.length?'<button type="button" class="br-c clr" onclick="brCrewSet([])">Clear</button>':'');
+  if(c)c.textContent=sel.length?'· '+sel.length+' picked: only they show on the checklists today':'· tap who’s in today';}
 
 // ── BEER GARDEN: wind, rain, frost and dark for the outside area ──
 // Same limits as the Black Rose report: gusts 19 mph = no parasols, 31 mph = caution. Garden 9am–9pm (Sunday 11am).
@@ -578,6 +599,7 @@ function showApp(){
   loadWeather();
   loadJobProgress();
   loadGarden();setInterval(loadGarden,30*60*1000);
+  loadBrStaff();
   buildTicker();
   // pull the shared notice + handover from the sheet, then re-render
   fetchShared().then(()=>{ loadNotice(); renderHandover(); buildTicker(); });

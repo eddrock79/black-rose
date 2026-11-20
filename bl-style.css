@@ -29,49 +29,49 @@ input,select,textarea{font-family:Barlow,sans-serif}
 /* ===== Banshee look (navy, purple, lime; Bevan + Signika) - matches the Banshee board and the new end of night page ===== */
 html:root{
   --bg:#0a0a0b;--surface:#111113;--surface2:#1b1b1e;--border:#2a2a2e;
-  --accent:#e8a93a;--accent-dim:rgba(232,169,58,.14);
+  --accent:#a3c43a;--accent-dim:rgba(163,196,58,.14);
   --text:#ffffff;--muted:#a9a9b2;
-  --green:#e8a93a;--green-dim:rgba(232,169,58,.12);--done-bg:rgba(232,169,58,.08);
-  --purple:#a3304e;--purple-dim:rgba(139,29,56,.2);--red:#ff6b8b;--red-dim:rgba(255,107,139,.1);
+  --green:#a3c43a;--green-dim:rgba(163,196,58,.12);--done-bg:rgba(163,196,58,.08);
+  --purple:#a8336d;--purple-dim:rgba(138,40,88,.2);--red:#ff6b8b;--red-dim:rgba(255,107,139,.1);
   --dash-display:"Alfa Slab One",Georgia,serif;
 }
-html,body{background:radial-gradient(900px 420px at 85% -5%,#8b1d3855 0,transparent 65%),repeating-linear-gradient(135deg,#ffffff03 0 2px,transparent 2px 14px),#0a0a0b!important;background-attachment:fixed!important}
+html,body{background:radial-gradient(900px 420px at 85% -5%,#8a285855 0,transparent 65%),repeating-linear-gradient(135deg,#ffffff03 0 2px,transparent 2px 14px),#0a0a0b!important;background-attachment:fixed!important}
 body{font-family:"Outfit",system-ui,-apple-system,"Segoe UI",sans-serif!important}
 input,select,textarea,button{font-family:"Outfit",sans-serif}
-.topbar{border-bottom:2px solid #8b1d38!important}
-.topbar .bl-tag{color:#e8a93a!important;font-family:"Outfit",sans-serif!important;font-weight:600;letter-spacing:.18em!important;font-size:15px!important}
+.topbar{border-bottom:2px solid #8a2858!important}
+.topbar .bl-tag{color:#a3c43a!important;font-family:"Outfit",sans-serif!important;font-weight:600;letter-spacing:.18em!important;font-size:15px!important}
 .card{background:linear-gradient(180deg,#141416,#0f0f11)!important;border-color:#333338!important;border-radius:12px!important}
-.card-title,.section-title,.card h2{font-family:"Alfa Slab One",Georgia,serif!important;font-weight:400!important;letter-spacing:.01em!important;color:#fff!important;text-shadow:2px 2px 0 #3b0a14}
+.card-title,.section-title,.card h2{font-family:"Alfa Slab One",Georgia,serif!important;font-weight:400!important;letter-spacing:.01em!important;color:#fff!important;text-shadow:2px 2px 0 #3d0f24}
 /* tab row: compact and always one line (scrolls sideways only if the screen is too narrow) */
 .nav-bar{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:6px!important;padding:8px 16px!important}
 .nav-bar::-webkit-scrollbar{display:none}
 .nav-btn{flex:none;white-space:nowrap;font-family:"Outfit",sans-serif!important;font-size:15px!important;font-weight:600!important;padding:7px 13px!important;background:#1b1b1e!important;border-color:#333338!important;color:#e2ddd5!important}
-.nav-btn:hover{border-color:#e8a93a!important;color:#e8a93a!important}
-.nav-btn.current{background:#e8a93a!important;color:#0a0a0b!important;border-color:#e8a93a!important}
+.nav-btn:hover{border-color:#a3c43a!important;color:#a3c43a!important}
+.nav-btn.current{background:#a3c43a!important;color:#0a0a0b!important;border-color:#a3c43a!important}
 /* Switch Venue / Log Out live in the header now (see bl-header.js) */
 .bl-acts{display:flex;gap:8px;align-items:center}
 .bl-mini{font:600 13px "Outfit",sans-serif!important;padding:5px 12px!important;border-radius:999px!important;border:1px solid #333338!important;background:#1b1b1e!important;color:#e2ddd5!important;cursor:pointer;white-space:nowrap}
 .bl-mini.out{color:#ff6b8b!important;border-color:#ff6b8b66!important}
 /* Pub Dashboard: a clear lime button everywhere, filled and larger on the Home page */
-.bl-xlink{font-family:"Outfit",sans-serif!important;color:#e8a93a!important;border:1px solid #e8a93a!important;background:rgba(232,169,58,.08)!important}
+.bl-xlink{font-family:"Outfit",sans-serif!important;color:#a3c43a!important;border:1px solid #a3c43a!important;background:rgba(163,196,58,.08)!important}
 .bl-xlink::after{content:" ↗"}
-.bl-xlink.hot{background:#e8a93a!important;color:#0a0a0b!important;font-size:17px!important;padding:9px 20px!important;border-radius:10px!important;box-shadow:0 0 0 4px rgba(232,169,58,.18)}
+.bl-xlink.hot{background:#a3c43a!important;color:#0a0a0b!important;font-size:17px!important;padding:9px 20px!important;border-radius:10px!important;box-shadow:0 0 0 4px rgba(163,196,58,.18)}
 @media(max-width:640px){.bl-mini{padding:4px 9px!important;font-size:12px!important}}
 /* PIN sign-in screen (each page has its own; these make them all match) */
-#pin-screen{background:radial-gradient(700px 360px at 50% 0%,#8b1d3866 0,transparent 70%),#0a0a0b!important}
-.pin-logo{font-family:"Alfa Slab One",Georgia,serif!important;letter-spacing:.02em!important;color:#fff!important;text-transform:uppercase;text-shadow:3px 3px 0 #8b1d38}
-.pin-sub{color:#e8a93a!important;font-family:"Outfit",sans-serif!important;font-weight:600}
+#pin-screen{background:radial-gradient(700px 360px at 50% 0%,#8a285866 0,transparent 70%),#0a0a0b!important}
+.pin-logo{font-family:"Alfa Slab One",Georgia,serif!important;letter-spacing:.02em!important;color:#fff!important;text-transform:uppercase;text-shadow:3px 3px 0 #8a2858}
+.pin-sub{color:#a3c43a!important;font-family:"Outfit",sans-serif!important;font-weight:600}
 .pin-key{background:#1b1b1e!important;border:1px solid #333338!important;color:#fff!important;font-family:"Outfit",sans-serif!important}
-.pin-key:active,.pin-key:hover{border-color:#e8a93a!important;background:#1b2550!important}
-.pin-dot{border-color:#4a4a52!important}.pin-dot.filled{background:#e8a93a!important;border-color:#e8a93a!important}
+.pin-key:active,.pin-key:hover{border-color:#a3c43a!important;background:#1b2550!important}
+.pin-dot{border-color:#4a4a52!important}.pin-dot.filled{background:#a3c43a!important;border-color:#a3c43a!important}
 /* the shared sign-in screen drawn by bl-auth.js */
-#bl-auth-overlay{background:radial-gradient(700px 360px at 50% 0%,#8b1d3866 0,transparent 70%),#0a0a0b!important;color:#fff!important}
-#bl-auth-overlay .bla-logo{font-family:"Alfa Slab One",Georgia,serif!important;letter-spacing:.02em!important;color:#fff!important;text-transform:uppercase;text-shadow:3px 3px 0 #8b1d38}
-#bl-auth-overlay .bla-sub{color:#e8a93a!important;font-family:"Outfit",sans-serif!important;font-weight:600}
+#bl-auth-overlay{background:radial-gradient(700px 360px at 50% 0%,#8a285866 0,transparent 70%),#0a0a0b!important;color:#fff!important}
+#bl-auth-overlay .bla-logo{font-family:"Alfa Slab One",Georgia,serif!important;letter-spacing:.02em!important;color:#fff!important;text-transform:uppercase;text-shadow:3px 3px 0 #8a2858}
+#bl-auth-overlay .bla-sub{color:#a3c43a!important;font-family:"Outfit",sans-serif!important;font-weight:600}
 #bl-auth-overlay .bla-key{background:#1b1b1e!important;border:1px solid #333338!important;color:#fff!important;font-family:"Outfit",sans-serif!important}
-#bl-auth-overlay .bla-key:active,#bl-auth-overlay .bla-key:hover{border-color:#e8a93a!important;background:#1b2550!important}
+#bl-auth-overlay .bla-key:active,#bl-auth-overlay .bla-key:hover{border-color:#a3c43a!important;background:#1b2550!important}
 #bl-auth-overlay .bla-dot{border-color:#4a4a52!important}
-#bl-auth-overlay .bla-dot.filled{background:#e8a93a!important;border-color:#e8a93a!important}
+#bl-auth-overlay .bla-dot.filled{background:#a3c43a!important;border-color:#a3c43a!important}
 #bl-auth-overlay .bla-dot.error{background:#ff6b8b!important;border-color:#ff6b8b!important}
 #bl-auth-overlay .bla-msg{font-family:"Outfit",sans-serif!important}
 #bl-auth-overlay .bla-chip,#bl-auth-overlay .bla-switch,#bl-auth-overlay .bla-logout,#bl-auth-overlay .bla-cancel,#bl-auth-overlay .bla-retry{font-family:"Outfit",sans-serif!important;border-color:#333338!important}
@@ -79,7 +79,7 @@ input,select,textarea,button{font-family:"Outfit",sans-serif}
 #bla-chip,.bla-chip{display:none!important}
 /* sheet status pill (Connected / Syncing / Error) matches the other header buttons */
 .gs-status{font:600 13px "Outfit",sans-serif!important;padding:5px 12px!important;border-radius:999px!important;background:#1b1b1e!important;border:1px solid #333338!important;color:#e2ddd5!important;white-space:nowrap}
-.gs-status.connected{color:#e8a93a!important;border-color:#e8a93a88!important}
+.gs-status.connected{color:#a3c43a!important;border-color:#a3c43a88!important}
 .gs-status.error{color:#ff6b8b!important;border-color:#ff6b8b88!important}
 
 /* Black Rose logo sits on black: let the black melt into the page */
