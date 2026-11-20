@@ -151,6 +151,8 @@
 <script src="../bl-auth.js"></script>
 <script src="../bl-header.js" defer></script>
 <link rel="stylesheet" href="../bl-style.css">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
 
@@ -215,7 +217,7 @@
     <!-- Tonight: who's on, what's on, the weather in one line, and the closing jobs button -->
     <div class="card tn-card" id="tonight-card">
       <div class="tn-head"><div class="card-title" id="tonight-title" style="margin-bottom:0">Tonight</div><div class="tn-wx" id="wx-content"></div></div>
-      <div class="br-crew"><div class="tn-lbl">Working today <span id="br-crew-n"></span></div><div id="br-crew-chips"></div></div>
+      <div class="br-greet" id="br-greet"></div><div class="br-crew"><div class="tn-lbl">Select today’s heroes <span id="br-crew-n"></span></div><div id="br-crew-chips"></div></div>
       <div class="tn-grid" style="display:none">
         <div><div class="tn-lbl">On shift</div><div id="tonight-content"><div class="muted-text">Loading the rota…</div></div></div>
         <div><div class="tn-lbl">On tonight</div><div id="tonight-events"><div class="muted-text">Loading…</div></div></div>
@@ -386,7 +388,9 @@ async function loadBrStaff(){
 function renderBrCrew(){const el=document.getElementById('br-crew-chips'),c=document.getElementById('br-crew-n');if(!el)return;const sel=brCrewGet().filter(n=>brStaff.includes(n));
   el.innerHTML=brStaff.map(n=>`<button type="button" class="br-c${sel.includes(n)?' on':''}" data-n="${escHtml(n)}" onclick="brToggle(this.dataset.n)">${sel.includes(n)?'✓ ':''}${escHtml(n)}</button>`).join('')
     +(sel.length?'<button type="button" class="br-c clr" onclick="brCrewSet([])">Clear</button>':'');
-  if(c)c.textContent=sel.length?'· '+sel.length+' picked: only they show on the checklists today':'· tap who’s in today';}
+  if(c)c.textContent=sel.length?'· '+sel.length+' hero'+(sel.length>1?'es':'')+' picked, only they show on the checklists today':'· tap who’s in today';
+  const g=document.getElementById('br-greet');if(g){const h=new Date().getHours(),hi=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+    const names=sel.length>1?sel.slice(0,-1).join(', ')+' and '+sel[sel.length-1]:sel[0];g.textContent=sel.length?'🌹 '+hi+', '+names:'';g.style.display=sel.length?'':'none';}}
 
 // ── BEER GARDEN: wind, rain, frost and dark for the outside area ──
 // Same limits as the Black Rose report: gusts 19 mph = no parasols, 31 mph = caution. Garden 9am–9pm (Sunday 11am).

@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="End Of Night">
-<link rel="apple-touch-icon" href="../logo.jpg">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   :root {
@@ -1475,6 +1475,11 @@ function removeStaff(i){
 
 // ── JOBS ──
 
+// ── BLACK ROSE: rose petals instead of fireworks ──
+function brPetals(){const box=document.createElement('div');box.className='br-petals';
+  for(let i=0;i<34;i++){const p=document.createElement('i');const s=10+Math.random()*14;p.style.cssText=`left:${Math.random()*100}vw;width:${s}px;height:${s*0.8}px;animation-duration:${4+Math.random()*3}s,${1.6+Math.random()*1.4}s;animation-delay:${Math.random()*1.8}s,0s;opacity:${.7+Math.random()*.3}`;box.appendChild(p);}
+  document.body.appendChild(box);setTimeout(()=>box.remove(),9000);}
+
 // ── BLACK ROSE: first open replaces the Banshee copy in the sheet with the Black Rose lists ──
 function brSeed(){let changed=false;const mark=DEFAULT_JOBS[0].job;
   if(!state.jobs.some(j=>j.job===mark)){state.jobs=DEFAULT_JOBS.map(j=>({...j,assignedTo:'',done:false,timestamp:'',notes:''}));changed=true;}
@@ -1867,8 +1872,8 @@ function triggerCelebration(day){
   celCountdown=setInterval(()=>{secs--;if(secs>0)countEl.textContent=`Auto-dismissing in ${secs}s`;},1000);
   celTimer=setTimeout(dismissCelebration,5000);
 
-  // Fireworks
-  startFireworks();
+  // Rose petals
+  brPetals();
 }
 
 function dismissCelebration(){
