@@ -1575,7 +1575,7 @@ function renderDay(day){
   // so blocks never jump columns as jobs are ticked; a just-ticked job stays put for a few seconds.
   const order=NX_MODE_AREAS.concat(['Other jobs']),nowMs=Date.now();
   const groups=order.map(a=>({a,all:jobs.filter(j=>nxArea(j.job)===a)})).filter(g=>g.all.length);
-  const cols=[[],[]],h=[0,0];groups.forEach(g=>{const c=h[0]<=h[1]?0:1;cols[c].push(g);h[c]+=g.all.length+1;});
+  const cols=[[],[]];groups.forEach(g=>{cols[/kitchen/i.test(g.a)?1:0].push(g);});   // bar left, kitchen right
   const showJob=j=>{const just=nxRecent[j.id]&&nxRecent[j.id]>nowMs&&nxIsDone(j);
     return just?`<button type="button" class="nx-job just" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(nxJobText(j.job))}<small>✓ Ticked for ${escHtml(j.assignedTo)}. Tap to undo</small></span></button>`
       :(r=>`<div class="nx-jrow${r?' flagged':''}"><button type="button" class="nx-job" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(nxJobText(j.job))}${r?`<small class="nx-why">⚑ Not done: ${escHtml(r)}</small>`:''}</span></button><button type="button" class="nx-flag" aria-label="${r?'Clear the reason':'Can’t do it'}" onclick="nxFlag(${j.id},this,event)">${r?'✕':'⚑'}</button></div>`)(nxReason(j));};

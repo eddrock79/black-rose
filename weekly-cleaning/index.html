@@ -684,7 +684,7 @@ function nxAddName(){let n=prompt('Your first name (as you want it to show):');i
   n=n.charAt(0).toUpperCase()+n.slice(1);const ex=state.staff.find(s=>s.name.toLowerCase()===n.toLowerCase());
   if(!ex){state.staff.push({name:n,onShift:true});saveState();queueSheetSync();nxToast('Added '+n);}nxPick(ex?ex.name:n);}
 // ── NEW PAGE: pick your name, tap the jobs you've done ──
-const NX_AREAS=[["Kitchen",/kitchen|grease|sauce/i],["Cellar and stock",/cellar|keg|batch|till|beer lines/i],["Bar",/bar|optic|glass|bottle|dishwasher/i],["Front of house",/toilet|mirror|board|plant|bin|fix/i]];
+const NX_AREAS=[["Kitchen",/kitchen|grease|sauce/i],["Bar",/./]];
 const NX_LIST=DAYS, NX_KEYS=DAY_KEYS, NX_KIND='day';
 function nxArea(job){for(const a of NX_AREAS){if(a[1].test(job))return a[0];}return "Other jobs";}
 function nxNow(){const d=new Date();if(NX_KIND==='day'&&d.getHours()<7)d.setDate(d.getDate()-1);return d;}
@@ -754,7 +754,7 @@ function renderDay(p){
     <button type="button" class="nx-chip nx-add" onclick="nxAddName()">＋ Add my name</button><button type="button" class="nx-chip nx-add" onclick="nxToggleNames()">${nxEditNames?'✓ Done':'✎ Edit names'}</button></div></section>`;
   const order=NX_AREAS.map(a=>a[0]).concat(['Other jobs']),nowMs=Date.now();
   const groups=order.map(a=>({a,all:jobs.filter(j=>nxArea(j.job)===a)})).filter(g=>g.all.length);
-  const cols=[[],[]],h=[0,0];groups.forEach(g=>{const c=h[0]<=h[1]?0:1;cols[c].push(g);h[c]+=g.all.length+1;});
+  const cols=[[],[]];groups.forEach(g=>{cols[/kitchen/i.test(g.a)?1:0].push(g);});   // bar left, kitchen right
   const showJob=j=>{const just=nxRecent[j.id]&&nxRecent[j.id]>nowMs&&nxIsDone(j);
     return just?`<button type="button" class="nx-job just" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(j.job)}<small>✓ Ticked for ${escHtml(j.assignedTo)}. Tap to undo</small></span></button>`
       :(r=>`<div class="nx-jrow${r?' flagged':''}"><button type="button" class="nx-job" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(j.job)}${r?`<small class="nx-why">⚑ Not done: ${escHtml(r)}</small>`:''}</span></button><button type="button" class="nx-flag" aria-label="${r?'Clear the reason':'Can’t do it'}" onclick="nxFlag(${j.id},this,event)">${r?'✕':'⚑'}</button></div>`)(nxReason(j));};
