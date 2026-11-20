@@ -13,7 +13,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   :root {
     --bg:#0d0d0f; --surface:#17171a; --surface2:#1f1f24; --border:#2a2a30;
-    --accent:#e8b84b; --accent-dim:rgba(232,184,75,0.12);
+    --accent:#4fb8a8; --accent-dim:rgba(79,184,168,0.12);
     --green:#3ecf6e; --green-dim:rgba(62,207,110,0.12);
     --red:#e85d5d; --red-dim:rgba(232,93,93,0.1);
     --purple:#a78bfa; --purple-dim:rgba(167,139,250,0.12);
@@ -182,9 +182,103 @@
   .modal p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;}
   .modal-buttons{display:flex;gap:10px;justify-content:flex-end;}
   @media(max-width:500px){.job-card{flex-wrap:wrap}.assign-select{max-width:100%}}
+
+/* ===== new day page: pick your name, tap the jobs you've done ===== */
+.nx-trial{background:#4fb8a81f;border-bottom:1px solid #4fb8a855;color:var(--accent);font-size:13px;text-align:center;padding:7px 12px}
+.nx-trial a{color:var(--accent);text-decoration:underline}
+.nx-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.nx-head .section-title{margin:0}
+.nx-sub{color:var(--muted);font-size:14px;margin-top:2px}
+.nx-prog{flex:1;min-width:160px;height:10px;border-radius:5px;background:#ffffff12;overflow:hidden}
+.nx-prog i{display:block;height:100%;background:var(--green);border-radius:5px}
+.nx-last{background:var(--red-dim);border:1px solid #e85d5d66;border-radius:12px;padding:10px 14px;font-size:14px;margin-bottom:12px}
+.nx-last b{color:var(--red)}
+.nx-who{position:sticky;top:0;z-index:20;background:var(--bg);padding:10px 0 12px;margin-bottom:8px;border-bottom:1px solid var(--border)}
+.nx-who p{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nx-who p b{color:var(--accent)}
+.nx-chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.nx-chip{font:600 18px 'DM Sans',sans-serif;padding:12px 22px;border-radius:999px;border:2px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;min-width:92px}
+.nx-chip.on{background:var(--accent);border-color:var(--accent);color:#06221e}
+.nx-other{font:500 15px 'DM Sans',sans-serif;padding:12px 14px;border-radius:999px;border:2px dashed var(--border);background:transparent;color:var(--muted)}
+.nx-board{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px;align-items:start}
+.nx-col{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.nx-col h3{margin:0;padding:12px 14px;display:flex;align-items:center;gap:10px;font:400 22px/1 'Bebas Neue',sans-serif;letter-spacing:.04em;border-bottom:1px solid var(--border)}
+.nx-col h3 small{margin-left:auto;font:600 13px 'DM Sans',sans-serif;color:var(--muted);letter-spacing:0}
+.nx-col.me{border-color:var(--accent)}
+.nx-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 13px 'DM Sans',sans-serif;background:var(--accent-dim);color:var(--accent)}
+.nx-list{padding:8px 10px 10px}
+.nx-todo .nx-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.nx-area{grid-column:1/-1;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:8px 4px 0}
+.nx-job{display:flex;gap:12px;align-items:center;min-height:64px;padding:12px;border-radius:12px;background:#1f1f24;border:1px solid var(--border);font:500 15px/1.3 'DM Sans',sans-serif;cursor:pointer;text-align:left;color:var(--text);width:100%}
+.nx-job:active{transform:scale(.98)}
+.nx-box{flex:none;width:28px;height:28px;border-radius:8px;border:2px solid #55555f}
+.nx-people{display:grid;gap:12px}
+.nx-done{display:flex;gap:10px;align-items:center;padding:9px 10px;border-radius:10px;background:var(--done-bg);border:1px solid #3ecf6e44;font-size:14px;margin-bottom:6px}
+.nx-done .nx-tick{flex:none;width:22px;height:22px;border-radius:7px;background:var(--green);display:grid;place-items:center;font-size:12px;color:#062a12}
+.nx-done small{display:block;font-size:11px;color:var(--muted)}
+.nx-grab{margin-left:auto;padding:6px 10px;border-radius:6px;color:#88888f;font-size:18px;background:none;border:0;cursor:pointer}
+.nx-empty{color:var(--muted);font-size:13px;padding:6px 4px}
+.nx-menu{position:absolute;z-index:60;background:#1f1f24;border:1px solid #3a3a44;border-radius:12px;padding:6px;box-shadow:0 10px 30px #000a;min-width:200px}
+.nx-menu button{display:block;width:100%;text-align:left;font:600 16px 'DM Sans',sans-serif;padding:12px 14px;border:0;background:none;color:var(--text);border-radius:8px;cursor:pointer}
+.nx-menu button.on,.nx-menu button:hover{background:var(--accent-dim);color:var(--accent)}
+.nx-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--accent);color:#06221e;font:700 15px 'DM Sans',sans-serif;padding:12px 18px;border-radius:999px;box-shadow:0 8px 24px #000a;z-index:70}
+.nx-manage{margin-top:16px}
+.nx-manage summary{cursor:pointer;color:var(--muted);font-size:14px;padding:8px 0}
+.nx-manage{background:#0f0f11;border:1px dashed #a3304e;border-radius:12px;padding:4px 14px 10px}
+.nx-manage summary{color:#f0a8b8!important;font:600 16px "Outfit",sans-serif!important;padding:10px 0 6px!important}
+.nx-edit{font:600 14px "Outfit",sans-serif;padding:8px 14px;border-radius:999px;border:1px solid #a3304e;background:rgba(139,29,56,.18);color:#f0a8b8;cursor:pointer;white-space:nowrap}
+.nx-jump+.nx-edit{margin-left:0}.nx-head>.nx-edit:first-of-type{margin-left:auto}
+@media(max-width:900px){.nx-board{grid-template-columns:1fr}}
+@media(max-width:560px){.nx-todo .nx-list{grid-template-columns:1fr}.nx-chip{font-size:16px;padding:10px 16px;min-width:0}}
+
+/* areas as whole columns: each area block stays in its column all night */
+.nx-todo .nx-list{display:block}
+.nx-cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.nx-c{display:grid;gap:12px;align-content:start}
+.nx-grp{background:#0f0f11;border:1px solid var(--border);border-radius:12px;padding:8px}
+.nx-grp .nx-area{margin:2px 4px 8px}
+.nx-grp .nx-job{margin-bottom:8px}.nx-grp .nx-job:last-child{margin-bottom:0}
+.nx-grp-done{color:var(--accent);font-size:14px;font-weight:600;padding:6px 6px 4px}
+/* just ticked: stays put for a few seconds so the next tap can't land on the wrong job */
+.nx-job.just{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+.nx-jrow{display:flex;gap:6px;align-items:stretch;margin-bottom:8px}.nx-jrow .nx-job{flex:1;min-width:0;margin-bottom:0}
+.nx-flag{flex:none;width:46px;border-radius:12px;border:1px solid #333338;background:#1b1b1e;color:#ff6b8b;font-size:17px;cursor:pointer}
+.nx-jrow.flagged .nx-job{border-color:#ff6b8b88}.nx-why{display:block;color:#ff6b8b!important;font-weight:600;margin-top:3px}
+.nx-menu-h{font:700 12px "Outfit",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#a9a9b2;padding:6px 10px 4px}
+.nx-jump{margin-left:auto;font:600 14px "Outfit",sans-serif;padding:8px 14px;border-radius:999px;border:1px solid #e8a93a;background:rgba(232,169,58,.08);color:#e8a93a;cursor:pointer;white-space:nowrap}
+.nx-job.just .nx-box{background:var(--accent);border-color:var(--accent);position:relative}
+.nx-job.just .nx-box::after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;color:#0a0a0b;font-weight:700}
+.nx-job.just small{display:block;font-size:12px;opacity:.85;margin-top:2px}
+@media(max-width:700px){.nx-cols2{grid-template-columns:1fr}}
+
+/* ===== Banshee look (navy, purple, lime) to match the Banshee board ===== */
+html:root{--bg:#0a0a0b;--surface:#111113;--border:#2a2a2e;--text:#ffffff;--muted:#a9a9b2;--accent:#e8a93a;--accent-dim:rgba(232,169,58,.14);
+ --green:#e8a93a;--green-dim:rgba(232,169,58,.12);--done-bg:rgba(232,169,58,.08);--purple:#a3304e;--purple-dim:rgba(139,29,56,.2);--red:#ff6b8b;--red-dim:rgba(255,107,139,.1)}
+html body{background:radial-gradient(900px 420px at 85% -5%,#8b1d3855 0,transparent 65%),repeating-linear-gradient(135deg,#ffffff03 0 2px,transparent 2px 14px),#0a0a0b!important;font-family:"Outfit",system-ui,sans-serif!important}
+.section-title,.nx-col h3,.notes-title{font-family:"Alfa Slab One",Georgia,serif!important;text-transform:uppercase;letter-spacing:.01em;text-shadow:2px 2px 0 #3b0a14}
+.nx-col h3{font-size:18px}
+.nx-col{background:linear-gradient(180deg,#141416,#0f0f11);border-color:#333338}
+.nx-col.me{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.nx-job{background:#1b1b1e;border-color:#333338;font-family:"Outfit",sans-serif}
+.nx-box{border-color:#4a4a52}
+.nx-chip{font-family:"Outfit",sans-serif;background:#1b1b1e;border-color:#333338}
+.nx-chip.on{color:#0a0a0b}
+.nx-other{font-family:"Outfit",sans-serif;border-color:#333338}
+.nx-who{background:#0a0a0bf2;border-bottom:2px solid #8b1d38}
+.nx-av{background:#8b1d3866;color:#fff}
+.nx-done{border-color:#e8a93a55}
+.nx-done .nx-tick{color:#0a0a0b}
+.nx-prog{background:#ffffff14}.nx-prog i{background:linear-gradient(90deg,#8b1d38,#e8a93a)}
+.nx-menu{background:#1b1b1e;border-color:#333338}
+.nx-toast{color:#0a0a0b}
+.nx-trial{background:#8b1d3833;border-bottom-color:#8b1d38;color:#e4d6ff}
+.nx-last{background:#ff6b8b14;border-color:#ff6b8b66}
 </style>
 <script src="../bl-config.js"></script>
 <script src="../bl-auth.js"></script>
+<script src="../bl-header.js" defer></script>
+<link rel="stylesheet" href="../bl-style.css">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -217,14 +311,15 @@
     </div>
   </div>
   <div class="nav-bar">
-    <a class="nav-btn" id="nav-home" href="../home">🏠 Home</a>
-    <a class="nav-btn" href="../weekly-cleaning">📋 Weekly Jobs</a>
-    <span class="nav-btn current">🌙 End Of Night</span>
-    <a class="nav-btn" href="../rotas">📅 Rotas</a>
-    <a class="nav-btn" href="../cocktails">🍸 Cocktails</a>
-    <a class="nav-btn" id="nav-dash" href="../dashboard" style="display:none;background:var(--purple-dim);color:var(--purple);border-color:var(--purple)">📊 Dashboard</a>
-    <button class="nav-btn" type="button" onclick="BLAuth.switchVenue()" style="cursor:pointer">🏘️ Switch Venue</button>
-    <button class="nav-btn" id="nav-logout" onclick="logOut()" style="display:none;cursor:pointer;color:var(--red);border-color:var(--red)">🔒 Log Out</button>
+    <a class="nav-btn" id="nav-home" href="../home">Home</a>
+    <a class="nav-btn" href="../end-of-night/?mode=opening">Opening</a>
+    <span class="nav-btn current">End Of Night</span>
+    <a class="nav-btn" href="../weekly-cleaning">Weekly Jobs</a>
+    <a class="nav-btn" href="../cocktails">Cocktails</a>
+    <a class="nav-btn" href="http://eddrock79nas:8101/">Pub Dashboard</a>
+    <a class="nav-btn" id="nav-dash" href="../dashboard" style="display:none;background:var(--purple-dim);color:var(--purple);border-color:var(--purple)">Dashboard</a>
+    <button class="nav-btn" type="button" onclick="BLAuth.switchVenue()" style="cursor:pointer">Switch Venue</button>
+    <button class="nav-btn" id="nav-logout" onclick="logOut()" style="cursor:pointer;color:var(--red);border-color:var(--red)">Log Out</button>
   </div>
   <div class="tabbar">
     <div class="tab active" onclick="switchTab('staff')">Staff</div>
@@ -349,194 +444,823 @@ const DAY_KEYS=['monday','tuesday','wednesday','thursday','friday','saturday','s
 const PIN_SHEET_ID=BL_CFG.weeklyJobs;
 const HANDOVER_KEY='bl_handover_notes';
 // Shared notes sheet (handover sync). Same /exec URL the Home page uses.
-const NOTES_SCRIPT_URL=BL_CFG.notesScript;
-const DEFAULT_STAFF=['Alix','Blue','Connor','Craig','David','Edd','Esje','Eva','Hannah','Jennifer','Maja','Richard','Rory','Ryan','Simon','Theresa'];
+Object.defineProperty(window,'NOTES_SCRIPT_URL',{get:()=>BL_CFG.sharedScript||BL_CFG.notesScript});
+const DEFAULT_STAFF=["Dave", "Keefe", "Callan", "Chloe", "Chaz", "Aaron", "Stuart", "Junior", "Allanah", "Laura", "Frank", "Scott M."];
 const DEFAULT_JOBS=[
-  {id:1,day:'Monday',job:'Lost property all logged',homeDay:'Monday'},
-  {id:2,day:'Monday',job:'Check Toilets, soap, and paper',homeDay:'Monday'},
-  {id:3,day:'Monday',job:'Bar surfaces wiped down',homeDay:'Monday'},
-  {id:4,day:'Monday',job:'Fruit in fridge',homeDay:'Monday'},
-  {id:5,day:'Monday',job:'Run drip trays & bar runners thru washer',homeDay:'Monday'},
-  {id:6,day:'Monday',job:'Wash bottle cap bins',homeDay:'Monday'},
-  {id:7,day:'Monday',job:'Spray/polish all tables & surfaces',homeDay:'Monday'},
-  {id:8,day:'Monday',job:'Wash bin lid',homeDay:'Monday'},
-  {id:9,day:'Monday',job:'Clean Ice buckets with blue roll',homeDay:'Monday'},
-  {id:10,day:'Monday',job:'Restock nibbles',homeDay:'Monday'},
-  {id:11,day:'Monday',job:'Stock fridges, forward facing',homeDay:'Monday'},
-  {id:12,day:'Monday',job:'Soda gun cord wiped / gun in soda',homeDay:'Monday'},
-  {id:13,day:'Monday',job:'Spray and wipe down bar fonts',homeDay:'Monday'},
-  {id:14,day:'Monday',job:'Nozzles in soda / Clean top of taps',homeDay:'Monday'},
-  {id:15,day:'Monday',job:'Wash all drip trays',homeDay:'Monday'},
-  {id:16,day:'Monday',job:'Check toilets for rubbish / glasses',homeDay:'Monday'},
-  {id:17,day:'Monday',job:'Clean fridge doors inside and out',homeDay:'Monday'},
-  {id:18,day:'Monday',job:'Clean till / spray blue roll NOT till',homeDay:'Monday'},
-  {id:19,day:'Monday',job:'Dismantle & Clean glass washer',homeDay:'Monday'},
-  {id:20,day:'Monday',job:'Empty bins to cellar',homeDay:'Monday'},
-  {id:21,day:'Monday',job:'Sweep and clean behind bar',homeDay:'Monday'},
-  {id:22,day:'Monday',job:'Deck scrub and mop behind bar',homeDay:'Monday'},
-  {id:23,day:'Monday',job:'Leave a note for anything day staff should know',homeDay:'Monday'},
-  {id:24,day:'Tuesday',job:'Lost property all logged',homeDay:'Tuesday'},
-  {id:25,day:'Tuesday',job:'Check Toilets, soap, and paper',homeDay:'Tuesday'},
-  {id:26,day:'Tuesday',job:'Bar surfaces wiped down',homeDay:'Tuesday'},
-  {id:27,day:'Tuesday',job:'Fruit in fridge',homeDay:'Tuesday'},
-  {id:28,day:'Tuesday',job:'Run drip trays & bar runners thru washer',homeDay:'Tuesday'},
-  {id:29,day:'Tuesday',job:'Wash bottle cap bins',homeDay:'Tuesday'},
-  {id:30,day:'Tuesday',job:'Spray/polish all tables & surfaces',homeDay:'Tuesday'},
-  {id:31,day:'Tuesday',job:'Wash bin lid',homeDay:'Tuesday'},
-  {id:32,day:'Tuesday',job:'Clean Ice buckets with blue roll',homeDay:'Tuesday'},
-  {id:33,day:'Tuesday',job:'Restock nibbles',homeDay:'Tuesday'},
-  {id:34,day:'Tuesday',job:'Stock fridges, forward facing',homeDay:'Tuesday'},
-  {id:35,day:'Tuesday',job:'Soda gun cord wiped / gun in soda',homeDay:'Tuesday'},
-  {id:36,day:'Tuesday',job:'Spray and wipe down bar fonts',homeDay:'Tuesday'},
-  {id:37,day:'Tuesday',job:'Nozzles in soda / Clean top of taps',homeDay:'Tuesday'},
-  {id:38,day:'Tuesday',job:'Wash all drip trays',homeDay:'Tuesday'},
-  {id:39,day:'Tuesday',job:'Check toilets for rubbish / glasses',homeDay:'Tuesday'},
-  {id:40,day:'Tuesday',job:'Clean fridge doors inside and out',homeDay:'Tuesday'},
-  {id:41,day:'Tuesday',job:'Clean till / spray blue roll NOT till',homeDay:'Tuesday'},
-  {id:42,day:'Tuesday',job:'Dismantle & Clean glass washer',homeDay:'Tuesday'},
-  {id:43,day:'Tuesday',job:'Empty bins to cellar / put bin out',homeDay:'Tuesday'},
-  {id:44,day:'Tuesday',job:'Sweep and clean behind bar',homeDay:'Tuesday'},
-  {id:45,day:'Tuesday',job:'Deck scrub and mop behind bar',homeDay:'Tuesday'},
-  {id:46,day:'Tuesday',job:'Leave a note for anything day staff should know',homeDay:'Tuesday'},
-  {id:47,day:'Wednesday',job:'Lost property all logged',homeDay:'Wednesday'},
-  {id:48,day:'Wednesday',job:'Check Toilets, soap, and paper',homeDay:'Wednesday'},
-  {id:49,day:'Wednesday',job:'Bar surfaces wiped down',homeDay:'Wednesday'},
-  {id:50,day:'Wednesday',job:'Fruit in fridge',homeDay:'Wednesday'},
-  {id:51,day:'Wednesday',job:'Run drip trays & bar runners thru washer',homeDay:'Wednesday'},
-  {id:52,day:'Wednesday',job:'Wash bottle cap bins',homeDay:'Wednesday'},
-  {id:53,day:'Wednesday',job:'Spray/polish all tables & surfaces',homeDay:'Wednesday'},
-  {id:54,day:'Wednesday',job:'Wash bin lid',homeDay:'Wednesday'},
-  {id:55,day:'Wednesday',job:'Clean Ice buckets with blue roll',homeDay:'Wednesday'},
-  {id:56,day:'Wednesday',job:'Restock nibbles',homeDay:'Wednesday'},
-  {id:57,day:'Wednesday',job:'Stock fridges, forward facing',homeDay:'Wednesday'},
-  {id:58,day:'Wednesday',job:'Soda gun cord wiped / gun in soda',homeDay:'Wednesday'},
-  {id:59,day:'Wednesday',job:'Spray and wipe down bar fonts',homeDay:'Wednesday'},
-  {id:60,day:'Wednesday',job:'Nozzles in soda / Clean top of taps',homeDay:'Wednesday'},
-  {id:61,day:'Wednesday',job:'Wash all drip trays',homeDay:'Wednesday'},
-  {id:62,day:'Wednesday',job:'Check toilets for rubbish / glasses',homeDay:'Wednesday'},
-  {id:63,day:'Wednesday',job:'Clean fridge doors inside and out',homeDay:'Wednesday'},
-  {id:64,day:'Wednesday',job:'Clean till / spray blue roll NOT till',homeDay:'Wednesday'},
-  {id:65,day:'Wednesday',job:'Dismantle & Clean glass washer',homeDay:'Wednesday'},
-  {id:66,day:'Wednesday',job:'Empty bins to cellar',homeDay:'Wednesday'},
-  {id:67,day:'Wednesday',job:'Sweep and clean behind bar',homeDay:'Wednesday'},
-  {id:68,day:'Wednesday',job:'Deck scrub and mop behind bar',homeDay:'Wednesday'},
-  {id:69,day:'Wednesday',job:'Leave a note for anything day staff should know',homeDay:'Wednesday'},
-  {id:70,day:'Thursday',job:'Lost property all logged',homeDay:'Thursday'},
-  {id:71,day:'Thursday',job:'Check Toilets, soap, and paper',homeDay:'Thursday'},
-  {id:72,day:'Thursday',job:'Bar surfaces wiped down',homeDay:'Thursday'},
-  {id:73,day:'Thursday',job:'Fruit in fridge',homeDay:'Thursday'},
-  {id:74,day:'Thursday',job:'Run drip trays & bar runners thru washer',homeDay:'Thursday'},
-  {id:75,day:'Thursday',job:'Wash bottle cap bins',homeDay:'Thursday'},
-  {id:76,day:'Thursday',job:'Spray/polish all tables & surfaces',homeDay:'Thursday'},
-  {id:77,day:'Thursday',job:'Wash bin lid',homeDay:'Thursday'},
-  {id:78,day:'Thursday',job:'Clean Ice buckets with blue roll',homeDay:'Thursday'},
-  {id:79,day:'Thursday',job:'Restock nibbles',homeDay:'Thursday'},
-  {id:80,day:'Thursday',job:'Stock fridges, forward facing',homeDay:'Thursday'},
-  {id:81,day:'Thursday',job:'Soda gun cord wiped / gun in soda',homeDay:'Thursday'},
-  {id:82,day:'Thursday',job:'Spray and wipe down bar fonts',homeDay:'Thursday'},
-  {id:83,day:'Thursday',job:'Nozzles in soda / Clean top of taps',homeDay:'Thursday'},
-  {id:84,day:'Thursday',job:'Wash all drip trays',homeDay:'Thursday'},
-  {id:85,day:'Thursday',job:'Check toilets for rubbish / glasses',homeDay:'Thursday'},
-  {id:86,day:'Thursday',job:'Clean fridge doors inside and out',homeDay:'Thursday'},
-  {id:87,day:'Thursday',job:'Clean till / spray blue roll NOT till',homeDay:'Thursday'},
-  {id:88,day:'Thursday',job:'Dismantle & Clean glass washer',homeDay:'Thursday'},
-  {id:89,day:'Thursday',job:'Empty bins to cellar',homeDay:'Thursday'},
-  {id:90,day:'Thursday',job:'Sweep and clean behind bar',homeDay:'Thursday'},
-  {id:91,day:'Thursday',job:'Deck scrub and mop behind bar',homeDay:'Thursday'},
-  {id:92,day:'Thursday',job:'Leave a note for anything day staff should know',homeDay:'Thursday'},
-  {id:93,day:'Friday',job:'Lost property all logged',homeDay:'Friday'},
-  {id:94,day:'Friday',job:'Check Toilets, soap, and paper',homeDay:'Friday'},
-  {id:95,day:'Friday',job:'Bar surfaces wiped down',homeDay:'Friday'},
-  {id:96,day:'Friday',job:'Fruit in fridge',homeDay:'Friday'},
-  {id:97,day:'Friday',job:'Run drip trays & bar runners thru washer',homeDay:'Friday'},
-  {id:98,day:'Friday',job:'Wash bottle cap bins',homeDay:'Friday'},
-  {id:99,day:'Friday',job:'Spray/polish all tables & surfaces',homeDay:'Friday'},
-  {id:100,day:'Friday',job:'Wash bin lid',homeDay:'Friday'},
-  {id:101,day:'Friday',job:'Clean Ice buckets with blue roll',homeDay:'Friday'},
-  {id:102,day:'Friday',job:'Restock nibbles',homeDay:'Friday'},
-  {id:103,day:'Friday',job:'Stock fridges, forward facing',homeDay:'Friday'},
-  {id:104,day:'Friday',job:'Soda gun cord wiped / gun in soda',homeDay:'Friday'},
-  {id:105,day:'Friday',job:'Spray and wipe down bar fonts',homeDay:'Friday'},
-  {id:106,day:'Friday',job:'Nozzles in soda / Clean top of taps',homeDay:'Friday'},
-  {id:107,day:'Friday',job:'Wash all drip trays',homeDay:'Friday'},
-  {id:108,day:'Friday',job:'Check toilets for rubbish / glasses',homeDay:'Friday'},
-  {id:109,day:'Friday',job:'Clean fridge doors inside and out',homeDay:'Friday'},
-  {id:110,day:'Friday',job:'Clean till / spray blue roll NOT till',homeDay:'Friday'},
-  {id:111,day:'Friday',job:'Dismantle & Clean glass washer',homeDay:'Friday'},
-  {id:112,day:'Friday',job:'Empty bins to cellar / put bins out',homeDay:'Friday'},
-  {id:113,day:'Friday',job:'Sweep and clean behind bar',homeDay:'Friday'},
-  {id:114,day:'Friday',job:'Deck scrub and mop behind bar',homeDay:'Friday'},
-  {id:115,day:'Friday',job:'Leave a note for anything day staff should know',homeDay:'Friday'},
-  {id:116,day:'Saturday',job:'Lost property all logged',homeDay:'Saturday'},
-  {id:117,day:'Saturday',job:'Check Toilets, soap, and paper',homeDay:'Saturday'},
-  {id:118,day:'Saturday',job:'Bar surfaces wiped down',homeDay:'Saturday'},
-  {id:119,day:'Saturday',job:'Fruit in fridge',homeDay:'Saturday'},
-  {id:120,day:'Saturday',job:'Run drip trays & bar runners thru washer',homeDay:'Saturday'},
-  {id:121,day:'Saturday',job:'Wash bottle cap bins',homeDay:'Saturday'},
-  {id:122,day:'Saturday',job:'Spray/polish all tables & surfaces',homeDay:'Saturday'},
-  {id:123,day:'Saturday',job:'Wash bin lid',homeDay:'Saturday'},
-  {id:124,day:'Saturday',job:'Clean Ice buckets with blue roll',homeDay:'Saturday'},
-  {id:125,day:'Saturday',job:'Restock nibbles',homeDay:'Saturday'},
-  {id:126,day:'Saturday',job:'Stock fridges, forward facing',homeDay:'Saturday'},
-  {id:127,day:'Saturday',job:'Soda gun cord wiped / gun in soda',homeDay:'Saturday'},
-  {id:128,day:'Saturday',job:'Spray and wipe down bar fonts',homeDay:'Saturday'},
-  {id:129,day:'Saturday',job:'Nozzles in soda / Clean top of taps',homeDay:'Saturday'},
-  {id:130,day:'Saturday',job:'Wash all drip trays',homeDay:'Saturday'},
-  {id:131,day:'Saturday',job:'Check toilets for rubbish / glasses',homeDay:'Saturday'},
-  {id:132,day:'Saturday',job:'Clean fridge doors inside and out',homeDay:'Saturday'},
-  {id:133,day:'Saturday',job:'Clean till / spray blue roll NOT till',homeDay:'Saturday'},
-  {id:134,day:'Saturday',job:'Dismantle & Clean glass washer',homeDay:'Saturday'},
-  {id:135,day:'Saturday',job:'Empty bins to cellar',homeDay:'Saturday'},
-  {id:136,day:'Saturday',job:'Sweep and clean behind bar',homeDay:'Saturday'},
-  {id:137,day:'Saturday',job:'Deck scrub and mop behind bar',homeDay:'Saturday'},
-  {id:138,day:'Saturday',job:'Leave a note for anything day staff should know',homeDay:'Saturday'},
-  {id:139,day:'Sunday',job:'Lost property all logged',homeDay:'Sunday'},
-  {id:140,day:'Sunday',job:'Check Toilets, soap, and paper',homeDay:'Sunday'},
-  {id:141,day:'Sunday',job:'Bar surfaces wiped down',homeDay:'Sunday'},
-  {id:142,day:'Sunday',job:'Fruit in fridge',homeDay:'Sunday'},
-  {id:143,day:'Sunday',job:'Run drip trays & bar runners thru washer',homeDay:'Sunday'},
-  {id:144,day:'Sunday',job:'Wash bottle cap bins',homeDay:'Sunday'},
-  {id:145,day:'Sunday',job:'Spray/polish all tables & surfaces',homeDay:'Sunday'},
-  {id:146,day:'Sunday',job:'Wash bin lid',homeDay:'Sunday'},
-  {id:147,day:'Sunday',job:'Clean Ice buckets with blue roll',homeDay:'Sunday'},
-  {id:148,day:'Sunday',job:'Restock nibbles',homeDay:'Sunday'},
-  {id:149,day:'Sunday',job:'Stock fridges, forward facing',homeDay:'Sunday'},
-  {id:150,day:'Sunday',job:'Soda gun cord wiped / gun in soda',homeDay:'Sunday'},
-  {id:151,day:'Sunday',job:'Spray and wipe down bar fonts',homeDay:'Sunday'},
-  {id:152,day:'Sunday',job:'Nozzles in soda / Clean top of taps',homeDay:'Sunday'},
-  {id:153,day:'Sunday',job:'Wash all drip trays',homeDay:'Sunday'},
-  {id:154,day:'Sunday',job:'Check toilets for rubbish / glasses',homeDay:'Sunday'},
-  {id:155,day:'Sunday',job:'Clean fridge doors inside and out',homeDay:'Sunday'},
-  {id:156,day:'Sunday',job:'Clean till / spray blue roll NOT till',homeDay:'Sunday'},
-  {id:157,day:'Sunday',job:'Dismantle & Clean glass washer',homeDay:'Sunday'},
-  {id:158,day:'Sunday',job:'Empty bins to cellar / put bins out',homeDay:'Sunday'},
-  {id:159,day:'Sunday',job:'Sweep and clean behind bar',homeDay:'Sunday'},
-  {id:160,day:'Sunday',job:'Deck scrub and mop behind bar',homeDay:'Sunday'},
-  {id:161,day:'Sunday',job:'Leave a note for anything day staff should know',homeDay:'Sunday'},
-  {id:162,day:'Sunday',job:'Renovate all glassware',homeDay:'Sunday'},
-  {id:163,day:'Sunday',job:'Clean all glass shelves behind the bar',homeDay:'Sunday'},
-  {id:164,day:'Sunday',job:'Date rotate all stock',homeDay:'Sunday'},
-  {id:165,day:'Sunday',job:'Clean bottom shelves of bottle cooler & fridge seals',homeDay:'Sunday'},
-  {id:166,day:'Sunday',job:'Refill water bulbs in plants if needed',homeDay:'Sunday'},
-  {id:167,day:'Sunday',job:'Sweep/scrub/mop stairs to cellar',homeDay:'Sunday'},
-  {id:168,day:'Sunday',job:'Sweep/scrub/mop office',homeDay:'Sunday'},
-  {id:169,day:'Sunday',job:'Cleaners cupboard - sort and clean',homeDay:'Sunday'},
-  {id:170,day:'Sunday',job:'Check First Aid boxes',homeDay:'Sunday'},
-  {id:171,day:'Sunday',job:'Clean underside of tabletops',homeDay:'Sunday'},
-  {id:172,day:'Sunday',job:'Wash down table bases using hot soapy water',homeDay:'Sunday'},
-  {id:173,day:'Sunday',job:'Wash down chair legs',homeDay:'Sunday'},
-  {id:174,day:'Sunday',job:'Wash front of bar including stool legs',homeDay:'Sunday'},
-  {id:175,day:'Sunday',job:'Clean radiators and remove any rubbish behind/under rads',homeDay:'Sunday'},
-  {id:176,day:'Sunday',job:'Wipe down back bar facings and unclutter around till',homeDay:'Sunday'},
-  {id:177,day:'Sunday',job:'Clean toilet mirrors, soap and toilet roll dispensers',homeDay:'Sunday'},
-  {id:178,day:'Sunday',job:'Line clean all lines (cask cleaned between keg change)',homeDay:'Sunday'},
-  {id:179,day:'Sunday',job:'Soak/clean optics & pourers',homeDay:'Sunday'},
-  {id:180,day:'Sunday',job:'Descale coffee machine',homeDay:'Sunday'},
-  {id:181,day:'Sunday',job:'Clean coffee machine filters',homeDay:'Sunday'},
-  {id:182,day:'Sunday',job:'Clean area under coffee machine and grinder',homeDay:'Sunday'},
-  {id:183,day:'Sunday',job:'Scrub inside of cups - remove tea/coffee stains',homeDay:'Sunday'},
-  {id:184,day:'Sunday',job:'Bomb cup and shot glass areas cleaned',homeDay:'Sunday'},
-  {id:185,day:'Sunday',job:'Clean Bins inside and out',homeDay:'Sunday'}
+  {"id": 1, "day": "Monday", "job": "Opening: bar | Turn on lights, beer taps and music", "homeDay": "Monday"},
+  {"id": 2, "day": "Monday", "job": "Opening: bar | Turn on coffee machine", "homeDay": "Monday"},
+  {"id": 3, "day": "Monday", "job": "Opening: bar | Read the bar handover, pass on notes (check with kitchen if they’re out of anything)", "homeDay": "Monday"},
+  {"id": 4, "day": "Monday", "job": "Opening: bar | Take down chairs", "homeDay": "Monday"},
+  {"id": 5, "day": "Monday", "job": "Opening: bar | Restock dead tealights, put out candles and food menus standing upright on tables", "homeDay": "Monday"},
+  {"id": 6, "day": "Monday", "job": "Opening: bar | Restock straws, coasters and napkins", "homeDay": "Monday"},
+  {"id": 7, "day": "Monday", "job": "Opening: bar | Stock fridges forward facing, restock nibbles", "homeDay": "Monday"},
+  {"id": 8, "day": "Monday", "job": "Opening: bar | Empty cooler bucket in the cellar", "homeDay": "Monday"},
+  {"id": 9, "day": "Monday", "job": "Opening: bar | Wipe fridge doors inside and out with glass cleaner", "homeDay": "Monday"},
+  {"id": 10, "day": "Monday", "job": "Opening: bar | Count safe and till, put float in the drawer", "homeDay": "Monday"},
+  {"id": 11, "day": "Monday", "job": "Opening: bar | Cut fruit, prep mint and garnishes", "homeDay": "Monday"},
+  {"id": 12, "day": "Monday", "job": "Opening: bar | Put the soda gun together", "homeDay": "Monday"},
+  {"id": 13, "day": "Monday", "job": "Opening: bar | Speed pourers into bottles", "homeDay": "Monday"},
+  {"id": 14, "day": "Monday", "job": "Opening: bar | Bottle lids and pourer covers into the bucket, stored under the coffee machine", "homeDay": "Monday"},
+  {"id": 15, "day": "Monday", "job": "Opening: bar | Take stoppers out of the beer taps", "homeDay": "Monday"},
+  {"id": 16, "day": "Monday", "job": "Opening: bar | Turn on and fill the glass wash", "homeDay": "Monday"},
+  {"id": 17, "day": "Monday", "job": "Opening: bar | Empty bottle bin and wipe inside with antibac", "homeDay": "Monday"},
+  {"id": 18, "day": "Monday", "job": "Opening: bar | Sweep cigarette butts from outside", "homeDay": "Monday"},
+  {"id": 19, "day": "Monday", "job": "Opening: bar | Unlock and set up outside tables", "homeDay": "Monday"},
+  {"id": 20, "day": "Monday", "job": "Opening: bar | Put out ashtrays and empty the big ashtray", "homeDay": "Monday"},
+  {"id": 21, "day": "Monday", "job": "Opening: bar | Cutlery", "homeDay": "Monday"},
+  {"id": 22, "day": "Monday", "job": "Opening: bar | Monday: put all bottom-shelf glassware through the glass washer before opening", "homeDay": "Monday"},
+  {"id": 23, "day": "Monday", "job": "Opening: bar | Prep coffee, top up citrus juices", "homeDay": "Monday"},
+  {"id": 24, "day": "Monday", "job": "Opening: bar | Fill the ice bucket", "homeDay": "Monday"},
+  {"id": 25, "day": "Monday", "job": "Opening: bar | “What’s on” onto the board outside", "homeDay": "Monday"},
+  {"id": 26, "day": "Monday", "job": "Opening: bar | Open doors", "homeDay": "Monday"},
+  {"id": 27, "day": "Monday", "job": "Opening: kitchen | Turn on rangehood and appliances", "homeDay": "Monday"},
+  {"id": 28, "day": "Monday", "job": "Opening: kitchen | Turn on dishwasher", "homeDay": "Monday"},
+  {"id": 29, "day": "Monday", "job": "Opening: kitchen | Microwave on at the isolator switch", "homeDay": "Monday"},
+  {"id": 30, "day": "Monday", "job": "Opening: kitchen | Check dates on all fridge and freezer stock, bin anything out of date", "homeDay": "Monday"},
+  {"id": 31, "day": "Monday", "job": "Opening: kitchen | Check the hotplate has its catch trays", "homeDay": "Monday"},
+  {"id": 32, "day": "Monday", "job": "Opening: kitchen | Sweep kitchen floor", "homeDay": "Monday"},
+  {"id": 33, "day": "Monday", "job": "Opening: kitchen | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Monday"},
+  {"id": 34, "day": "Monday", "job": "Opening: kitchen | Last check of dishes", "homeDay": "Monday"},
+  {"id": 35, "day": "Monday", "job": "Opening: kitchen | Put out food menus standing upright on tables", "homeDay": "Monday"},
+  {"id": 36, "day": "Monday", "job": "Opening: kitchen | Clean sink grease trap", "homeDay": "Monday"},
+  {"id": 37, "day": "Monday", "job": "Opening: kitchen | Cut fruit for the bar", "homeDay": "Monday"},
+  {"id": 38, "day": "Monday", "job": "Opening: kitchen | Polish cutlery", "homeDay": "Monday"},
+  {"id": 39, "day": "Monday", "job": "4–5pm: bar | Top up stock, forward facing", "homeDay": "Monday"},
+  {"id": 40, "day": "Monday", "job": "4–5pm: bar | Restock nibbles", "homeDay": "Monday"},
+  {"id": 41, "day": "Monday", "job": "4–5pm: bar | Top up ice bucket", "homeDay": "Monday"},
+  {"id": 42, "day": "Monday", "job": "4–5pm: bar | Top up fruit", "homeDay": "Monday"},
+  {"id": 43, "day": "Monday", "job": "4–5pm: bar | Clear tables of glasses and food, wipe down", "homeDay": "Monday"},
+  {"id": 44, "day": "Monday", "job": "4–5pm: bar | Empty bins if needed, new bin bag", "homeDay": "Monday"},
+  {"id": 45, "day": "Monday", "job": "4–5pm: bar | Date open juices and wine", "homeDay": "Monday"},
+  {"id": 46, "day": "Monday", "job": "4–5pm: bar | Cutlery", "homeDay": "Monday"},
+  {"id": 47, "day": "Monday", "job": "4–5pm: bar | Top up condiments", "homeDay": "Monday"},
+  {"id": 48, "day": "Monday", "job": "4–5pm: bar | Check the weekly jobs list", "homeDay": "Monday"},
+  {"id": 49, "day": "Monday", "job": "4–5pm: bar | Hand over to the keyholder, add anything for everyone to the handover chat", "homeDay": "Monday"},
+  {"id": 50, "day": "Monday", "job": "4–5pm: kitchen | Top up food in fridge and freezer", "homeDay": "Monday"},
+  {"id": 51, "day": "Monday", "job": "4–5pm: kitchen | Clear dishes from the dishwasher", "homeDay": "Monday"},
+  {"id": 52, "day": "Monday", "job": "4–5pm: kitchen | Clear sinks and food from plugs", "homeDay": "Monday"},
+  {"id": 53, "day": "Monday", "job": "4–5pm: kitchen | Check if rubbish needs taking out, new bin bags", "homeDay": "Monday"},
+  {"id": 54, "day": "Monday", "job": "Bar 9–10pm | 9pm: collect food menus", "homeDay": "Monday"},
+  {"id": 55, "day": "Monday", "job": "Bar 9–10pm | 9pm: outside tables packed down, tarp on and locked", "homeDay": "Monday"},
+  {"id": 56, "day": "Monday", "job": "Bar 9–10pm | Put candles out when dark outside", "homeDay": "Monday"},
+  {"id": 57, "day": "Monday", "job": "Bar 9–10pm | 9pm: spray ashtrays with antibac and wipe with blue roll", "homeDay": "Monday"},
+  {"id": 58, "day": "Monday", "job": "Bar 9–10pm | Wipe down food menus", "homeDay": "Monday"},
+  {"id": 59, "day": "Monday", "job": "Bar 9–10pm | Empty coffee grounds from the knock box into the kitchen compost bag (rinse knock box down the kitchen sink)", "homeDay": "Monday"},
+  {"id": 60, "day": "Monday", "job": "Bar 10pm–12:30am | 12am: Clean coffee machine with chemical (rinse in kitchen sink), wash all jugs in the kitchen dishwasher", "homeDay": "Monday"},
+  {"id": 61, "day": "Monday", "job": "Bar 10pm–12:30am | Clean fridge glass", "homeDay": "Monday"},
+  {"id": 62, "day": "Monday", "job": "Bar 10pm–12:30am | Date open juices and wine", "homeDay": "Monday"},
+  {"id": 63, "day": "Monday", "job": "Bar 10pm–12:30am | Turn off mulled wine", "homeDay": "Monday"},
+  {"id": 64, "day": "Monday", "job": "Bar 10pm–12:30am | Speed pourers off all bottles and through the glass wash", "homeDay": "Monday"},
+  {"id": 65, "day": "Monday", "job": "Bar 10pm–12:30am | Lids onto bottles and wipe down with a damp cloth", "homeDay": "Monday"},
+  {"id": 66, "day": "Monday", "job": "Bar 10pm–12:30am | Wash speed rail and bottle cap bin", "homeDay": "Monday"},
+  {"id": 67, "day": "Monday", "job": "Bar 10pm–12:30am | Wipe bar menus", "homeDay": "Monday"},
+  {"id": 68, "day": "Monday", "job": "Bar 10pm–12:30am | Run bar top trays through the glass washer", "homeDay": "Monday"},
+  {"id": 69, "day": "Monday", "job": "Bar 10pm–12:30am | Fruit cling-wrapped and stored in the fridge", "homeDay": "Monday"},
+  {"id": 70, "day": "Monday", "job": "Bar 10pm–12:30am | Fresh cocktail ingredients into the fridge (lime, coffee etc.)", "homeDay": "Monday"},
+  {"id": 71, "day": "Monday", "job": "Bar 10pm–12:30am | Clean puggy buttons and card machine: antibac on blue roll, NOT sprayed on the tech", "homeDay": "Monday"},
+  {"id": 72, "day": "Monday", "job": "Bar 10pm–12:30am | Soda gun cord wiped, nozzle cleaned and wrapped in clingfilm", "homeDay": "Monday"},
+  {"id": 73, "day": "Monday", "job": "Bar 10pm–12:30am | Spray and wipe down beer dispenser fronts", "homeDay": "Monday"},
+  {"id": 74, "day": "Monday", "job": "Bar 10pm–12:30am | Restock bar fridges, forward facing", "homeDay": "Monday"},
+  {"id": 75, "day": "Monday", "job": "Bar 10pm–12:30am | Ring the bell and call last orders at 12:30am", "homeDay": "Monday"},
+  {"id": 76, "day": "Monday", "job": "Bar 12:45–1am | Beer pourers cleaned in the glass wash, reattached and plugged with brush", "homeDay": "Monday"},
+  {"id": 77, "day": "Monday", "job": "Bar 12:45–1am | Clean beer drip trays from the dispensers", "homeDay": "Monday"},
+  {"id": 78, "day": "Monday", "job": "Bar 12:45–1am | Clean ice buckets with antibac and blue roll (separate and leave to dry)", "homeDay": "Monday"},
+  {"id": 79, "day": "Monday", "job": "Bar 12:45–1am | Decant mulled wine into jugs and cling film, antibac spray inside the urn", "homeDay": "Monday"},
+  {"id": 80, "day": "Monday", "job": "Bar after close | Turn off projector", "homeDay": "Monday"},
+  {"id": 81, "day": "Monday", "job": "Bar after close | Bring in all signage and banner posts", "homeDay": "Monday"},
+  {"id": 82, "day": "Monday", "job": "Bar after close | Check toilets for people, rubbish and glasses, restock soap and paper towels", "homeDay": "Monday"},
+  {"id": 83, "day": "Monday", "job": "Bar after close | Close front doors as soon as customers are out (safety)", "homeDay": "Monday"},
+  {"id": 84, "day": "Monday", "job": "Bar after close | Cash up and count the safe", "homeDay": "Monday"},
+  {"id": 85, "day": "Monday", "job": "Bar after close | Bring in candles", "homeDay": "Monday"},
+  {"id": 86, "day": "Monday", "job": "Bar after close | Spray and polish all tables and the bar", "homeDay": "Monday"},
+  {"id": 87, "day": "Monday", "job": "Bar after close | Wipe back bar and on top of fridges", "homeDay": "Monday"},
+  {"id": 88, "day": "Monday", "job": "Bar after close | Drain and clean dishwasher and glass washer (walls, roof, bottom, blades and filters), wipe down fronts", "homeDay": "Monday"},
+  {"id": 89, "day": "Monday", "job": "Bar after close | Clean bar and kitchen sinks, dry, plug drain with blue roll or a glass", "homeDay": "Monday"},
+  {"id": 90, "day": "Monday", "job": "Bar after close | Empty bins and replace bin bags (don’t put bins on the work top)", "homeDay": "Monday"},
+  {"id": 91, "day": "Monday", "job": "Bar after close | Chairs up", "homeDay": "Monday"},
+  {"id": 92, "day": "Monday", "job": "Bar after close | Sweep bar", "homeDay": "Monday"},
+  {"id": 93, "day": "Monday", "job": "Bar after close | Mop behind bar with floor gel", "homeDay": "Monday"},
+  {"id": 94, "day": "Monday", "job": "Bar after close | Lights off: beer taps, glass, sauces, fridges", "homeDay": "Monday"},
+  {"id": 95, "day": "Monday", "job": "Bar after close | Fans and electrics off, shut down the computer", "homeDay": "Monday"},
+  {"id": 96, "day": "Monday", "job": "Bar after close | Bar handover into the chat, anything run out into the 86’d chat", "homeDay": "Monday"},
+  {"id": 97, "day": "Monday", "job": "Bar after close | Lock hatch to outside and alarm on", "homeDay": "Monday"},
+  {"id": 98, "day": "Monday", "job": "Kitchen close | Clean and polish cutlery", "homeDay": "Monday"},
+  {"id": 99, "day": "Monday", "job": "Kitchen close | Restock freezers and fridges and defrost (up and downstairs), date everything", "homeDay": "Monday"},
+  {"id": 100, "day": "Monday", "job": "Kitchen close | Sharpen knives, put through wash, dry and put away", "homeDay": "Monday"},
+  {"id": 101, "day": "Monday", "job": "Kitchen close | Microwave filters out and cleaned, inside wiped, put back together, isolator switch off", "homeDay": "Monday"},
+  {"id": 102, "day": "Monday", "job": "Kitchen close | Wipe inside bottom of salad bar and under boxes, refill salad bar bread boxes", "homeDay": "Monday"},
+  {"id": 103, "day": "Monday", "job": "Kitchen close | Wipe fridge doors with antibac", "homeDay": "Monday"},
+  {"id": 104, "day": "Monday", "job": "Kitchen close | Clean hotplate with soda, take out catch trays and wash", "homeDay": "Monday"},
+  {"id": 105, "day": "Monday", "job": "Kitchen close | Soak and scrub fryer baskets and lids", "homeDay": "Monday"},
+  {"id": 106, "day": "Monday", "job": "Kitchen close | Lids on all bottles and bottles wiped down", "homeDay": "Monday"},
+  {"id": 107, "day": "Monday", "job": "Kitchen close | Wash splashback and fryer shelf, including under the hotplate", "homeDay": "Monday"},
+  {"id": 108, "day": "Monday", "job": "Kitchen close | Put oven through its cleaning cycle and remove the water", "homeDay": "Monday"},
+  {"id": 109, "day": "Monday", "job": "Kitchen close | Move and wipe under the garnish/salad station", "homeDay": "Monday"},
+  {"id": 110, "day": "Monday", "job": "Kitchen close | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Monday"},
+  {"id": 111, "day": "Monday", "job": "Kitchen close | Last check of dishes", "homeDay": "Monday"},
+  {"id": 112, "day": "Monday", "job": "Kitchen close | Drain and clean kitchen glass washer (walls, roof, bottom, blades) with antibac, clean filter", "homeDay": "Monday"},
+  {"id": 113, "day": "Monday", "job": "Kitchen close | Empty both bins, wipe inside and out, new bags (don’t put on the work top)", "homeDay": "Monday"},
+  {"id": 114, "day": "Monday", "job": "Kitchen close | Clean sinks and sink plugs", "homeDay": "Monday"},
+  {"id": 115, "day": "Monday", "job": "Kitchen close | Turn off switches", "homeDay": "Monday"},
+  {"id": 116, "day": "Monday", "job": "Kitchen close | Sweep kitchen floor", "homeDay": "Monday"},
+  {"id": 117, "day": "Monday", "job": "Kitchen close | Lights off above the rangehood", "homeDay": "Monday"},
+  {"id": 118, "day": "Tuesday", "job": "Opening: bar | Turn on lights, beer taps and music", "homeDay": "Tuesday"},
+  {"id": 119, "day": "Tuesday", "job": "Opening: bar | Turn on coffee machine", "homeDay": "Tuesday"},
+  {"id": 120, "day": "Tuesday", "job": "Opening: bar | Read the bar handover, pass on notes (check with kitchen if they’re out of anything)", "homeDay": "Tuesday"},
+  {"id": 121, "day": "Tuesday", "job": "Opening: bar | Take down chairs", "homeDay": "Tuesday"},
+  {"id": 122, "day": "Tuesday", "job": "Opening: bar | Restock dead tealights, put out candles and food menus standing upright on tables", "homeDay": "Tuesday"},
+  {"id": 123, "day": "Tuesday", "job": "Opening: bar | Restock straws, coasters and napkins", "homeDay": "Tuesday"},
+  {"id": 124, "day": "Tuesday", "job": "Opening: bar | Stock fridges forward facing, restock nibbles", "homeDay": "Tuesday"},
+  {"id": 125, "day": "Tuesday", "job": "Opening: bar | Empty cooler bucket in the cellar", "homeDay": "Tuesday"},
+  {"id": 126, "day": "Tuesday", "job": "Opening: bar | Wipe fridge doors inside and out with glass cleaner", "homeDay": "Tuesday"},
+  {"id": 127, "day": "Tuesday", "job": "Opening: bar | Count safe and till, put float in the drawer", "homeDay": "Tuesday"},
+  {"id": 128, "day": "Tuesday", "job": "Opening: bar | Cut fruit, prep mint and garnishes", "homeDay": "Tuesday"},
+  {"id": 129, "day": "Tuesday", "job": "Opening: bar | Put the soda gun together", "homeDay": "Tuesday"},
+  {"id": 130, "day": "Tuesday", "job": "Opening: bar | Speed pourers into bottles", "homeDay": "Tuesday"},
+  {"id": 131, "day": "Tuesday", "job": "Opening: bar | Bottle lids and pourer covers into the bucket, stored under the coffee machine", "homeDay": "Tuesday"},
+  {"id": 132, "day": "Tuesday", "job": "Opening: bar | Take stoppers out of the beer taps", "homeDay": "Tuesday"},
+  {"id": 133, "day": "Tuesday", "job": "Opening: bar | Turn on and fill the glass wash", "homeDay": "Tuesday"},
+  {"id": 134, "day": "Tuesday", "job": "Opening: bar | Empty bottle bin and wipe inside with antibac", "homeDay": "Tuesday"},
+  {"id": 135, "day": "Tuesday", "job": "Opening: bar | Sweep cigarette butts from outside", "homeDay": "Tuesday"},
+  {"id": 136, "day": "Tuesday", "job": "Opening: bar | Unlock and set up outside tables", "homeDay": "Tuesday"},
+  {"id": 137, "day": "Tuesday", "job": "Opening: bar | Put out ashtrays and empty the big ashtray", "homeDay": "Tuesday"},
+  {"id": 138, "day": "Tuesday", "job": "Opening: bar | Cutlery", "homeDay": "Tuesday"},
+  {"id": 139, "day": "Tuesday", "job": "Opening: bar | Prep coffee, top up citrus juices", "homeDay": "Tuesday"},
+  {"id": 140, "day": "Tuesday", "job": "Opening: bar | Fill the ice bucket", "homeDay": "Tuesday"},
+  {"id": 141, "day": "Tuesday", "job": "Opening: bar | “What’s on” onto the board outside", "homeDay": "Tuesday"},
+  {"id": 142, "day": "Tuesday", "job": "Opening: bar | Open doors", "homeDay": "Tuesday"},
+  {"id": 143, "day": "Tuesday", "job": "Opening: kitchen | Turn on rangehood and appliances", "homeDay": "Tuesday"},
+  {"id": 144, "day": "Tuesday", "job": "Opening: kitchen | Turn on dishwasher", "homeDay": "Tuesday"},
+  {"id": 145, "day": "Tuesday", "job": "Opening: kitchen | Microwave on at the isolator switch", "homeDay": "Tuesday"},
+  {"id": 146, "day": "Tuesday", "job": "Opening: kitchen | Check dates on all fridge and freezer stock, bin anything out of date", "homeDay": "Tuesday"},
+  {"id": 147, "day": "Tuesday", "job": "Opening: kitchen | Check the hotplate has its catch trays", "homeDay": "Tuesday"},
+  {"id": 148, "day": "Tuesday", "job": "Opening: kitchen | Sweep kitchen floor", "homeDay": "Tuesday"},
+  {"id": 149, "day": "Tuesday", "job": "Opening: kitchen | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Tuesday"},
+  {"id": 150, "day": "Tuesday", "job": "Opening: kitchen | Last check of dishes", "homeDay": "Tuesday"},
+  {"id": 151, "day": "Tuesday", "job": "Opening: kitchen | Put out food menus standing upright on tables", "homeDay": "Tuesday"},
+  {"id": 152, "day": "Tuesday", "job": "Opening: kitchen | Clean sink grease trap", "homeDay": "Tuesday"},
+  {"id": 153, "day": "Tuesday", "job": "Opening: kitchen | Cut fruit for the bar", "homeDay": "Tuesday"},
+  {"id": 154, "day": "Tuesday", "job": "Opening: kitchen | Polish cutlery", "homeDay": "Tuesday"},
+  {"id": 155, "day": "Tuesday", "job": "4–5pm: bar | Top up stock, forward facing", "homeDay": "Tuesday"},
+  {"id": 156, "day": "Tuesday", "job": "4–5pm: bar | Restock nibbles", "homeDay": "Tuesday"},
+  {"id": 157, "day": "Tuesday", "job": "4–5pm: bar | Top up ice bucket", "homeDay": "Tuesday"},
+  {"id": 158, "day": "Tuesday", "job": "4–5pm: bar | Top up fruit", "homeDay": "Tuesday"},
+  {"id": 159, "day": "Tuesday", "job": "4–5pm: bar | Clear tables of glasses and food, wipe down", "homeDay": "Tuesday"},
+  {"id": 160, "day": "Tuesday", "job": "4–5pm: bar | Empty bins if needed, new bin bag", "homeDay": "Tuesday"},
+  {"id": 161, "day": "Tuesday", "job": "4–5pm: bar | Date open juices and wine", "homeDay": "Tuesday"},
+  {"id": 162, "day": "Tuesday", "job": "4–5pm: bar | Cutlery", "homeDay": "Tuesday"},
+  {"id": 163, "day": "Tuesday", "job": "4–5pm: bar | Top up condiments", "homeDay": "Tuesday"},
+  {"id": 164, "day": "Tuesday", "job": "4–5pm: bar | Check the weekly jobs list", "homeDay": "Tuesday"},
+  {"id": 165, "day": "Tuesday", "job": "4–5pm: bar | Hand over to the keyholder, add anything for everyone to the handover chat", "homeDay": "Tuesday"},
+  {"id": 166, "day": "Tuesday", "job": "4–5pm: kitchen | Top up food in fridge and freezer", "homeDay": "Tuesday"},
+  {"id": 167, "day": "Tuesday", "job": "4–5pm: kitchen | Clear dishes from the dishwasher", "homeDay": "Tuesday"},
+  {"id": 168, "day": "Tuesday", "job": "4–5pm: kitchen | Clear sinks and food from plugs", "homeDay": "Tuesday"},
+  {"id": 169, "day": "Tuesday", "job": "4–5pm: kitchen | Check if rubbish needs taking out, new bin bags", "homeDay": "Tuesday"},
+  {"id": 170, "day": "Tuesday", "job": "Bar 9–10pm | 9pm: collect food menus", "homeDay": "Tuesday"},
+  {"id": 171, "day": "Tuesday", "job": "Bar 9–10pm | 9pm: outside tables packed down, tarp on and locked", "homeDay": "Tuesday"},
+  {"id": 172, "day": "Tuesday", "job": "Bar 9–10pm | Put candles out when dark outside", "homeDay": "Tuesday"},
+  {"id": 173, "day": "Tuesday", "job": "Bar 9–10pm | 9pm: spray ashtrays with antibac and wipe with blue roll", "homeDay": "Tuesday"},
+  {"id": 174, "day": "Tuesday", "job": "Bar 9–10pm | Wipe down food menus", "homeDay": "Tuesday"},
+  {"id": 175, "day": "Tuesday", "job": "Bar 9–10pm | Empty coffee grounds from the knock box into the kitchen compost bag (rinse knock box down the kitchen sink)", "homeDay": "Tuesday"},
+  {"id": 176, "day": "Tuesday", "job": "Bar 10pm–12:30am | 12am: Clean coffee machine with antibac spray, wash all jugs in the kitchen dishwasher", "homeDay": "Tuesday"},
+  {"id": 177, "day": "Tuesday", "job": "Bar 10pm–12:30am | Clean fridge glass", "homeDay": "Tuesday"},
+  {"id": 178, "day": "Tuesday", "job": "Bar 10pm–12:30am | Date open juices and wine", "homeDay": "Tuesday"},
+  {"id": 179, "day": "Tuesday", "job": "Bar 10pm–12:30am | Turn off mulled wine", "homeDay": "Tuesday"},
+  {"id": 180, "day": "Tuesday", "job": "Bar 10pm–12:30am | Speed pourers off all bottles and through the glass wash", "homeDay": "Tuesday"},
+  {"id": 181, "day": "Tuesday", "job": "Bar 10pm–12:30am | Lids onto bottles and wipe down with a damp cloth", "homeDay": "Tuesday"},
+  {"id": 182, "day": "Tuesday", "job": "Bar 10pm–12:30am | Wash speed rail and bottle cap bin", "homeDay": "Tuesday"},
+  {"id": 183, "day": "Tuesday", "job": "Bar 10pm–12:30am | Wipe bar menus", "homeDay": "Tuesday"},
+  {"id": 184, "day": "Tuesday", "job": "Bar 10pm–12:30am | Run bar top trays through the glass washer", "homeDay": "Tuesday"},
+  {"id": 185, "day": "Tuesday", "job": "Bar 10pm–12:30am | Fruit cling-wrapped and stored in the fridge", "homeDay": "Tuesday"},
+  {"id": 186, "day": "Tuesday", "job": "Bar 10pm–12:30am | Fresh cocktail ingredients into the fridge (lime, coffee etc.)", "homeDay": "Tuesday"},
+  {"id": 187, "day": "Tuesday", "job": "Bar 10pm–12:30am | Clean puggy buttons and card machine: antibac on blue roll, NOT sprayed on the tech", "homeDay": "Tuesday"},
+  {"id": 188, "day": "Tuesday", "job": "Bar 10pm–12:30am | Soda gun cord wiped, nozzle cleaned and wrapped in clingfilm", "homeDay": "Tuesday"},
+  {"id": 189, "day": "Tuesday", "job": "Bar 10pm–12:30am | Spray and wipe down beer dispenser fronts", "homeDay": "Tuesday"},
+  {"id": 190, "day": "Tuesday", "job": "Bar 10pm–12:30am | Restock bar fridges, forward facing", "homeDay": "Tuesday"},
+  {"id": 191, "day": "Tuesday", "job": "Bar 10pm–12:30am | Ring the bell and call last orders at 12:30am", "homeDay": "Tuesday"},
+  {"id": 192, "day": "Tuesday", "job": "Bar 12:45–1am | Beer pourers cleaned in the glass wash, reattached and plugged with brush", "homeDay": "Tuesday"},
+  {"id": 193, "day": "Tuesday", "job": "Bar 12:45–1am | Clean beer drip trays from the dispensers", "homeDay": "Tuesday"},
+  {"id": 194, "day": "Tuesday", "job": "Bar 12:45–1am | Clean ice buckets with antibac and blue roll (separate and leave to dry)", "homeDay": "Tuesday"},
+  {"id": 195, "day": "Tuesday", "job": "Bar 12:45–1am | Decant mulled wine into jugs and cling film, antibac spray inside the urn", "homeDay": "Tuesday"},
+  {"id": 196, "day": "Tuesday", "job": "Bar after close | Turn off projector", "homeDay": "Tuesday"},
+  {"id": 197, "day": "Tuesday", "job": "Bar after close | Bring in all signage and banner posts", "homeDay": "Tuesday"},
+  {"id": 198, "day": "Tuesday", "job": "Bar after close | Check toilets for people, rubbish and glasses, restock soap and paper towels", "homeDay": "Tuesday"},
+  {"id": 199, "day": "Tuesday", "job": "Bar after close | Close front doors as soon as customers are out (safety)", "homeDay": "Tuesday"},
+  {"id": 200, "day": "Tuesday", "job": "Bar after close | Cash up and count the safe", "homeDay": "Tuesday"},
+  {"id": 201, "day": "Tuesday", "job": "Bar after close | Bring in candles", "homeDay": "Tuesday"},
+  {"id": 202, "day": "Tuesday", "job": "Bar after close | Spray and polish all tables and the bar", "homeDay": "Tuesday"},
+  {"id": 203, "day": "Tuesday", "job": "Bar after close | Wipe back bar and on top of fridges", "homeDay": "Tuesday"},
+  {"id": 204, "day": "Tuesday", "job": "Bar after close | Drain and clean dishwasher and glass washer (walls, roof, bottom, blades and filters), wipe down fronts", "homeDay": "Tuesday"},
+  {"id": 205, "day": "Tuesday", "job": "Bar after close | Clean bar and kitchen sinks, dry, plug drain with blue roll or a glass", "homeDay": "Tuesday"},
+  {"id": 206, "day": "Tuesday", "job": "Bar after close | Empty bins and replace bin bags (don’t put bins on the work top)", "homeDay": "Tuesday"},
+  {"id": 207, "day": "Tuesday", "job": "Bar after close | Chairs up", "homeDay": "Tuesday"},
+  {"id": 208, "day": "Tuesday", "job": "Bar after close | Sweep bar", "homeDay": "Tuesday"},
+  {"id": 209, "day": "Tuesday", "job": "Bar after close | Mop behind bar with bleach", "homeDay": "Tuesday"},
+  {"id": 210, "day": "Tuesday", "job": "Bar after close | Lights off: beer taps, glass, sauces, fridges", "homeDay": "Tuesday"},
+  {"id": 211, "day": "Tuesday", "job": "Bar after close | Fans and electrics off, shut down the computer", "homeDay": "Tuesday"},
+  {"id": 212, "day": "Tuesday", "job": "Bar after close | Bar handover into the chat, anything run out into the 86’d chat", "homeDay": "Tuesday"},
+  {"id": 213, "day": "Tuesday", "job": "Bar after close | Lock hatch to outside and alarm on", "homeDay": "Tuesday"},
+  {"id": 214, "day": "Tuesday", "job": "Kitchen close | Clean and polish cutlery", "homeDay": "Tuesday"},
+  {"id": 215, "day": "Tuesday", "job": "Kitchen close | Restock freezers and fridges and defrost (up and downstairs), date everything", "homeDay": "Tuesday"},
+  {"id": 216, "day": "Tuesday", "job": "Kitchen close | Sharpen knives, put through wash, dry and put away", "homeDay": "Tuesday"},
+  {"id": 217, "day": "Tuesday", "job": "Kitchen close | Microwave filters out and cleaned, inside wiped, put back together, isolator switch off", "homeDay": "Tuesday"},
+  {"id": 218, "day": "Tuesday", "job": "Kitchen close | Wipe inside bottom of salad bar and under boxes, refill salad bar bread boxes", "homeDay": "Tuesday"},
+  {"id": 219, "day": "Tuesday", "job": "Kitchen close | Wipe fridge doors with antibac", "homeDay": "Tuesday"},
+  {"id": 220, "day": "Tuesday", "job": "Kitchen close | Clean hotplate with soda, take out catch trays and wash", "homeDay": "Tuesday"},
+  {"id": 221, "day": "Tuesday", "job": "Kitchen close | Soak and scrub fryer baskets and lids", "homeDay": "Tuesday"},
+  {"id": 222, "day": "Tuesday", "job": "Kitchen close | Lids on all bottles and bottles wiped down", "homeDay": "Tuesday"},
+  {"id": 223, "day": "Tuesday", "job": "Kitchen close | Wash splashback and fryer shelf, including under the hotplate", "homeDay": "Tuesday"},
+  {"id": 224, "day": "Tuesday", "job": "Kitchen close | Put oven through its cleaning cycle and remove the water", "homeDay": "Tuesday"},
+  {"id": 225, "day": "Tuesday", "job": "Kitchen close | Move and wipe under the garnish/salad station", "homeDay": "Tuesday"},
+  {"id": 226, "day": "Tuesday", "job": "Kitchen close | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Tuesday"},
+  {"id": 227, "day": "Tuesday", "job": "Kitchen close | Last check of dishes", "homeDay": "Tuesday"},
+  {"id": 228, "day": "Tuesday", "job": "Kitchen close | Drain and clean kitchen glass washer (walls, roof, bottom, blades) with antibac, clean filter", "homeDay": "Tuesday"},
+  {"id": 229, "day": "Tuesday", "job": "Kitchen close | Empty both bins, wipe inside and out, new bags (don’t put on the work top)", "homeDay": "Tuesday"},
+  {"id": 230, "day": "Tuesday", "job": "Kitchen close | Clean sinks and sink plugs", "homeDay": "Tuesday"},
+  {"id": 231, "day": "Tuesday", "job": "Kitchen close | Turn off switches", "homeDay": "Tuesday"},
+  {"id": 232, "day": "Tuesday", "job": "Kitchen close | Sweep kitchen floor", "homeDay": "Tuesday"},
+  {"id": 233, "day": "Tuesday", "job": "Kitchen close | Lights off above the rangehood", "homeDay": "Tuesday"},
+  {"id": 234, "day": "Wednesday", "job": "Opening: bar | Turn on lights, beer taps and music", "homeDay": "Wednesday"},
+  {"id": 235, "day": "Wednesday", "job": "Opening: bar | Turn on coffee machine", "homeDay": "Wednesday"},
+  {"id": 236, "day": "Wednesday", "job": "Opening: bar | Read the bar handover, pass on notes (check with kitchen if they’re out of anything)", "homeDay": "Wednesday"},
+  {"id": 237, "day": "Wednesday", "job": "Opening: bar | Take down chairs", "homeDay": "Wednesday"},
+  {"id": 238, "day": "Wednesday", "job": "Opening: bar | Restock dead tealights, put out candles and food menus standing upright on tables", "homeDay": "Wednesday"},
+  {"id": 239, "day": "Wednesday", "job": "Opening: bar | Restock straws, coasters and napkins", "homeDay": "Wednesday"},
+  {"id": 240, "day": "Wednesday", "job": "Opening: bar | Stock fridges forward facing, restock nibbles", "homeDay": "Wednesday"},
+  {"id": 241, "day": "Wednesday", "job": "Opening: bar | Empty cooler bucket in the cellar", "homeDay": "Wednesday"},
+  {"id": 242, "day": "Wednesday", "job": "Opening: bar | Wipe fridge doors inside and out with glass cleaner", "homeDay": "Wednesday"},
+  {"id": 243, "day": "Wednesday", "job": "Opening: bar | Count safe and till, put float in the drawer", "homeDay": "Wednesday"},
+  {"id": 244, "day": "Wednesday", "job": "Opening: bar | Cut fruit, prep mint and garnishes", "homeDay": "Wednesday"},
+  {"id": 245, "day": "Wednesday", "job": "Opening: bar | Put the soda gun together", "homeDay": "Wednesday"},
+  {"id": 246, "day": "Wednesday", "job": "Opening: bar | Speed pourers into bottles", "homeDay": "Wednesday"},
+  {"id": 247, "day": "Wednesday", "job": "Opening: bar | Bottle lids and pourer covers into the bucket, stored under the coffee machine", "homeDay": "Wednesday"},
+  {"id": 248, "day": "Wednesday", "job": "Opening: bar | Take stoppers out of the beer taps", "homeDay": "Wednesday"},
+  {"id": 249, "day": "Wednesday", "job": "Opening: bar | Turn on and fill the glass wash", "homeDay": "Wednesday"},
+  {"id": 250, "day": "Wednesday", "job": "Opening: bar | Empty bottle bin and wipe inside with antibac", "homeDay": "Wednesday"},
+  {"id": 251, "day": "Wednesday", "job": "Opening: bar | Sweep cigarette butts from outside", "homeDay": "Wednesday"},
+  {"id": 252, "day": "Wednesday", "job": "Opening: bar | Unlock and set up outside tables", "homeDay": "Wednesday"},
+  {"id": 253, "day": "Wednesday", "job": "Opening: bar | Put out ashtrays and empty the big ashtray", "homeDay": "Wednesday"},
+  {"id": 254, "day": "Wednesday", "job": "Opening: bar | Cutlery", "homeDay": "Wednesday"},
+  {"id": 255, "day": "Wednesday", "job": "Opening: bar | Prep coffee, top up citrus juices", "homeDay": "Wednesday"},
+  {"id": 256, "day": "Wednesday", "job": "Opening: bar | Fill the ice bucket", "homeDay": "Wednesday"},
+  {"id": 257, "day": "Wednesday", "job": "Opening: bar | “What’s on” onto the board outside", "homeDay": "Wednesday"},
+  {"id": 258, "day": "Wednesday", "job": "Opening: bar | Open doors", "homeDay": "Wednesday"},
+  {"id": 259, "day": "Wednesday", "job": "Opening: kitchen | Turn on rangehood and appliances", "homeDay": "Wednesday"},
+  {"id": 260, "day": "Wednesday", "job": "Opening: kitchen | Turn on dishwasher", "homeDay": "Wednesday"},
+  {"id": 261, "day": "Wednesday", "job": "Opening: kitchen | Microwave on at the isolator switch", "homeDay": "Wednesday"},
+  {"id": 262, "day": "Wednesday", "job": "Opening: kitchen | Check dates on all fridge and freezer stock, bin anything out of date", "homeDay": "Wednesday"},
+  {"id": 263, "day": "Wednesday", "job": "Opening: kitchen | Check the hotplate has its catch trays", "homeDay": "Wednesday"},
+  {"id": 264, "day": "Wednesday", "job": "Opening: kitchen | Sweep kitchen floor", "homeDay": "Wednesday"},
+  {"id": 265, "day": "Wednesday", "job": "Opening: kitchen | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Wednesday"},
+  {"id": 266, "day": "Wednesday", "job": "Opening: kitchen | Last check of dishes", "homeDay": "Wednesday"},
+  {"id": 267, "day": "Wednesday", "job": "Opening: kitchen | Put out food menus standing upright on tables", "homeDay": "Wednesday"},
+  {"id": 268, "day": "Wednesday", "job": "Opening: kitchen | Clean sink grease trap", "homeDay": "Wednesday"},
+  {"id": 269, "day": "Wednesday", "job": "Opening: kitchen | Cut fruit for the bar", "homeDay": "Wednesday"},
+  {"id": 270, "day": "Wednesday", "job": "Opening: kitchen | Polish cutlery", "homeDay": "Wednesday"},
+  {"id": 271, "day": "Wednesday", "job": "4–5pm: bar | Top up stock, forward facing", "homeDay": "Wednesday"},
+  {"id": 272, "day": "Wednesday", "job": "4–5pm: bar | Restock nibbles", "homeDay": "Wednesday"},
+  {"id": 273, "day": "Wednesday", "job": "4–5pm: bar | Top up ice bucket", "homeDay": "Wednesday"},
+  {"id": 274, "day": "Wednesday", "job": "4–5pm: bar | Top up fruit", "homeDay": "Wednesday"},
+  {"id": 275, "day": "Wednesday", "job": "4–5pm: bar | Clear tables of glasses and food, wipe down", "homeDay": "Wednesday"},
+  {"id": 276, "day": "Wednesday", "job": "4–5pm: bar | Empty bins if needed, new bin bag", "homeDay": "Wednesday"},
+  {"id": 277, "day": "Wednesday", "job": "4–5pm: bar | Date open juices and wine", "homeDay": "Wednesday"},
+  {"id": 278, "day": "Wednesday", "job": "4–5pm: bar | Cutlery", "homeDay": "Wednesday"},
+  {"id": 279, "day": "Wednesday", "job": "4–5pm: bar | Top up condiments", "homeDay": "Wednesday"},
+  {"id": 280, "day": "Wednesday", "job": "4–5pm: bar | Check the weekly jobs list", "homeDay": "Wednesday"},
+  {"id": 281, "day": "Wednesday", "job": "4–5pm: bar | Hand over to the keyholder, add anything for everyone to the handover chat", "homeDay": "Wednesday"},
+  {"id": 282, "day": "Wednesday", "job": "4–5pm: kitchen | Top up food in fridge and freezer", "homeDay": "Wednesday"},
+  {"id": 283, "day": "Wednesday", "job": "4–5pm: kitchen | Clear dishes from the dishwasher", "homeDay": "Wednesday"},
+  {"id": 284, "day": "Wednesday", "job": "4–5pm: kitchen | Clear sinks and food from plugs", "homeDay": "Wednesday"},
+  {"id": 285, "day": "Wednesday", "job": "4–5pm: kitchen | Check if rubbish needs taking out, new bin bags", "homeDay": "Wednesday"},
+  {"id": 286, "day": "Wednesday", "job": "Bar 9–10pm | 9pm: collect food menus", "homeDay": "Wednesday"},
+  {"id": 287, "day": "Wednesday", "job": "Bar 9–10pm | 9pm: outside tables packed down, tarp on and locked", "homeDay": "Wednesday"},
+  {"id": 288, "day": "Wednesday", "job": "Bar 9–10pm | Put candles out when dark outside", "homeDay": "Wednesday"},
+  {"id": 289, "day": "Wednesday", "job": "Bar 9–10pm | 9pm: spray ashtrays with antibac and wipe with blue roll", "homeDay": "Wednesday"},
+  {"id": 290, "day": "Wednesday", "job": "Bar 9–10pm | Wipe down food menus", "homeDay": "Wednesday"},
+  {"id": 291, "day": "Wednesday", "job": "Bar 9–10pm | Empty coffee grounds from the knock box into the kitchen compost bag (rinse knock box down the kitchen sink)", "homeDay": "Wednesday"},
+  {"id": 292, "day": "Wednesday", "job": "Bar 10pm–12:30am | 12am: Clean coffee machine with chemical (rinse in kitchen sink), wash all jugs in the kitchen dishwasher", "homeDay": "Wednesday"},
+  {"id": 293, "day": "Wednesday", "job": "Bar 10pm–12:30am | Clean fridge glass", "homeDay": "Wednesday"},
+  {"id": 294, "day": "Wednesday", "job": "Bar 10pm–12:30am | Date open juices and wine", "homeDay": "Wednesday"},
+  {"id": 295, "day": "Wednesday", "job": "Bar 10pm–12:30am | Turn off mulled wine", "homeDay": "Wednesday"},
+  {"id": 296, "day": "Wednesday", "job": "Bar 10pm–12:30am | Speed pourers off all bottles and through the glass wash", "homeDay": "Wednesday"},
+  {"id": 297, "day": "Wednesday", "job": "Bar 10pm–12:30am | Lids onto bottles and wipe down with a damp cloth", "homeDay": "Wednesday"},
+  {"id": 298, "day": "Wednesday", "job": "Bar 10pm–12:30am | Wash speed rail and bottle cap bin", "homeDay": "Wednesday"},
+  {"id": 299, "day": "Wednesday", "job": "Bar 10pm–12:30am | Wipe bar menus", "homeDay": "Wednesday"},
+  {"id": 300, "day": "Wednesday", "job": "Bar 10pm–12:30am | Run bar top trays through the glass washer", "homeDay": "Wednesday"},
+  {"id": 301, "day": "Wednesday", "job": "Bar 10pm–12:30am | Fruit cling-wrapped and stored in the fridge", "homeDay": "Wednesday"},
+  {"id": 302, "day": "Wednesday", "job": "Bar 10pm–12:30am | Fresh cocktail ingredients into the fridge (lime, coffee etc.)", "homeDay": "Wednesday"},
+  {"id": 303, "day": "Wednesday", "job": "Bar 10pm–12:30am | Clean puggy buttons and card machine: antibac on blue roll, NOT sprayed on the tech", "homeDay": "Wednesday"},
+  {"id": 304, "day": "Wednesday", "job": "Bar 10pm–12:30am | Soda gun cord wiped, nozzle cleaned and wrapped in clingfilm", "homeDay": "Wednesday"},
+  {"id": 305, "day": "Wednesday", "job": "Bar 10pm–12:30am | Spray and wipe down beer dispenser fronts", "homeDay": "Wednesday"},
+  {"id": 306, "day": "Wednesday", "job": "Bar 10pm–12:30am | Restock bar fridges, forward facing", "homeDay": "Wednesday"},
+  {"id": 307, "day": "Wednesday", "job": "Bar 10pm–12:30am | Ring the bell and call last orders at 12:30am", "homeDay": "Wednesday"},
+  {"id": 308, "day": "Wednesday", "job": "Bar 12:45–1am | Beer pourers cleaned in the glass wash, reattached and plugged with brush", "homeDay": "Wednesday"},
+  {"id": 309, "day": "Wednesday", "job": "Bar 12:45–1am | Clean beer drip trays from the dispensers", "homeDay": "Wednesday"},
+  {"id": 310, "day": "Wednesday", "job": "Bar 12:45–1am | Clean ice buckets with antibac and blue roll (separate and leave to dry)", "homeDay": "Wednesday"},
+  {"id": 311, "day": "Wednesday", "job": "Bar 12:45–1am | Decant mulled wine into jugs and cling film, antibac spray inside the urn", "homeDay": "Wednesday"},
+  {"id": 312, "day": "Wednesday", "job": "Bar after close | Turn off projector", "homeDay": "Wednesday"},
+  {"id": 313, "day": "Wednesday", "job": "Bar after close | Bring in all signage and banner posts", "homeDay": "Wednesday"},
+  {"id": 314, "day": "Wednesday", "job": "Bar after close | Check toilets for people, rubbish and glasses, restock soap and paper towels", "homeDay": "Wednesday"},
+  {"id": 315, "day": "Wednesday", "job": "Bar after close | Close front doors as soon as customers are out (safety)", "homeDay": "Wednesday"},
+  {"id": 316, "day": "Wednesday", "job": "Bar after close | Cash up and count the safe", "homeDay": "Wednesday"},
+  {"id": 317, "day": "Wednesday", "job": "Bar after close | Bring in candles", "homeDay": "Wednesday"},
+  {"id": 318, "day": "Wednesday", "job": "Bar after close | Spray and polish all tables and the bar", "homeDay": "Wednesday"},
+  {"id": 319, "day": "Wednesday", "job": "Bar after close | Wipe back bar and on top of fridges", "homeDay": "Wednesday"},
+  {"id": 320, "day": "Wednesday", "job": "Bar after close | Drain and clean dishwasher and glass washer (walls, roof, bottom, blades and filters), wipe down fronts", "homeDay": "Wednesday"},
+  {"id": 321, "day": "Wednesday", "job": "Bar after close | Clean bar and kitchen sinks, dry, plug drain with blue roll or a glass", "homeDay": "Wednesday"},
+  {"id": 322, "day": "Wednesday", "job": "Bar after close | Empty bins and replace bin bags (don’t put bins on the work top)", "homeDay": "Wednesday"},
+  {"id": 323, "day": "Wednesday", "job": "Bar after close | Chairs up", "homeDay": "Wednesday"},
+  {"id": 324, "day": "Wednesday", "job": "Bar after close | Sweep bar", "homeDay": "Wednesday"},
+  {"id": 325, "day": "Wednesday", "job": "Bar after close | Mop behind bar with floor gel", "homeDay": "Wednesday"},
+  {"id": 326, "day": "Wednesday", "job": "Bar after close | Lights off: beer taps, glass, sauces, fridges", "homeDay": "Wednesday"},
+  {"id": 327, "day": "Wednesday", "job": "Bar after close | Fans and electrics off, shut down the computer", "homeDay": "Wednesday"},
+  {"id": 328, "day": "Wednesday", "job": "Bar after close | Bar handover into the chat, anything run out into the 86’d chat", "homeDay": "Wednesday"},
+  {"id": 329, "day": "Wednesday", "job": "Bar after close | Lock hatch to outside and alarm on", "homeDay": "Wednesday"},
+  {"id": 330, "day": "Wednesday", "job": "Kitchen close | Clean and polish cutlery", "homeDay": "Wednesday"},
+  {"id": 331, "day": "Wednesday", "job": "Kitchen close | Restock freezers and fridges and defrost (up and downstairs), date everything", "homeDay": "Wednesday"},
+  {"id": 332, "day": "Wednesday", "job": "Kitchen close | Sharpen knives, put through wash, dry and put away", "homeDay": "Wednesday"},
+  {"id": 333, "day": "Wednesday", "job": "Kitchen close | Microwave filters out and cleaned, inside wiped, put back together, isolator switch off", "homeDay": "Wednesday"},
+  {"id": 334, "day": "Wednesday", "job": "Kitchen close | Wipe inside bottom of salad bar and under boxes, refill salad bar bread boxes", "homeDay": "Wednesday"},
+  {"id": 335, "day": "Wednesday", "job": "Kitchen close | Wipe fridge doors with antibac", "homeDay": "Wednesday"},
+  {"id": 336, "day": "Wednesday", "job": "Kitchen close | Clean hotplate with soda, take out catch trays and wash", "homeDay": "Wednesday"},
+  {"id": 337, "day": "Wednesday", "job": "Kitchen close | Soak and scrub fryer baskets and lids", "homeDay": "Wednesday"},
+  {"id": 338, "day": "Wednesday", "job": "Kitchen close | Lids on all bottles and bottles wiped down", "homeDay": "Wednesday"},
+  {"id": 339, "day": "Wednesday", "job": "Kitchen close | Wash splashback and fryer shelf, including under the hotplate", "homeDay": "Wednesday"},
+  {"id": 340, "day": "Wednesday", "job": "Kitchen close | Put oven through its cleaning cycle and remove the water", "homeDay": "Wednesday"},
+  {"id": 341, "day": "Wednesday", "job": "Kitchen close | Move and wipe under the garnish/salad station", "homeDay": "Wednesday"},
+  {"id": 342, "day": "Wednesday", "job": "Kitchen close | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Wednesday"},
+  {"id": 343, "day": "Wednesday", "job": "Kitchen close | Last check of dishes", "homeDay": "Wednesday"},
+  {"id": 344, "day": "Wednesday", "job": "Kitchen close | Drain and clean kitchen glass washer (walls, roof, bottom, blades) with antibac, clean filter", "homeDay": "Wednesday"},
+  {"id": 345, "day": "Wednesday", "job": "Kitchen close | Empty both bins, wipe inside and out, new bags (don’t put on the work top)", "homeDay": "Wednesday"},
+  {"id": 346, "day": "Wednesday", "job": "Kitchen close | Clean sinks and sink plugs", "homeDay": "Wednesday"},
+  {"id": 347, "day": "Wednesday", "job": "Kitchen close | Turn off switches", "homeDay": "Wednesday"},
+  {"id": 348, "day": "Wednesday", "job": "Kitchen close | Sweep kitchen floor", "homeDay": "Wednesday"},
+  {"id": 349, "day": "Wednesday", "job": "Kitchen close | Lights off above the rangehood", "homeDay": "Wednesday"},
+  {"id": 350, "day": "Thursday", "job": "Opening: bar | Turn on lights, beer taps and music", "homeDay": "Thursday"},
+  {"id": 351, "day": "Thursday", "job": "Opening: bar | Turn on coffee machine", "homeDay": "Thursday"},
+  {"id": 352, "day": "Thursday", "job": "Opening: bar | Read the bar handover, pass on notes (check with kitchen if they’re out of anything)", "homeDay": "Thursday"},
+  {"id": 353, "day": "Thursday", "job": "Opening: bar | Take down chairs", "homeDay": "Thursday"},
+  {"id": 354, "day": "Thursday", "job": "Opening: bar | Restock dead tealights, put out candles and food menus standing upright on tables", "homeDay": "Thursday"},
+  {"id": 355, "day": "Thursday", "job": "Opening: bar | Restock straws, coasters and napkins", "homeDay": "Thursday"},
+  {"id": 356, "day": "Thursday", "job": "Opening: bar | Stock fridges forward facing, restock nibbles", "homeDay": "Thursday"},
+  {"id": 357, "day": "Thursday", "job": "Opening: bar | Empty cooler bucket in the cellar", "homeDay": "Thursday"},
+  {"id": 358, "day": "Thursday", "job": "Opening: bar | Wipe fridge doors inside and out with glass cleaner", "homeDay": "Thursday"},
+  {"id": 359, "day": "Thursday", "job": "Opening: bar | Count safe and till, put float in the drawer", "homeDay": "Thursday"},
+  {"id": 360, "day": "Thursday", "job": "Opening: bar | Cut fruit, prep mint and garnishes", "homeDay": "Thursday"},
+  {"id": 361, "day": "Thursday", "job": "Opening: bar | Put the soda gun together", "homeDay": "Thursday"},
+  {"id": 362, "day": "Thursday", "job": "Opening: bar | Speed pourers into bottles", "homeDay": "Thursday"},
+  {"id": 363, "day": "Thursday", "job": "Opening: bar | Bottle lids and pourer covers into the bucket, stored under the coffee machine", "homeDay": "Thursday"},
+  {"id": 364, "day": "Thursday", "job": "Opening: bar | Take stoppers out of the beer taps", "homeDay": "Thursday"},
+  {"id": 365, "day": "Thursday", "job": "Opening: bar | Turn on and fill the glass wash", "homeDay": "Thursday"},
+  {"id": 366, "day": "Thursday", "job": "Opening: bar | Empty bottle bin and wipe inside with antibac", "homeDay": "Thursday"},
+  {"id": 367, "day": "Thursday", "job": "Opening: bar | Sweep cigarette butts from outside", "homeDay": "Thursday"},
+  {"id": 368, "day": "Thursday", "job": "Opening: bar | Unlock and set up outside tables", "homeDay": "Thursday"},
+  {"id": 369, "day": "Thursday", "job": "Opening: bar | Put out ashtrays and empty the big ashtray", "homeDay": "Thursday"},
+  {"id": 370, "day": "Thursday", "job": "Opening: bar | Cutlery", "homeDay": "Thursday"},
+  {"id": 371, "day": "Thursday", "job": "Opening: bar | Prep coffee, top up citrus juices", "homeDay": "Thursday"},
+  {"id": 372, "day": "Thursday", "job": "Opening: bar | Fill the ice bucket", "homeDay": "Thursday"},
+  {"id": 373, "day": "Thursday", "job": "Opening: bar | “What’s on” onto the board outside", "homeDay": "Thursday"},
+  {"id": 374, "day": "Thursday", "job": "Opening: bar | Open doors", "homeDay": "Thursday"},
+  {"id": 375, "day": "Thursday", "job": "Opening: kitchen | Turn on rangehood and appliances", "homeDay": "Thursday"},
+  {"id": 376, "day": "Thursday", "job": "Opening: kitchen | Turn on dishwasher", "homeDay": "Thursday"},
+  {"id": 377, "day": "Thursday", "job": "Opening: kitchen | Microwave on at the isolator switch", "homeDay": "Thursday"},
+  {"id": 378, "day": "Thursday", "job": "Opening: kitchen | Check dates on all fridge and freezer stock, bin anything out of date", "homeDay": "Thursday"},
+  {"id": 379, "day": "Thursday", "job": "Opening: kitchen | Check the hotplate has its catch trays", "homeDay": "Thursday"},
+  {"id": 380, "day": "Thursday", "job": "Opening: kitchen | Sweep kitchen floor", "homeDay": "Thursday"},
+  {"id": 381, "day": "Thursday", "job": "Opening: kitchen | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Thursday"},
+  {"id": 382, "day": "Thursday", "job": "Opening: kitchen | Last check of dishes", "homeDay": "Thursday"},
+  {"id": 383, "day": "Thursday", "job": "Opening: kitchen | Put out food menus standing upright on tables", "homeDay": "Thursday"},
+  {"id": 384, "day": "Thursday", "job": "Opening: kitchen | Clean sink grease trap", "homeDay": "Thursday"},
+  {"id": 385, "day": "Thursday", "job": "Opening: kitchen | Cut fruit for the bar", "homeDay": "Thursday"},
+  {"id": 386, "day": "Thursday", "job": "Opening: kitchen | Polish cutlery", "homeDay": "Thursday"},
+  {"id": 387, "day": "Thursday", "job": "4–5pm: bar | Top up stock, forward facing", "homeDay": "Thursday"},
+  {"id": 388, "day": "Thursday", "job": "4–5pm: bar | Restock nibbles", "homeDay": "Thursday"},
+  {"id": 389, "day": "Thursday", "job": "4–5pm: bar | Top up ice bucket", "homeDay": "Thursday"},
+  {"id": 390, "day": "Thursday", "job": "4–5pm: bar | Top up fruit", "homeDay": "Thursday"},
+  {"id": 391, "day": "Thursday", "job": "4–5pm: bar | Clear tables of glasses and food, wipe down", "homeDay": "Thursday"},
+  {"id": 392, "day": "Thursday", "job": "4–5pm: bar | Empty bins if needed, new bin bag", "homeDay": "Thursday"},
+  {"id": 393, "day": "Thursday", "job": "4–5pm: bar | Date open juices and wine", "homeDay": "Thursday"},
+  {"id": 394, "day": "Thursday", "job": "4–5pm: bar | Cutlery", "homeDay": "Thursday"},
+  {"id": 395, "day": "Thursday", "job": "4–5pm: bar | Top up condiments", "homeDay": "Thursday"},
+  {"id": 396, "day": "Thursday", "job": "4–5pm: bar | Check the weekly jobs list", "homeDay": "Thursday"},
+  {"id": 397, "day": "Thursday", "job": "4–5pm: bar | Hand over to the keyholder, add anything for everyone to the handover chat", "homeDay": "Thursday"},
+  {"id": 398, "day": "Thursday", "job": "4–5pm: kitchen | Top up food in fridge and freezer", "homeDay": "Thursday"},
+  {"id": 399, "day": "Thursday", "job": "4–5pm: kitchen | Clear dishes from the dishwasher", "homeDay": "Thursday"},
+  {"id": 400, "day": "Thursday", "job": "4–5pm: kitchen | Clear sinks and food from plugs", "homeDay": "Thursday"},
+  {"id": 401, "day": "Thursday", "job": "4–5pm: kitchen | Check if rubbish needs taking out, new bin bags", "homeDay": "Thursday"},
+  {"id": 402, "day": "Thursday", "job": "Bar 9–10pm | 9pm: collect food menus", "homeDay": "Thursday"},
+  {"id": 403, "day": "Thursday", "job": "Bar 9–10pm | 9pm: outside tables packed down, tarp on and locked", "homeDay": "Thursday"},
+  {"id": 404, "day": "Thursday", "job": "Bar 9–10pm | Put candles out when dark outside", "homeDay": "Thursday"},
+  {"id": 405, "day": "Thursday", "job": "Bar 9–10pm | 9pm: spray ashtrays with antibac and wipe with blue roll", "homeDay": "Thursday"},
+  {"id": 406, "day": "Thursday", "job": "Bar 9–10pm | Wipe down food menus", "homeDay": "Thursday"},
+  {"id": 407, "day": "Thursday", "job": "Bar 9–10pm | Empty coffee grounds from the knock box into the kitchen compost bag (rinse knock box down the kitchen sink)", "homeDay": "Thursday"},
+  {"id": 408, "day": "Thursday", "job": "Bar 10pm–12:30am | 12am: Clean coffee machine with antibac spray, wash all jugs in the kitchen dishwasher", "homeDay": "Thursday"},
+  {"id": 409, "day": "Thursday", "job": "Bar 10pm–12:30am | Clean fridge glass", "homeDay": "Thursday"},
+  {"id": 410, "day": "Thursday", "job": "Bar 10pm–12:30am | Date open juices and wine", "homeDay": "Thursday"},
+  {"id": 411, "day": "Thursday", "job": "Bar 10pm–12:30am | Turn off mulled wine", "homeDay": "Thursday"},
+  {"id": 412, "day": "Thursday", "job": "Bar 10pm–12:30am | Speed pourers off all bottles and through the glass wash", "homeDay": "Thursday"},
+  {"id": 413, "day": "Thursday", "job": "Bar 10pm–12:30am | Lids onto bottles and wipe down with a damp cloth", "homeDay": "Thursday"},
+  {"id": 414, "day": "Thursday", "job": "Bar 10pm–12:30am | Wash speed rail and bottle cap bin", "homeDay": "Thursday"},
+  {"id": 415, "day": "Thursday", "job": "Bar 10pm–12:30am | Wipe bar menus", "homeDay": "Thursday"},
+  {"id": 416, "day": "Thursday", "job": "Bar 10pm–12:30am | Run bar top trays through the glass washer", "homeDay": "Thursday"},
+  {"id": 417, "day": "Thursday", "job": "Bar 10pm–12:30am | Fruit cling-wrapped and stored in the fridge", "homeDay": "Thursday"},
+  {"id": 418, "day": "Thursday", "job": "Bar 10pm–12:30am | Fresh cocktail ingredients into the fridge (lime, coffee etc.)", "homeDay": "Thursday"},
+  {"id": 419, "day": "Thursday", "job": "Bar 10pm–12:30am | Clean puggy buttons and card machine: antibac on blue roll, NOT sprayed on the tech", "homeDay": "Thursday"},
+  {"id": 420, "day": "Thursday", "job": "Bar 10pm–12:30am | Soda gun cord wiped, nozzle cleaned and wrapped in clingfilm", "homeDay": "Thursday"},
+  {"id": 421, "day": "Thursday", "job": "Bar 10pm–12:30am | Spray and wipe down beer dispenser fronts", "homeDay": "Thursday"},
+  {"id": 422, "day": "Thursday", "job": "Bar 10pm–12:30am | Restock bar fridges, forward facing", "homeDay": "Thursday"},
+  {"id": 423, "day": "Thursday", "job": "Bar 10pm–12:30am | Ring the bell and call last orders at 12:30am", "homeDay": "Thursday"},
+  {"id": 424, "day": "Thursday", "job": "Bar 12:45–1am | Beer pourers cleaned in the glass wash, reattached and plugged with brush", "homeDay": "Thursday"},
+  {"id": 425, "day": "Thursday", "job": "Bar 12:45–1am | Clean beer drip trays from the dispensers", "homeDay": "Thursday"},
+  {"id": 426, "day": "Thursday", "job": "Bar 12:45–1am | Clean ice buckets with antibac and blue roll (separate and leave to dry)", "homeDay": "Thursday"},
+  {"id": 427, "day": "Thursday", "job": "Bar 12:45–1am | Decant mulled wine into jugs and cling film, antibac spray inside the urn", "homeDay": "Thursday"},
+  {"id": 428, "day": "Thursday", "job": "Bar after close | Turn off projector", "homeDay": "Thursday"},
+  {"id": 429, "day": "Thursday", "job": "Bar after close | Bring in all signage and banner posts", "homeDay": "Thursday"},
+  {"id": 430, "day": "Thursday", "job": "Bar after close | Check toilets for people, rubbish and glasses, restock soap and paper towels", "homeDay": "Thursday"},
+  {"id": 431, "day": "Thursday", "job": "Bar after close | Close front doors as soon as customers are out (safety)", "homeDay": "Thursday"},
+  {"id": 432, "day": "Thursday", "job": "Bar after close | Cash up and count the safe", "homeDay": "Thursday"},
+  {"id": 433, "day": "Thursday", "job": "Bar after close | Bring in candles", "homeDay": "Thursday"},
+  {"id": 434, "day": "Thursday", "job": "Bar after close | Spray and polish all tables and the bar", "homeDay": "Thursday"},
+  {"id": 435, "day": "Thursday", "job": "Bar after close | Wipe back bar and on top of fridges", "homeDay": "Thursday"},
+  {"id": 436, "day": "Thursday", "job": "Bar after close | Drain and clean dishwasher and glass washer (walls, roof, bottom, blades and filters), wipe down fronts", "homeDay": "Thursday"},
+  {"id": 437, "day": "Thursday", "job": "Bar after close | Clean bar and kitchen sinks, dry, plug drain with blue roll or a glass", "homeDay": "Thursday"},
+  {"id": 438, "day": "Thursday", "job": "Bar after close | Empty bins and replace bin bags (don’t put bins on the work top)", "homeDay": "Thursday"},
+  {"id": 439, "day": "Thursday", "job": "Bar after close | Chairs up", "homeDay": "Thursday"},
+  {"id": 440, "day": "Thursday", "job": "Bar after close | Sweep bar", "homeDay": "Thursday"},
+  {"id": 441, "day": "Thursday", "job": "Bar after close | Mop behind bar with bleach", "homeDay": "Thursday"},
+  {"id": 442, "day": "Thursday", "job": "Bar after close | Lights off: beer taps, glass, sauces, fridges", "homeDay": "Thursday"},
+  {"id": 443, "day": "Thursday", "job": "Bar after close | Fans and electrics off, shut down the computer", "homeDay": "Thursday"},
+  {"id": 444, "day": "Thursday", "job": "Bar after close | Bar handover into the chat, anything run out into the 86’d chat", "homeDay": "Thursday"},
+  {"id": 445, "day": "Thursday", "job": "Bar after close | Lock hatch to outside and alarm on", "homeDay": "Thursday"},
+  {"id": 446, "day": "Thursday", "job": "Kitchen close | Clean and polish cutlery", "homeDay": "Thursday"},
+  {"id": 447, "day": "Thursday", "job": "Kitchen close | Restock freezers and fridges and defrost (up and downstairs), date everything", "homeDay": "Thursday"},
+  {"id": 448, "day": "Thursday", "job": "Kitchen close | Sharpen knives, put through wash, dry and put away", "homeDay": "Thursday"},
+  {"id": 449, "day": "Thursday", "job": "Kitchen close | Microwave filters out and cleaned, inside wiped, put back together, isolator switch off", "homeDay": "Thursday"},
+  {"id": 450, "day": "Thursday", "job": "Kitchen close | Wipe inside bottom of salad bar and under boxes, refill salad bar bread boxes", "homeDay": "Thursday"},
+  {"id": 451, "day": "Thursday", "job": "Kitchen close | Wipe fridge doors with antibac", "homeDay": "Thursday"},
+  {"id": 452, "day": "Thursday", "job": "Kitchen close | Clean hotplate with soda, take out catch trays and wash", "homeDay": "Thursday"},
+  {"id": 453, "day": "Thursday", "job": "Kitchen close | Soak and scrub fryer baskets and lids", "homeDay": "Thursday"},
+  {"id": 454, "day": "Thursday", "job": "Kitchen close | Lids on all bottles and bottles wiped down", "homeDay": "Thursday"},
+  {"id": 455, "day": "Thursday", "job": "Kitchen close | Wash splashback and fryer shelf, including under the hotplate", "homeDay": "Thursday"},
+  {"id": 456, "day": "Thursday", "job": "Kitchen close | Put oven through its cleaning cycle and remove the water", "homeDay": "Thursday"},
+  {"id": 457, "day": "Thursday", "job": "Kitchen close | Move and wipe under the garnish/salad station", "homeDay": "Thursday"},
+  {"id": 458, "day": "Thursday", "job": "Kitchen close | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Thursday"},
+  {"id": 459, "day": "Thursday", "job": "Kitchen close | Last check of dishes", "homeDay": "Thursday"},
+  {"id": 460, "day": "Thursday", "job": "Kitchen close | Drain and clean kitchen glass washer (walls, roof, bottom, blades) with antibac, clean filter", "homeDay": "Thursday"},
+  {"id": 461, "day": "Thursday", "job": "Kitchen close | Empty both bins, wipe inside and out, new bags (don’t put on the work top)", "homeDay": "Thursday"},
+  {"id": 462, "day": "Thursday", "job": "Kitchen close | Clean sinks and sink plugs", "homeDay": "Thursday"},
+  {"id": 463, "day": "Thursday", "job": "Kitchen close | Turn off switches", "homeDay": "Thursday"},
+  {"id": 464, "day": "Thursday", "job": "Kitchen close | Sweep kitchen floor", "homeDay": "Thursday"},
+  {"id": 465, "day": "Thursday", "job": "Kitchen close | Lights off above the rangehood", "homeDay": "Thursday"},
+  {"id": 466, "day": "Friday", "job": "Opening: bar | Turn on lights, beer taps and music", "homeDay": "Friday"},
+  {"id": 467, "day": "Friday", "job": "Opening: bar | Turn on coffee machine", "homeDay": "Friday"},
+  {"id": 468, "day": "Friday", "job": "Opening: bar | Read the bar handover, pass on notes (check with kitchen if they’re out of anything)", "homeDay": "Friday"},
+  {"id": 469, "day": "Friday", "job": "Opening: bar | Take down chairs", "homeDay": "Friday"},
+  {"id": 470, "day": "Friday", "job": "Opening: bar | Restock dead tealights, put out candles and food menus standing upright on tables", "homeDay": "Friday"},
+  {"id": 471, "day": "Friday", "job": "Opening: bar | Restock straws, coasters and napkins", "homeDay": "Friday"},
+  {"id": 472, "day": "Friday", "job": "Opening: bar | Stock fridges forward facing, restock nibbles", "homeDay": "Friday"},
+  {"id": 473, "day": "Friday", "job": "Opening: bar | Empty cooler bucket in the cellar", "homeDay": "Friday"},
+  {"id": 474, "day": "Friday", "job": "Opening: bar | Wipe fridge doors inside and out with glass cleaner", "homeDay": "Friday"},
+  {"id": 475, "day": "Friday", "job": "Opening: bar | Count safe and till, put float in the drawer", "homeDay": "Friday"},
+  {"id": 476, "day": "Friday", "job": "Opening: bar | Cut fruit, prep mint and garnishes", "homeDay": "Friday"},
+  {"id": 477, "day": "Friday", "job": "Opening: bar | Put the soda gun together", "homeDay": "Friday"},
+  {"id": 478, "day": "Friday", "job": "Opening: bar | Speed pourers into bottles", "homeDay": "Friday"},
+  {"id": 479, "day": "Friday", "job": "Opening: bar | Bottle lids and pourer covers into the bucket, stored under the coffee machine", "homeDay": "Friday"},
+  {"id": 480, "day": "Friday", "job": "Opening: bar | Take stoppers out of the beer taps", "homeDay": "Friday"},
+  {"id": 481, "day": "Friday", "job": "Opening: bar | Turn on and fill the glass wash", "homeDay": "Friday"},
+  {"id": 482, "day": "Friday", "job": "Opening: bar | Empty bottle bin and wipe inside with antibac", "homeDay": "Friday"},
+  {"id": 483, "day": "Friday", "job": "Opening: bar | Sweep cigarette butts from outside", "homeDay": "Friday"},
+  {"id": 484, "day": "Friday", "job": "Opening: bar | Unlock and set up outside tables", "homeDay": "Friday"},
+  {"id": 485, "day": "Friday", "job": "Opening: bar | Put out ashtrays and empty the big ashtray", "homeDay": "Friday"},
+  {"id": 486, "day": "Friday", "job": "Opening: bar | Cutlery", "homeDay": "Friday"},
+  {"id": 487, "day": "Friday", "job": "Opening: bar | Prep coffee, top up citrus juices", "homeDay": "Friday"},
+  {"id": 488, "day": "Friday", "job": "Opening: bar | Fill the ice bucket", "homeDay": "Friday"},
+  {"id": 489, "day": "Friday", "job": "Opening: bar | “What’s on” onto the board outside", "homeDay": "Friday"},
+  {"id": 490, "day": "Friday", "job": "Opening: bar | Open doors", "homeDay": "Friday"},
+  {"id": 491, "day": "Friday", "job": "Opening: kitchen | Turn on rangehood and appliances", "homeDay": "Friday"},
+  {"id": 492, "day": "Friday", "job": "Opening: kitchen | Turn on dishwasher", "homeDay": "Friday"},
+  {"id": 493, "day": "Friday", "job": "Opening: kitchen | Microwave on at the isolator switch", "homeDay": "Friday"},
+  {"id": 494, "day": "Friday", "job": "Opening: kitchen | Check dates on all fridge and freezer stock, bin anything out of date", "homeDay": "Friday"},
+  {"id": 495, "day": "Friday", "job": "Opening: kitchen | Check the hotplate has its catch trays", "homeDay": "Friday"},
+  {"id": 496, "day": "Friday", "job": "Opening: kitchen | Sweep kitchen floor", "homeDay": "Friday"},
+  {"id": 497, "day": "Friday", "job": "Opening: kitchen | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Friday"},
+  {"id": 498, "day": "Friday", "job": "Opening: kitchen | Last check of dishes", "homeDay": "Friday"},
+  {"id": 499, "day": "Friday", "job": "Opening: kitchen | Put out food menus standing upright on tables", "homeDay": "Friday"},
+  {"id": 500, "day": "Friday", "job": "Opening: kitchen | Clean sink grease trap", "homeDay": "Friday"},
+  {"id": 501, "day": "Friday", "job": "Opening: kitchen | Cut fruit for the bar", "homeDay": "Friday"},
+  {"id": 502, "day": "Friday", "job": "Opening: kitchen | Polish cutlery", "homeDay": "Friday"},
+  {"id": 503, "day": "Friday", "job": "4–5pm: bar | Top up stock, forward facing", "homeDay": "Friday"},
+  {"id": 504, "day": "Friday", "job": "4–5pm: bar | Restock nibbles", "homeDay": "Friday"},
+  {"id": 505, "day": "Friday", "job": "4–5pm: bar | Top up ice bucket", "homeDay": "Friday"},
+  {"id": 506, "day": "Friday", "job": "4–5pm: bar | Top up fruit", "homeDay": "Friday"},
+  {"id": 507, "day": "Friday", "job": "4–5pm: bar | Clear tables of glasses and food, wipe down", "homeDay": "Friday"},
+  {"id": 508, "day": "Friday", "job": "4–5pm: bar | Empty bins if needed, new bin bag", "homeDay": "Friday"},
+  {"id": 509, "day": "Friday", "job": "4–5pm: bar | Date open juices and wine", "homeDay": "Friday"},
+  {"id": 510, "day": "Friday", "job": "4–5pm: bar | Cutlery", "homeDay": "Friday"},
+  {"id": 511, "day": "Friday", "job": "4–5pm: bar | Top up condiments", "homeDay": "Friday"},
+  {"id": 512, "day": "Friday", "job": "4–5pm: bar | Check the weekly jobs list", "homeDay": "Friday"},
+  {"id": 513, "day": "Friday", "job": "4–5pm: bar | Hand over to the keyholder, add anything for everyone to the handover chat", "homeDay": "Friday"},
+  {"id": 514, "day": "Friday", "job": "4–5pm: kitchen | Top up food in fridge and freezer", "homeDay": "Friday"},
+  {"id": 515, "day": "Friday", "job": "4–5pm: kitchen | Clear dishes from the dishwasher", "homeDay": "Friday"},
+  {"id": 516, "day": "Friday", "job": "4–5pm: kitchen | Clear sinks and food from plugs", "homeDay": "Friday"},
+  {"id": 517, "day": "Friday", "job": "4–5pm: kitchen | Check if rubbish needs taking out, new bin bags", "homeDay": "Friday"},
+  {"id": 518, "day": "Friday", "job": "Bar 9–10pm | 9pm: collect food menus", "homeDay": "Friday"},
+  {"id": 519, "day": "Friday", "job": "Bar 9–10pm | 9pm: outside tables packed down, tarp on and locked", "homeDay": "Friday"},
+  {"id": 520, "day": "Friday", "job": "Bar 9–10pm | Put candles out when dark outside", "homeDay": "Friday"},
+  {"id": 521, "day": "Friday", "job": "Bar 9–10pm | 9pm: spray ashtrays with antibac and wipe with blue roll", "homeDay": "Friday"},
+  {"id": 522, "day": "Friday", "job": "Bar 9–10pm | Wipe down food menus", "homeDay": "Friday"},
+  {"id": 523, "day": "Friday", "job": "Bar 9–10pm | Empty coffee grounds from the knock box into the kitchen compost bag (rinse knock box down the kitchen sink)", "homeDay": "Friday"},
+  {"id": 524, "day": "Friday", "job": "Bar 10pm–12:30am | 12am: Clean coffee machine with chemical (rinse in kitchen sink), wash all jugs in the kitchen dishwasher", "homeDay": "Friday"},
+  {"id": 525, "day": "Friday", "job": "Bar 10pm–12:30am | Clean fridge glass", "homeDay": "Friday"},
+  {"id": 526, "day": "Friday", "job": "Bar 10pm–12:30am | Date open juices and wine", "homeDay": "Friday"},
+  {"id": 527, "day": "Friday", "job": "Bar 10pm–12:30am | Turn off mulled wine", "homeDay": "Friday"},
+  {"id": 528, "day": "Friday", "job": "Bar 10pm–12:30am | Speed pourers off all bottles and through the glass wash", "homeDay": "Friday"},
+  {"id": 529, "day": "Friday", "job": "Bar 10pm–12:30am | Lids onto bottles and wipe down with a damp cloth", "homeDay": "Friday"},
+  {"id": 530, "day": "Friday", "job": "Bar 10pm–12:30am | Wash speed rail and bottle cap bin", "homeDay": "Friday"},
+  {"id": 531, "day": "Friday", "job": "Bar 10pm–12:30am | Wipe bar menus", "homeDay": "Friday"},
+  {"id": 532, "day": "Friday", "job": "Bar 10pm–12:30am | Run bar top trays through the glass washer", "homeDay": "Friday"},
+  {"id": 533, "day": "Friday", "job": "Bar 10pm–12:30am | Fruit cling-wrapped and stored in the fridge", "homeDay": "Friday"},
+  {"id": 534, "day": "Friday", "job": "Bar 10pm–12:30am | Fresh cocktail ingredients into the fridge (lime, coffee etc.)", "homeDay": "Friday"},
+  {"id": 535, "day": "Friday", "job": "Bar 10pm–12:30am | Clean puggy buttons and card machine: antibac on blue roll, NOT sprayed on the tech", "homeDay": "Friday"},
+  {"id": 536, "day": "Friday", "job": "Bar 10pm–12:30am | Soda gun cord wiped, nozzle cleaned and wrapped in clingfilm", "homeDay": "Friday"},
+  {"id": 537, "day": "Friday", "job": "Bar 10pm–12:30am | Spray and wipe down beer dispenser fronts", "homeDay": "Friday"},
+  {"id": 538, "day": "Friday", "job": "Bar 10pm–12:30am | Restock bar fridges, forward facing", "homeDay": "Friday"},
+  {"id": 539, "day": "Friday", "job": "Bar 10pm–12:30am | Ring the bell and call last orders at 12:30am", "homeDay": "Friday"},
+  {"id": 540, "day": "Friday", "job": "Bar 12:45–1am | Beer pourers cleaned in the glass wash, reattached and plugged with brush", "homeDay": "Friday"},
+  {"id": 541, "day": "Friday", "job": "Bar 12:45–1am | Clean beer drip trays from the dispensers", "homeDay": "Friday"},
+  {"id": 542, "day": "Friday", "job": "Bar 12:45–1am | Clean ice buckets with antibac and blue roll (separate and leave to dry)", "homeDay": "Friday"},
+  {"id": 543, "day": "Friday", "job": "Bar 12:45–1am | Decant mulled wine into jugs and cling film, antibac spray inside the urn", "homeDay": "Friday"},
+  {"id": 544, "day": "Friday", "job": "Bar after close | Turn off projector", "homeDay": "Friday"},
+  {"id": 545, "day": "Friday", "job": "Bar after close | Bring in all signage and banner posts", "homeDay": "Friday"},
+  {"id": 546, "day": "Friday", "job": "Bar after close | Check toilets for people, rubbish and glasses, restock soap and paper towels", "homeDay": "Friday"},
+  {"id": 547, "day": "Friday", "job": "Bar after close | Close front doors as soon as customers are out (safety)", "homeDay": "Friday"},
+  {"id": 548, "day": "Friday", "job": "Bar after close | Cash up and count the safe", "homeDay": "Friday"},
+  {"id": 549, "day": "Friday", "job": "Bar after close | Bring in candles", "homeDay": "Friday"},
+  {"id": 550, "day": "Friday", "job": "Bar after close | Spray and polish all tables and the bar", "homeDay": "Friday"},
+  {"id": 551, "day": "Friday", "job": "Bar after close | Wipe back bar and on top of fridges", "homeDay": "Friday"},
+  {"id": 552, "day": "Friday", "job": "Bar after close | Drain and clean dishwasher and glass washer (walls, roof, bottom, blades and filters), wipe down fronts", "homeDay": "Friday"},
+  {"id": 553, "day": "Friday", "job": "Bar after close | Clean bar and kitchen sinks, dry, plug drain with blue roll or a glass", "homeDay": "Friday"},
+  {"id": 554, "day": "Friday", "job": "Bar after close | Empty bins and replace bin bags (don’t put bins on the work top)", "homeDay": "Friday"},
+  {"id": 555, "day": "Friday", "job": "Bar after close | Chairs up", "homeDay": "Friday"},
+  {"id": 556, "day": "Friday", "job": "Bar after close | Sweep bar", "homeDay": "Friday"},
+  {"id": 557, "day": "Friday", "job": "Bar after close | Mop behind bar with floor gel", "homeDay": "Friday"},
+  {"id": 558, "day": "Friday", "job": "Bar after close | Lights off: beer taps, glass, sauces, fridges", "homeDay": "Friday"},
+  {"id": 559, "day": "Friday", "job": "Bar after close | Fans and electrics off, shut down the computer", "homeDay": "Friday"},
+  {"id": 560, "day": "Friday", "job": "Bar after close | Bar handover into the chat, anything run out into the 86’d chat", "homeDay": "Friday"},
+  {"id": 561, "day": "Friday", "job": "Bar after close | Lock hatch to outside and alarm on", "homeDay": "Friday"},
+  {"id": 562, "day": "Friday", "job": "Kitchen close | Clean and polish cutlery", "homeDay": "Friday"},
+  {"id": 563, "day": "Friday", "job": "Kitchen close | Restock freezers and fridges and defrost (up and downstairs), date everything", "homeDay": "Friday"},
+  {"id": 564, "day": "Friday", "job": "Kitchen close | Sharpen knives, put through wash, dry and put away", "homeDay": "Friday"},
+  {"id": 565, "day": "Friday", "job": "Kitchen close | Microwave filters out and cleaned, inside wiped, put back together, isolator switch off", "homeDay": "Friday"},
+  {"id": 566, "day": "Friday", "job": "Kitchen close | Wipe inside bottom of salad bar and under boxes, refill salad bar bread boxes", "homeDay": "Friday"},
+  {"id": 567, "day": "Friday", "job": "Kitchen close | Wipe fridge doors with antibac", "homeDay": "Friday"},
+  {"id": 568, "day": "Friday", "job": "Kitchen close | Clean hotplate with soda, take out catch trays and wash", "homeDay": "Friday"},
+  {"id": 569, "day": "Friday", "job": "Kitchen close | Soak and scrub fryer baskets and lids", "homeDay": "Friday"},
+  {"id": 570, "day": "Friday", "job": "Kitchen close | Lids on all bottles and bottles wiped down", "homeDay": "Friday"},
+  {"id": 571, "day": "Friday", "job": "Kitchen close | Wash splashback and fryer shelf, including under the hotplate", "homeDay": "Friday"},
+  {"id": 572, "day": "Friday", "job": "Kitchen close | Put oven through its cleaning cycle and remove the water", "homeDay": "Friday"},
+  {"id": 573, "day": "Friday", "job": "Kitchen close | Move and wipe under the garnish/salad station", "homeDay": "Friday"},
+  {"id": 574, "day": "Friday", "job": "Kitchen close | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Friday"},
+  {"id": 575, "day": "Friday", "job": "Kitchen close | Last check of dishes", "homeDay": "Friday"},
+  {"id": 576, "day": "Friday", "job": "Kitchen close | Drain and clean kitchen glass washer (walls, roof, bottom, blades) with antibac, clean filter", "homeDay": "Friday"},
+  {"id": 577, "day": "Friday", "job": "Kitchen close | Empty both bins, wipe inside and out, new bags (don’t put on the work top)", "homeDay": "Friday"},
+  {"id": 578, "day": "Friday", "job": "Kitchen close | Clean sinks and sink plugs", "homeDay": "Friday"},
+  {"id": 579, "day": "Friday", "job": "Kitchen close | Turn off switches", "homeDay": "Friday"},
+  {"id": 580, "day": "Friday", "job": "Kitchen close | Sweep kitchen floor", "homeDay": "Friday"},
+  {"id": 581, "day": "Friday", "job": "Kitchen close | Lights off above the rangehood", "homeDay": "Friday"},
+  {"id": 582, "day": "Saturday", "job": "Opening: bar | Turn on lights, beer taps and music", "homeDay": "Saturday"},
+  {"id": 583, "day": "Saturday", "job": "Opening: bar | Turn on coffee machine", "homeDay": "Saturday"},
+  {"id": 584, "day": "Saturday", "job": "Opening: bar | Read the bar handover, pass on notes (check with kitchen if they’re out of anything)", "homeDay": "Saturday"},
+  {"id": 585, "day": "Saturday", "job": "Opening: bar | Take down chairs", "homeDay": "Saturday"},
+  {"id": 586, "day": "Saturday", "job": "Opening: bar | Restock dead tealights, put out candles and food menus standing upright on tables", "homeDay": "Saturday"},
+  {"id": 587, "day": "Saturday", "job": "Opening: bar | Restock straws, coasters and napkins", "homeDay": "Saturday"},
+  {"id": 588, "day": "Saturday", "job": "Opening: bar | Stock fridges forward facing, restock nibbles", "homeDay": "Saturday"},
+  {"id": 589, "day": "Saturday", "job": "Opening: bar | Empty cooler bucket in the cellar", "homeDay": "Saturday"},
+  {"id": 590, "day": "Saturday", "job": "Opening: bar | Wipe fridge doors inside and out with glass cleaner", "homeDay": "Saturday"},
+  {"id": 591, "day": "Saturday", "job": "Opening: bar | Count safe and till, put float in the drawer", "homeDay": "Saturday"},
+  {"id": 592, "day": "Saturday", "job": "Opening: bar | Cut fruit, prep mint and garnishes", "homeDay": "Saturday"},
+  {"id": 593, "day": "Saturday", "job": "Opening: bar | Put the soda gun together", "homeDay": "Saturday"},
+  {"id": 594, "day": "Saturday", "job": "Opening: bar | Speed pourers into bottles", "homeDay": "Saturday"},
+  {"id": 595, "day": "Saturday", "job": "Opening: bar | Bottle lids and pourer covers into the bucket, stored under the coffee machine", "homeDay": "Saturday"},
+  {"id": 596, "day": "Saturday", "job": "Opening: bar | Take stoppers out of the beer taps", "homeDay": "Saturday"},
+  {"id": 597, "day": "Saturday", "job": "Opening: bar | Turn on and fill the glass wash", "homeDay": "Saturday"},
+  {"id": 598, "day": "Saturday", "job": "Opening: bar | Empty bottle bin and wipe inside with antibac", "homeDay": "Saturday"},
+  {"id": 599, "day": "Saturday", "job": "Opening: bar | Sweep cigarette butts from outside", "homeDay": "Saturday"},
+  {"id": 600, "day": "Saturday", "job": "Opening: bar | Unlock and set up outside tables", "homeDay": "Saturday"},
+  {"id": 601, "day": "Saturday", "job": "Opening: bar | Put out ashtrays and empty the big ashtray", "homeDay": "Saturday"},
+  {"id": 602, "day": "Saturday", "job": "Opening: bar | Cutlery", "homeDay": "Saturday"},
+  {"id": 603, "day": "Saturday", "job": "Opening: bar | Prep coffee, top up citrus juices", "homeDay": "Saturday"},
+  {"id": 604, "day": "Saturday", "job": "Opening: bar | Fill the ice bucket", "homeDay": "Saturday"},
+  {"id": 605, "day": "Saturday", "job": "Opening: bar | “What’s on” onto the board outside", "homeDay": "Saturday"},
+  {"id": 606, "day": "Saturday", "job": "Opening: bar | Open doors", "homeDay": "Saturday"},
+  {"id": 607, "day": "Saturday", "job": "Opening: kitchen | Turn on rangehood and appliances", "homeDay": "Saturday"},
+  {"id": 608, "day": "Saturday", "job": "Opening: kitchen | Turn on dishwasher", "homeDay": "Saturday"},
+  {"id": 609, "day": "Saturday", "job": "Opening: kitchen | Microwave on at the isolator switch", "homeDay": "Saturday"},
+  {"id": 610, "day": "Saturday", "job": "Opening: kitchen | Check dates on all fridge and freezer stock, bin anything out of date", "homeDay": "Saturday"},
+  {"id": 611, "day": "Saturday", "job": "Opening: kitchen | Check the hotplate has its catch trays", "homeDay": "Saturday"},
+  {"id": 612, "day": "Saturday", "job": "Opening: kitchen | Sweep kitchen floor", "homeDay": "Saturday"},
+  {"id": 613, "day": "Saturday", "job": "Opening: kitchen | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Saturday"},
+  {"id": 614, "day": "Saturday", "job": "Opening: kitchen | Last check of dishes", "homeDay": "Saturday"},
+  {"id": 615, "day": "Saturday", "job": "Opening: kitchen | Put out food menus standing upright on tables", "homeDay": "Saturday"},
+  {"id": 616, "day": "Saturday", "job": "Opening: kitchen | Clean sink grease trap", "homeDay": "Saturday"},
+  {"id": 617, "day": "Saturday", "job": "Opening: kitchen | Cut fruit for the bar", "homeDay": "Saturday"},
+  {"id": 618, "day": "Saturday", "job": "Opening: kitchen | Polish cutlery", "homeDay": "Saturday"},
+  {"id": 619, "day": "Saturday", "job": "4–5pm: bar | Top up stock, forward facing", "homeDay": "Saturday"},
+  {"id": 620, "day": "Saturday", "job": "4–5pm: bar | Restock nibbles", "homeDay": "Saturday"},
+  {"id": 621, "day": "Saturday", "job": "4–5pm: bar | Top up ice bucket", "homeDay": "Saturday"},
+  {"id": 622, "day": "Saturday", "job": "4–5pm: bar | Top up fruit", "homeDay": "Saturday"},
+  {"id": 623, "day": "Saturday", "job": "4–5pm: bar | Clear tables of glasses and food, wipe down", "homeDay": "Saturday"},
+  {"id": 624, "day": "Saturday", "job": "4–5pm: bar | Empty bins if needed, new bin bag", "homeDay": "Saturday"},
+  {"id": 625, "day": "Saturday", "job": "4–5pm: bar | Date open juices and wine", "homeDay": "Saturday"},
+  {"id": 626, "day": "Saturday", "job": "4–5pm: bar | Cutlery", "homeDay": "Saturday"},
+  {"id": 627, "day": "Saturday", "job": "4–5pm: bar | Top up condiments", "homeDay": "Saturday"},
+  {"id": 628, "day": "Saturday", "job": "4–5pm: bar | Check the weekly jobs list", "homeDay": "Saturday"},
+  {"id": 629, "day": "Saturday", "job": "4–5pm: bar | Hand over to the keyholder, add anything for everyone to the handover chat", "homeDay": "Saturday"},
+  {"id": 630, "day": "Saturday", "job": "4–5pm: kitchen | Top up food in fridge and freezer", "homeDay": "Saturday"},
+  {"id": 631, "day": "Saturday", "job": "4–5pm: kitchen | Clear dishes from the dishwasher", "homeDay": "Saturday"},
+  {"id": 632, "day": "Saturday", "job": "4–5pm: kitchen | Clear sinks and food from plugs", "homeDay": "Saturday"},
+  {"id": 633, "day": "Saturday", "job": "4–5pm: kitchen | Check if rubbish needs taking out, new bin bags", "homeDay": "Saturday"},
+  {"id": 634, "day": "Saturday", "job": "Bar 9–10pm | 9pm: collect food menus", "homeDay": "Saturday"},
+  {"id": 635, "day": "Saturday", "job": "Bar 9–10pm | 9pm: outside tables packed down, tarp on and locked", "homeDay": "Saturday"},
+  {"id": 636, "day": "Saturday", "job": "Bar 9–10pm | Put candles out when dark outside", "homeDay": "Saturday"},
+  {"id": 637, "day": "Saturday", "job": "Bar 9–10pm | 9pm: spray ashtrays with antibac and wipe with blue roll", "homeDay": "Saturday"},
+  {"id": 638, "day": "Saturday", "job": "Bar 9–10pm | Wipe down food menus", "homeDay": "Saturday"},
+  {"id": 639, "day": "Saturday", "job": "Bar 9–10pm | Empty coffee grounds from the knock box into the kitchen compost bag (rinse knock box down the kitchen sink)", "homeDay": "Saturday"},
+  {"id": 640, "day": "Saturday", "job": "Bar 10pm–12:30am | 12am: Clean coffee machine with chemical (rinse in kitchen sink), wash all jugs in the kitchen dishwasher", "homeDay": "Saturday"},
+  {"id": 641, "day": "Saturday", "job": "Bar 10pm–12:30am | Clean fridge glass", "homeDay": "Saturday"},
+  {"id": 642, "day": "Saturday", "job": "Bar 10pm–12:30am | Date open juices and wine", "homeDay": "Saturday"},
+  {"id": 643, "day": "Saturday", "job": "Bar 10pm–12:30am | Turn off mulled wine", "homeDay": "Saturday"},
+  {"id": 644, "day": "Saturday", "job": "Bar 10pm–12:30am | Speed pourers off all bottles and through the glass wash", "homeDay": "Saturday"},
+  {"id": 645, "day": "Saturday", "job": "Bar 10pm–12:30am | Lids onto bottles and wipe down with a damp cloth", "homeDay": "Saturday"},
+  {"id": 646, "day": "Saturday", "job": "Bar 10pm–12:30am | Wash speed rail and bottle cap bin", "homeDay": "Saturday"},
+  {"id": 647, "day": "Saturday", "job": "Bar 10pm–12:30am | Wipe bar menus", "homeDay": "Saturday"},
+  {"id": 648, "day": "Saturday", "job": "Bar 10pm–12:30am | Run bar top trays through the glass washer", "homeDay": "Saturday"},
+  {"id": 649, "day": "Saturday", "job": "Bar 10pm–12:30am | Fruit cling-wrapped and stored in the fridge", "homeDay": "Saturday"},
+  {"id": 650, "day": "Saturday", "job": "Bar 10pm–12:30am | Fresh cocktail ingredients into the fridge (lime, coffee etc.)", "homeDay": "Saturday"},
+  {"id": 651, "day": "Saturday", "job": "Bar 10pm–12:30am | Clean puggy buttons and card machine: antibac on blue roll, NOT sprayed on the tech", "homeDay": "Saturday"},
+  {"id": 652, "day": "Saturday", "job": "Bar 10pm–12:30am | Soda gun cord wiped, nozzle cleaned and wrapped in clingfilm", "homeDay": "Saturday"},
+  {"id": 653, "day": "Saturday", "job": "Bar 10pm–12:30am | Spray and wipe down beer dispenser fronts", "homeDay": "Saturday"},
+  {"id": 654, "day": "Saturday", "job": "Bar 10pm–12:30am | Restock bar fridges, forward facing", "homeDay": "Saturday"},
+  {"id": 655, "day": "Saturday", "job": "Bar 10pm–12:30am | Ring the bell and call last orders at 12:30am", "homeDay": "Saturday"},
+  {"id": 656, "day": "Saturday", "job": "Bar 12:45–1am | Beer pourers cleaned in the glass wash, reattached and plugged with brush", "homeDay": "Saturday"},
+  {"id": 657, "day": "Saturday", "job": "Bar 12:45–1am | Clean beer drip trays from the dispensers", "homeDay": "Saturday"},
+  {"id": 658, "day": "Saturday", "job": "Bar 12:45–1am | Clean ice buckets with antibac and blue roll (separate and leave to dry)", "homeDay": "Saturday"},
+  {"id": 659, "day": "Saturday", "job": "Bar 12:45–1am | Decant mulled wine into jugs and cling film, antibac spray inside the urn", "homeDay": "Saturday"},
+  {"id": 660, "day": "Saturday", "job": "Bar after close | Turn off projector", "homeDay": "Saturday"},
+  {"id": 661, "day": "Saturday", "job": "Bar after close | Bring in all signage and banner posts", "homeDay": "Saturday"},
+  {"id": 662, "day": "Saturday", "job": "Bar after close | Check toilets for people, rubbish and glasses, restock soap and paper towels", "homeDay": "Saturday"},
+  {"id": 663, "day": "Saturday", "job": "Bar after close | Close front doors as soon as customers are out (safety)", "homeDay": "Saturday"},
+  {"id": 664, "day": "Saturday", "job": "Bar after close | Cash up and count the safe", "homeDay": "Saturday"},
+  {"id": 665, "day": "Saturday", "job": "Bar after close | Bring in candles", "homeDay": "Saturday"},
+  {"id": 666, "day": "Saturday", "job": "Bar after close | Spray and polish all tables and the bar", "homeDay": "Saturday"},
+  {"id": 667, "day": "Saturday", "job": "Bar after close | Wipe back bar and on top of fridges", "homeDay": "Saturday"},
+  {"id": 668, "day": "Saturday", "job": "Bar after close | Drain and clean dishwasher and glass washer (walls, roof, bottom, blades and filters), wipe down fronts", "homeDay": "Saturday"},
+  {"id": 669, "day": "Saturday", "job": "Bar after close | Clean bar and kitchen sinks, dry, plug drain with blue roll or a glass", "homeDay": "Saturday"},
+  {"id": 670, "day": "Saturday", "job": "Bar after close | Empty bins and replace bin bags (don’t put bins on the work top)", "homeDay": "Saturday"},
+  {"id": 671, "day": "Saturday", "job": "Bar after close | Chairs up", "homeDay": "Saturday"},
+  {"id": 672, "day": "Saturday", "job": "Bar after close | Sweep bar", "homeDay": "Saturday"},
+  {"id": 673, "day": "Saturday", "job": "Bar after close | Mop behind bar with bleach", "homeDay": "Saturday"},
+  {"id": 674, "day": "Saturday", "job": "Bar after close | Lights off: beer taps, glass, sauces, fridges", "homeDay": "Saturday"},
+  {"id": 675, "day": "Saturday", "job": "Bar after close | Fans and electrics off, shut down the computer", "homeDay": "Saturday"},
+  {"id": 676, "day": "Saturday", "job": "Bar after close | Bar handover into the chat, anything run out into the 86’d chat", "homeDay": "Saturday"},
+  {"id": 677, "day": "Saturday", "job": "Bar after close | Lock hatch to outside and alarm on", "homeDay": "Saturday"},
+  {"id": 678, "day": "Saturday", "job": "Kitchen close | Clean and polish cutlery", "homeDay": "Saturday"},
+  {"id": 679, "day": "Saturday", "job": "Kitchen close | Restock freezers and fridges and defrost (up and downstairs), date everything", "homeDay": "Saturday"},
+  {"id": 680, "day": "Saturday", "job": "Kitchen close | Sharpen knives, put through wash, dry and put away", "homeDay": "Saturday"},
+  {"id": 681, "day": "Saturday", "job": "Kitchen close | Microwave filters out and cleaned, inside wiped, put back together, isolator switch off", "homeDay": "Saturday"},
+  {"id": 682, "day": "Saturday", "job": "Kitchen close | Wipe inside bottom of salad bar and under boxes, refill salad bar bread boxes", "homeDay": "Saturday"},
+  {"id": 683, "day": "Saturday", "job": "Kitchen close | Wipe fridge doors with antibac", "homeDay": "Saturday"},
+  {"id": 684, "day": "Saturday", "job": "Kitchen close | Clean hotplate with soda, take out catch trays and wash", "homeDay": "Saturday"},
+  {"id": 685, "day": "Saturday", "job": "Kitchen close | Soak and scrub fryer baskets and lids", "homeDay": "Saturday"},
+  {"id": 686, "day": "Saturday", "job": "Kitchen close | Lids on all bottles and bottles wiped down", "homeDay": "Saturday"},
+  {"id": 687, "day": "Saturday", "job": "Kitchen close | Wash splashback and fryer shelf, including under the hotplate", "homeDay": "Saturday"},
+  {"id": 688, "day": "Saturday", "job": "Kitchen close | Put oven through its cleaning cycle and remove the water", "homeDay": "Saturday"},
+  {"id": 689, "day": "Saturday", "job": "Kitchen close | Move and wipe under the garnish/salad station", "homeDay": "Saturday"},
+  {"id": 690, "day": "Saturday", "job": "Kitchen close | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Saturday"},
+  {"id": 691, "day": "Saturday", "job": "Kitchen close | Last check of dishes", "homeDay": "Saturday"},
+  {"id": 692, "day": "Saturday", "job": "Kitchen close | Drain and clean kitchen glass washer (walls, roof, bottom, blades) with antibac, clean filter", "homeDay": "Saturday"},
+  {"id": 693, "day": "Saturday", "job": "Kitchen close | Empty both bins, wipe inside and out, new bags (don’t put on the work top)", "homeDay": "Saturday"},
+  {"id": 694, "day": "Saturday", "job": "Kitchen close | Clean sinks and sink plugs", "homeDay": "Saturday"},
+  {"id": 695, "day": "Saturday", "job": "Kitchen close | Turn off switches", "homeDay": "Saturday"},
+  {"id": 696, "day": "Saturday", "job": "Kitchen close | Sweep kitchen floor", "homeDay": "Saturday"},
+  {"id": 697, "day": "Saturday", "job": "Kitchen close | Lights off above the rangehood", "homeDay": "Saturday"},
+  {"id": 698, "day": "Sunday", "job": "Opening: bar | Turn on lights, beer taps and music", "homeDay": "Sunday"},
+  {"id": 699, "day": "Sunday", "job": "Opening: bar | Turn on coffee machine", "homeDay": "Sunday"},
+  {"id": 700, "day": "Sunday", "job": "Opening: bar | Read the bar handover, pass on notes (check with kitchen if they’re out of anything)", "homeDay": "Sunday"},
+  {"id": 701, "day": "Sunday", "job": "Opening: bar | Take down chairs", "homeDay": "Sunday"},
+  {"id": 702, "day": "Sunday", "job": "Opening: bar | Restock dead tealights, put out candles and food menus standing upright on tables", "homeDay": "Sunday"},
+  {"id": 703, "day": "Sunday", "job": "Opening: bar | Restock straws, coasters and napkins", "homeDay": "Sunday"},
+  {"id": 704, "day": "Sunday", "job": "Opening: bar | Stock fridges forward facing, restock nibbles", "homeDay": "Sunday"},
+  {"id": 705, "day": "Sunday", "job": "Opening: bar | Empty cooler bucket in the cellar", "homeDay": "Sunday"},
+  {"id": 706, "day": "Sunday", "job": "Opening: bar | Wipe fridge doors inside and out with glass cleaner", "homeDay": "Sunday"},
+  {"id": 707, "day": "Sunday", "job": "Opening: bar | Count safe and till, put float in the drawer", "homeDay": "Sunday"},
+  {"id": 708, "day": "Sunday", "job": "Opening: bar | Cut fruit, prep mint and garnishes", "homeDay": "Sunday"},
+  {"id": 709, "day": "Sunday", "job": "Opening: bar | Put the soda gun together", "homeDay": "Sunday"},
+  {"id": 710, "day": "Sunday", "job": "Opening: bar | Speed pourers into bottles", "homeDay": "Sunday"},
+  {"id": 711, "day": "Sunday", "job": "Opening: bar | Bottle lids and pourer covers into the bucket, stored under the coffee machine", "homeDay": "Sunday"},
+  {"id": 712, "day": "Sunday", "job": "Opening: bar | Take stoppers out of the beer taps", "homeDay": "Sunday"},
+  {"id": 713, "day": "Sunday", "job": "Opening: bar | Turn on and fill the glass wash", "homeDay": "Sunday"},
+  {"id": 714, "day": "Sunday", "job": "Opening: bar | Empty bottle bin and wipe inside with antibac", "homeDay": "Sunday"},
+  {"id": 715, "day": "Sunday", "job": "Opening: bar | Sweep cigarette butts from outside", "homeDay": "Sunday"},
+  {"id": 716, "day": "Sunday", "job": "Opening: bar | Unlock and set up outside tables", "homeDay": "Sunday"},
+  {"id": 717, "day": "Sunday", "job": "Opening: bar | Put out ashtrays and empty the big ashtray", "homeDay": "Sunday"},
+  {"id": 718, "day": "Sunday", "job": "Opening: bar | Cutlery", "homeDay": "Sunday"},
+  {"id": 719, "day": "Sunday", "job": "Opening: bar | Prep coffee, top up citrus juices", "homeDay": "Sunday"},
+  {"id": 720, "day": "Sunday", "job": "Opening: bar | Fill the ice bucket", "homeDay": "Sunday"},
+  {"id": 721, "day": "Sunday", "job": "Opening: bar | “What’s on” onto the board outside", "homeDay": "Sunday"},
+  {"id": 722, "day": "Sunday", "job": "Opening: bar | Open doors", "homeDay": "Sunday"},
+  {"id": 723, "day": "Sunday", "job": "Opening: kitchen | Turn on rangehood and appliances", "homeDay": "Sunday"},
+  {"id": 724, "day": "Sunday", "job": "Opening: kitchen | Turn on dishwasher", "homeDay": "Sunday"},
+  {"id": 725, "day": "Sunday", "job": "Opening: kitchen | Microwave on at the isolator switch", "homeDay": "Sunday"},
+  {"id": 726, "day": "Sunday", "job": "Opening: kitchen | Check dates on all fridge and freezer stock, bin anything out of date", "homeDay": "Sunday"},
+  {"id": 727, "day": "Sunday", "job": "Opening: kitchen | Check the hotplate has its catch trays", "homeDay": "Sunday"},
+  {"id": 728, "day": "Sunday", "job": "Opening: kitchen | Sweep kitchen floor", "homeDay": "Sunday"},
+  {"id": 729, "day": "Sunday", "job": "Opening: kitchen | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Sunday"},
+  {"id": 730, "day": "Sunday", "job": "Opening: kitchen | Last check of dishes", "homeDay": "Sunday"},
+  {"id": 731, "day": "Sunday", "job": "Opening: kitchen | Put out food menus standing upright on tables", "homeDay": "Sunday"},
+  {"id": 732, "day": "Sunday", "job": "Opening: kitchen | Clean sink grease trap", "homeDay": "Sunday"},
+  {"id": 733, "day": "Sunday", "job": "Opening: kitchen | Cut fruit for the bar", "homeDay": "Sunday"},
+  {"id": 734, "day": "Sunday", "job": "Opening: kitchen | Polish cutlery", "homeDay": "Sunday"},
+  {"id": 735, "day": "Sunday", "job": "4–5pm: bar | Top up stock, forward facing", "homeDay": "Sunday"},
+  {"id": 736, "day": "Sunday", "job": "4–5pm: bar | Restock nibbles", "homeDay": "Sunday"},
+  {"id": 737, "day": "Sunday", "job": "4–5pm: bar | Top up ice bucket", "homeDay": "Sunday"},
+  {"id": 738, "day": "Sunday", "job": "4–5pm: bar | Top up fruit", "homeDay": "Sunday"},
+  {"id": 739, "day": "Sunday", "job": "4–5pm: bar | Clear tables of glasses and food, wipe down", "homeDay": "Sunday"},
+  {"id": 740, "day": "Sunday", "job": "4–5pm: bar | Empty bins if needed, new bin bag", "homeDay": "Sunday"},
+  {"id": 741, "day": "Sunday", "job": "4–5pm: bar | Date open juices and wine", "homeDay": "Sunday"},
+  {"id": 742, "day": "Sunday", "job": "4–5pm: bar | Cutlery", "homeDay": "Sunday"},
+  {"id": 743, "day": "Sunday", "job": "4–5pm: bar | Top up condiments", "homeDay": "Sunday"},
+  {"id": 744, "day": "Sunday", "job": "4–5pm: bar | Check the weekly jobs list", "homeDay": "Sunday"},
+  {"id": 745, "day": "Sunday", "job": "4–5pm: bar | Hand over to the keyholder, add anything for everyone to the handover chat", "homeDay": "Sunday"},
+  {"id": 746, "day": "Sunday", "job": "4–5pm: kitchen | Top up food in fridge and freezer", "homeDay": "Sunday"},
+  {"id": 747, "day": "Sunday", "job": "4–5pm: kitchen | Clear dishes from the dishwasher", "homeDay": "Sunday"},
+  {"id": 748, "day": "Sunday", "job": "4–5pm: kitchen | Clear sinks and food from plugs", "homeDay": "Sunday"},
+  {"id": 749, "day": "Sunday", "job": "4–5pm: kitchen | Check if rubbish needs taking out, new bin bags", "homeDay": "Sunday"},
+  {"id": 750, "day": "Sunday", "job": "Bar 9–10pm | 9pm: collect food menus", "homeDay": "Sunday"},
+  {"id": 751, "day": "Sunday", "job": "Bar 9–10pm | 9pm: outside tables packed down, tarp on and locked", "homeDay": "Sunday"},
+  {"id": 752, "day": "Sunday", "job": "Bar 9–10pm | Put candles out when dark outside", "homeDay": "Sunday"},
+  {"id": 753, "day": "Sunday", "job": "Bar 9–10pm | 9pm: spray ashtrays with antibac and wipe with blue roll", "homeDay": "Sunday"},
+  {"id": 754, "day": "Sunday", "job": "Bar 9–10pm | Wipe down food menus", "homeDay": "Sunday"},
+  {"id": 755, "day": "Sunday", "job": "Bar 9–10pm | Empty coffee grounds from the knock box into the kitchen compost bag (rinse knock box down the kitchen sink)", "homeDay": "Sunday"},
+  {"id": 756, "day": "Sunday", "job": "Bar 10pm–12:30am | 12am: Clean coffee machine with antibac spray, wash all jugs in the kitchen dishwasher", "homeDay": "Sunday"},
+  {"id": 757, "day": "Sunday", "job": "Bar 10pm–12:30am | Clean fridge glass", "homeDay": "Sunday"},
+  {"id": 758, "day": "Sunday", "job": "Bar 10pm–12:30am | Date open juices and wine", "homeDay": "Sunday"},
+  {"id": 759, "day": "Sunday", "job": "Bar 10pm–12:30am | Turn off mulled wine", "homeDay": "Sunday"},
+  {"id": 760, "day": "Sunday", "job": "Bar 10pm–12:30am | Speed pourers off all bottles and through the glass wash", "homeDay": "Sunday"},
+  {"id": 761, "day": "Sunday", "job": "Bar 10pm–12:30am | Lids onto bottles and wipe down with a damp cloth", "homeDay": "Sunday"},
+  {"id": 762, "day": "Sunday", "job": "Bar 10pm–12:30am | Wash speed rail and bottle cap bin", "homeDay": "Sunday"},
+  {"id": 763, "day": "Sunday", "job": "Bar 10pm–12:30am | Wipe bar menus", "homeDay": "Sunday"},
+  {"id": 764, "day": "Sunday", "job": "Bar 10pm–12:30am | Run bar top trays through the glass washer", "homeDay": "Sunday"},
+  {"id": 765, "day": "Sunday", "job": "Bar 10pm–12:30am | Fruit cling-wrapped and stored in the fridge", "homeDay": "Sunday"},
+  {"id": 766, "day": "Sunday", "job": "Bar 10pm–12:30am | Fresh cocktail ingredients into the fridge (lime, coffee etc.)", "homeDay": "Sunday"},
+  {"id": 767, "day": "Sunday", "job": "Bar 10pm–12:30am | Clean puggy buttons and card machine: antibac on blue roll, NOT sprayed on the tech", "homeDay": "Sunday"},
+  {"id": 768, "day": "Sunday", "job": "Bar 10pm–12:30am | Soda gun cord wiped, nozzle cleaned and wrapped in clingfilm", "homeDay": "Sunday"},
+  {"id": 769, "day": "Sunday", "job": "Bar 10pm–12:30am | Spray and wipe down beer dispenser fronts", "homeDay": "Sunday"},
+  {"id": 770, "day": "Sunday", "job": "Bar 10pm–12:30am | Restock bar fridges, forward facing", "homeDay": "Sunday"},
+  {"id": 771, "day": "Sunday", "job": "Bar 10pm–12:30am | Ring the bell and call last orders at 12:30am", "homeDay": "Sunday"},
+  {"id": 772, "day": "Sunday", "job": "Bar 12:45–1am | Beer pourers cleaned in the glass wash, reattached and plugged with brush", "homeDay": "Sunday"},
+  {"id": 773, "day": "Sunday", "job": "Bar 12:45–1am | Clean beer drip trays from the dispensers", "homeDay": "Sunday"},
+  {"id": 774, "day": "Sunday", "job": "Bar 12:45–1am | Clean ice buckets with antibac and blue roll (separate and leave to dry)", "homeDay": "Sunday"},
+  {"id": 775, "day": "Sunday", "job": "Bar 12:45–1am | Decant mulled wine into jugs and cling film, antibac spray inside the urn", "homeDay": "Sunday"},
+  {"id": 776, "day": "Sunday", "job": "Bar after close | Turn off projector", "homeDay": "Sunday"},
+  {"id": 777, "day": "Sunday", "job": "Bar after close | Bring in all signage and banner posts", "homeDay": "Sunday"},
+  {"id": 778, "day": "Sunday", "job": "Bar after close | Check toilets for people, rubbish and glasses, restock soap and paper towels", "homeDay": "Sunday"},
+  {"id": 779, "day": "Sunday", "job": "Bar after close | Close front doors as soon as customers are out (safety)", "homeDay": "Sunday"},
+  {"id": 780, "day": "Sunday", "job": "Bar after close | Cash up and count the safe", "homeDay": "Sunday"},
+  {"id": 781, "day": "Sunday", "job": "Bar after close | Bring in candles", "homeDay": "Sunday"},
+  {"id": 782, "day": "Sunday", "job": "Bar after close | Spray and polish all tables and the bar", "homeDay": "Sunday"},
+  {"id": 783, "day": "Sunday", "job": "Bar after close | Wipe back bar and on top of fridges", "homeDay": "Sunday"},
+  {"id": 784, "day": "Sunday", "job": "Bar after close | Drain and clean dishwasher and glass washer (walls, roof, bottom, blades and filters), wipe down fronts", "homeDay": "Sunday"},
+  {"id": 785, "day": "Sunday", "job": "Bar after close | Clean bar and kitchen sinks, dry, plug drain with blue roll or a glass", "homeDay": "Sunday"},
+  {"id": 786, "day": "Sunday", "job": "Bar after close | Empty bins and replace bin bags (don’t put bins on the work top)", "homeDay": "Sunday"},
+  {"id": 787, "day": "Sunday", "job": "Bar after close | Flatten and tape together cardboard in the cellar", "homeDay": "Sunday"},
+  {"id": 788, "day": "Sunday", "job": "Bar after close | Chairs up", "homeDay": "Sunday"},
+  {"id": 789, "day": "Sunday", "job": "Bar after close | Sweep bar floor and scrub it with bleach (Sunday scrub)", "homeDay": "Sunday"},
+  {"id": 790, "day": "Sunday", "job": "Bar after close | Mop behind bar with bleach", "homeDay": "Sunday"},
+  {"id": 791, "day": "Sunday", "job": "Bar after close | Lights off: beer taps, glass, sauces, fridges", "homeDay": "Sunday"},
+  {"id": 792, "day": "Sunday", "job": "Bar after close | Fans and electrics off, shut down the computer", "homeDay": "Sunday"},
+  {"id": 793, "day": "Sunday", "job": "Bar after close | Bar handover into the chat, anything run out into the 86’d chat", "homeDay": "Sunday"},
+  {"id": 794, "day": "Sunday", "job": "Bar after close | Lock hatch to outside and alarm on", "homeDay": "Sunday"},
+  {"id": 795, "day": "Sunday", "job": "Kitchen close | Clean and polish cutlery", "homeDay": "Sunday"},
+  {"id": 796, "day": "Sunday", "job": "Kitchen close | Restock freezers and fridges and defrost (up and downstairs), date everything", "homeDay": "Sunday"},
+  {"id": 797, "day": "Sunday", "job": "Kitchen close | Sharpen knives, put through wash, dry and put away", "homeDay": "Sunday"},
+  {"id": 798, "day": "Sunday", "job": "Kitchen close | Microwave filters out and cleaned, inside wiped, put back together, isolator switch off", "homeDay": "Sunday"},
+  {"id": 799, "day": "Sunday", "job": "Kitchen close | Wipe inside bottom of salad bar and under boxes, refill salad bar bread boxes", "homeDay": "Sunday"},
+  {"id": 800, "day": "Sunday", "job": "Kitchen close | Wipe fridge doors with antibac", "homeDay": "Sunday"},
+  {"id": 801, "day": "Sunday", "job": "Kitchen close | Clean hotplate with soda, take out catch trays and wash", "homeDay": "Sunday"},
+  {"id": 802, "day": "Sunday", "job": "Kitchen close | Soak and scrub fryer baskets and lids", "homeDay": "Sunday"},
+  {"id": 803, "day": "Sunday", "job": "Kitchen close | Lids on all bottles and bottles wiped down", "homeDay": "Sunday"},
+  {"id": 804, "day": "Sunday", "job": "Kitchen close | Wash splashback and fryer shelf, including under the hotplate", "homeDay": "Sunday"},
+  {"id": 805, "day": "Sunday", "job": "Kitchen close | Put oven through its cleaning cycle and remove the water", "homeDay": "Sunday"},
+  {"id": 806, "day": "Sunday", "job": "Kitchen close | Move and wipe under the garnish/salad station", "homeDay": "Sunday"},
+  {"id": 807, "day": "Sunday", "job": "Kitchen close | Wash down surfaces, wipe with antibac/kitchen cleaner", "homeDay": "Sunday"},
+  {"id": 808, "day": "Sunday", "job": "Kitchen close | Last check of dishes", "homeDay": "Sunday"},
+  {"id": 809, "day": "Sunday", "job": "Kitchen close | Drain and clean kitchen glass washer (walls, roof, bottom, blades) with antibac, clean filter", "homeDay": "Sunday"},
+  {"id": 810, "day": "Sunday", "job": "Kitchen close | Empty both bins, wipe inside and out, new bags (don’t put on the work top)", "homeDay": "Sunday"},
+  {"id": 811, "day": "Sunday", "job": "Kitchen close | Clean sinks and sink plugs", "homeDay": "Sunday"},
+  {"id": 812, "day": "Sunday", "job": "Kitchen close | Turn off switches", "homeDay": "Sunday"},
+  {"id": 813, "day": "Sunday", "job": "Kitchen close | Sweep kitchen floor", "homeDay": "Sunday"},
+  {"id": 814, "day": "Sunday", "job": "Kitchen close | Lights off above the rangehood", "homeDay": "Sunday"}
 ];
 
 // ── STATE ──
@@ -660,6 +1384,7 @@ function initApp(){
   if(DAY_KEYS.includes(today)){
     const el=document.getElementById('tab-'+today);
     if(el){el.style.fontWeight='700';el.style.color='var(--accent)';}
+    switchTab(today);
   }
 }
 
@@ -719,7 +1444,9 @@ function rotaDayISO(){
   if(n.getHours()<7) d.setDate(d.getDate()-1);
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
-function tonightCrew(){ const days=(rotaShifts&&rotaShifts.days)||{}; return (days[rotaDayISO()]||[]).map(x=>x.name); }
+function tonightCrew(){ const days=(rotaShifts&&rotaShifts.days)||{}, iso=rotaDayISO();
+  let k=days[iso]?iso:Object.keys(days).filter(x=>x.slice(5)===iso.slice(5)).pop();   // rota sometimes has the wrong year
+  return (k?days[k]:[]).map(x=>x.name).filter(Boolean); }
 async function loadShifts(){ try{const r=await fetch(SHIFTS_URL+'?t='+Date.now()); if(r.ok) rotaShifts=await r.json();}catch(e){} }
 function applyRotaCrew(replace){
   const crew=tonightCrew();
@@ -732,6 +1459,7 @@ function applyRotaCrew(replace){
 }
 async function maybeSeedShifts(){
   await loadShifts();
+  if(DAY_KEYS.includes(currentTab)) renderDay(DAYS[DAY_KEYS.indexOf(currentTab)]);
   if(tonightCrew().length && !state.staff.some(s=>s.onShift)) applyRotaCrew(true);  // auto-fill only when nobody is on yet
 }
 function addStaffMember(){
@@ -745,64 +1473,133 @@ function removeStaff(i){
 }
 
 // ── JOBS ──
+
+// ── BLACK ROSE: first open replaces the Banshee copy in the sheet with the Black Rose lists ──
+function brSeed(){let changed=false;const mark=DEFAULT_JOBS[0].job;
+  if(!state.jobs.some(j=>j.job===mark)){state.jobs=DEFAULT_JOBS.map(j=>({...j,assignedTo:'',done:false,timestamp:'',notes:''}));changed=true;}
+  if(!state.staff.some(s=>DEFAULT_STAFF.includes(s.name))){state.staff=DEFAULT_STAFF.map(n=>({name:n,onShift:false}));changed=true;}
+  if(changed){saveState();setTimeout(pushToSheet,800);}}
+function nxAddName(){let n=prompt('Your first name (as you want it to show):');if(!n)return;n=n.replace(/\s+/g,' ').trim().slice(0,24);if(!n)return;
+  n=n.charAt(0).toUpperCase()+n.slice(1);const ex=state.staff.find(s=>s.name.toLowerCase()===n.toLowerCase());
+  if(!ex){state.staff.push({name:n,onShift:true});saveState();queueSheetSync();nxToast('Added '+n);}nxPick(ex?ex.name:n);}
+// ── NEW DAY PAGE: pick your name, tap the jobs you've done ──
+const NX_MODE=/[?&]mode=opening/.test(location.search)?"opening":"closing";
+const NX_CLOSE=["Bar 9–10pm", "Bar 10pm–12:30am", "Bar 12:45–1am", "Bar after close", "Kitchen close"],NX_OPEN=["Opening: bar", "Opening: kitchen", "4–5pm: bar", "4–5pm: kitchen"];
+const NX_MODE_AREAS=NX_MODE==="opening"?NX_OPEN:NX_CLOSE, NX_SO=NX_MODE==="opening"?"open-signoff-":"eon-signoff-";
+const NX_AREAS=NX_MODE_AREAS.map(a=>[a,null]);
+function nxArea(job){const i=String(job).indexOf(" | ");return i>0?String(job).slice(0,i):"Other jobs";}
+function nxJobText(job){const i=String(job).indexOf(" | ");return i>0?String(job).slice(i+3):String(job);}
+function nxInMode(j){const a=nxArea(j.job);return NX_MODE==="opening"?NX_OPEN.includes(a):!NX_OPEN.includes(a);}
+if(NX_MODE==="opening"){const go=()=>{document.querySelectorAll(".nav-bar .nav-btn").forEach(b=>{const t=b.textContent.trim();if(t==="Opening")b.classList.add("current");else if(t==="End Of Night"&&b.classList.contains("current")){b.classList.remove("current");b.style.cursor="pointer";b.onclick=()=>{location.href="../end-of-night/";};}});};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",go):go();}
+function nxDayDate(day){ // the date of this weekday's trading night: tonight, or the most recent one before it
+  const t=new Date(rotaDayISO()+'T12:00:00'),back=(t.getDay()+6)%7-DAYS.indexOf(day),d=new Date(t);d.setDate(d.getDate()-((back%7)+7)%7);return d;}
+function nxWindow(day){const s=nxDayDate(day);s.setHours(7,0,0,0);const e=new Date(s);e.setDate(e.getDate()+1);return [s,e];}
+function nxIsDone(j){if(!j.done)return false;if(!j.timestamp)return true;const t=new Date(j.timestamp),w=nxWindow(j.day),wk=new Date(w[0]);wk.setDate(wk.getDate()+7);
+  return isNaN(t)||(t>=w[0]&&t<wk);}   // counts from that night's start until the same weekday comes round again (late ticks on a past tab stay ticked)
+function nxToday(){return DAYS[(new Date(rotaDayISO()+'T12:00:00').getDay()+6)%7];}
+function nxMe(){try{const m=JSON.parse(localStorage.getItem('eon_new_me')||'null');return m&&m.d===rotaDayISO()?m.n:'';}catch(e){return '';}}
+function nxSetMe(n){localStorage.setItem('eon_new_me',JSON.stringify({d:rotaDayISO(),n:n}));}
+function nxCrew(){const set=state.staff.map(s=>s.name).filter(Boolean);const me=nxMe();if(me&&!set.includes(me))set.push(me);return set;}
+function nxToast(t){const o=document.querySelector('.nx-toast');if(o)o.remove();const d=document.createElement('div');d.className='nx-toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800);}
+function nxPick(n){if(!n)return;nxSetMe(n);const s=state.staff.find(x=>x.name.toLowerCase()===n.toLowerCase());if(s&&!s.onShift){s.onShift=true;saveState();queueSheetSync();}
+  renderDay(DAYS[DAY_KEYS.indexOf(currentTab)]||nxToday());}
+const NX_HOLD=3500, nxRecent={};   // id -> time it moves out of "Still to do"
+function nxTick(id){const me=nxMe();if(!me){nxToast('Tap your name at the top first');const w=document.querySelector('.nx-who');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  const j=state.jobs.find(x=>x.id===id);if(!j)return;
+  if(nxRecent[id]&&nxRecent[id]>Date.now()){nxUndo(id);return;}   // second tap while it's still showing = undo
+  j.assignedTo=me;j.done=true;j.timestamp=new Date().toISOString();if(/^Not done:/i.test(j.notes||''))j.notes='';
+  nxRecent[id]=Date.now()+NX_HOLD;
+  saveState();renderDay(j.day);queueSheetSync();
+  setTimeout(()=>{if(nxRecent[id]&&nxRecent[id]<=Date.now()+50){delete nxRecent[id];if(currentTab===j.day.toLowerCase())renderDay(j.day);}},NX_HOLD+60);
+  const left=state.jobs.filter(x=>x.day===j.day&&nxInMode(x)&&!nxIsDone(x)).length;if(!left)setTimeout(()=>triggerCelebration(j.day),NX_HOLD);}
+function nxUndo(id){const j=state.jobs.find(x=>x.id===id);if(!j)return;delete nxRecent[id];j.assignedTo='';j.done=false;j.timestamp='';
+  saveState();renderDay(j.day);queueSheetSync();nxToast('Unticked');}
+function nxSet(id,name){const j=state.jobs.find(x=>x.id===id);if(!j)return;if(name){j.assignedTo=name;j.done=true;j.timestamp=j.timestamp||new Date().toISOString();if(/^Not done:/i.test(j.notes||''))j.notes='';}else{j.assignedTo='';j.done=false;j.timestamp='';}
+  saveState();renderDay(j.day);queueSheetSync();}
+function nxMenu(id,btn,ev){ev.stopPropagation();const old=document.querySelector('.nx-menu');if(old)old.remove();const j=state.jobs.find(x=>x.id===id);if(!j)return;
+  const m=document.createElement('div');m.className='nx-menu';
+  m.innerHTML=nxCrew().map(n=>`<button type="button" class="${j.assignedTo===n?'on':''}" data-n="${escHtml(n)}">Done by ${escHtml(n)}</button>`).join('')+'<button type="button" data-n="">Not done (untick)</button>';
+  const r=btn.getBoundingClientRect();m.style.left=Math.max(8,Math.min(innerWidth-220,r.right+scrollX-200))+'px';m.style.top=(r.bottom+scrollY+4)+'px';document.body.appendChild(m);
+  m.onclick=e=>{const b=e.target.closest('[data-n]');if(!b)return;m.remove();nxSet(id,b.getAttribute('data-n'));};}
+// "can't do it": the reason goes in the job's Notes column (and the time in Timestamp) so it reaches the sheet
+const NX_REASONS=['Ran out of time','Area still in use','Broken or needs fixing','Out of stock or supplies'];
+function nxReason(j){if(!j||j.done||!/^Not done:/i.test(j.notes||''))return '';
+  if(j.timestamp){const t=new Date(j.timestamp),w=nxWindow(j.day),wk=new Date(w[0]);wk.setDate(wk.getDate()+7);if(!isNaN(t)&&(t<w[0]||t>=wk))return '';}
+  return j.notes.replace(/^Not done:\s*/i,'');}
+function nxSetReason(id,txt){const j=state.jobs.find(x=>x.id===id);if(!j)return;const me=nxMe();
+  txt=(txt||'').replace(/[\r\n,]+/g,' ').trim().slice(0,120);
+  j.done=false;j.assignedTo='';j.notes=txt?'Not done: '+txt+(me?' ('+me+')':''):'';j.timestamp=txt?new Date().toISOString():'';
+  saveState();renderDay(j.day);queueSheetSync();nxToast(txt?'Reason saved':'Reason cleared');}
+function nxFlag(id,btn,ev){ev.stopPropagation();const old=document.querySelector('.nx-menu');if(old)old.remove();
+  if(!nxMe()){nxToast('Tap your name at the top first');return;}
+  const j=state.jobs.find(x=>x.id===id);if(!j)return;
+  if(nxReason(j)){nxSetReason(id,'');return;}
+  const m=document.createElement('div');m.className='nx-menu';
+  m.innerHTML='<div class="nx-menu-h">Why can’t it be done?</div>'+NX_REASONS.map(r=>`<button type="button" data-r="${escHtml(r)}">${escHtml(r)}</button>`).join('')+'<button type="button" data-r="*">Something else…</button>';
+  const r=btn.getBoundingClientRect();m.style.left=Math.max(8,Math.min(innerWidth-240,r.right+scrollX-230))+'px';m.style.top=(r.bottom+scrollY+4)+'px';document.body.appendChild(m);
+  m.onclick=e=>{const b=e.target.closest('[data-r]');if(!b)return;m.remove();let t=b.getAttribute('data-r');
+    if(t==='*'){t=prompt('Why can’t "'+j.job+'" be done tonight?');if(!t)return;}nxSetReason(id,t);};}
+function nxJump(dk){const sec=document.querySelector('#page-'+dk+' .notes-section');if(!sec)return;sec.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>{const ta=document.getElementById('ho-ta-'+dk);if(ta)ta.focus({preventScroll:true});},500);}
+document.addEventListener('click',e=>{if(!e.target.closest('.nx-menu')){const m=document.querySelector('.nx-menu');if(m)m.remove();}});
+async function nxSignOff(day,dk,name){if(!name)return;const jobs=state.jobs.filter(j=>j.day===day&&nxInMode(j)),done=jobs.filter(nxIsDone).length;
+  const notDone=jobs.filter(j=>!nxIsDone(j)),noWhy=notDone.filter(j=>!nxReason(j));
+  if(noWhy.length&&!confirm(noWhy.length+' unticked job'+(noWhy.length>1?'s have':' has')+' no reason. Tap the flag on a job to say why it wasn’t done.\n\nSign off anyway?')){renderDay(day);return;}
+  doSignOffByName(NX_SO+dk,day,dk,name);
+  try{await fetch(NOTES_SCRIPT_URL,{method:'POST',body:JSON.stringify({board:'notes',op:'add',src:HANDOVER_APP+' - '+day,author:name,note:'✓ Signed off: '+done+' of '+jobs.length+' '+(NX_MODE==='opening'?'opening checks':'closing jobs')+' ticked'+(notDone.length?'. Not done: '+notDone.map(j=>nxJobText(j.job)+(nxReason(j)?' ('+nxReason(j).replace(/\s*\([^)]*\)$/,'')+')':' (no reason given)')).join('; '):'')})});handoverLoaded=false;loadHandover(day);}catch(e){}}
+
 function renderDay(day){
   const dk=day.toLowerCase(),el=document.getElementById('page-'+dk);
-  const jobs=state.jobs.filter(j=>j.day===day);
-  const onShift=state.staff.filter(s=>s.onShift).map(s=>s.name);
-  const done=jobs.filter(j=>j.done).length;
-  const signOff=getSignOff('eon-signoff-'+dk);
-
-  // Sign-off card — always at bottom, looks like a job card but distinct
+  const jobs=state.jobs.filter(j=>j.day===day&&nxInMode(j)),isDone=nxIsDone;
+  const doneJobs=jobs.filter(isDone),left=jobs.filter(j=>!isDone(j)),me=nxMe(),crew=nxCrew();
+  const onShift=crew.length?crew:state.staff.filter(s=>s.onShift).map(s=>s.name);
+  const tonight=day===nxToday(),signOff=getSignOff(NX_SO+dk);
+  // last night's result, shown on tonight's page
+  let lastHtml='';
+  if(tonight&&NX_MODE!=='opening'){const prev=DAYS[(DAYS.indexOf(day)+6)%7],pj=state.jobs.filter(j=>j.day===prev&&nxInMode(j)),pd=pj.filter(nxIsDone).length;
+    if(pj.length&&pd<pj.length)lastHtml=`<div class="nx-last">⚠ Last night <b>${pd} of ${pj.length}</b> closing jobs were ticked. Missed: ${pj.filter(j=>!nxIsDone(j)).slice(0,4).map(j=>escHtml(nxJobText(j.job))+(nxReason(j)?` <i>(${escHtml(nxReason(j))})</i>`:'')).join('; ')}${pj.length-pd>4?'…':''}</div>`;}
+  // who's ticking
+  const others=state.staff.map(s=>s.name).filter(n=>!crew.includes(n));
+  const whoHtml=`<section class="nx-who"><p>${me?`Ticking as <b>${escHtml(me)}</b>. Tap the jobs you've finished`:'Who are you? Tap your name (or add it)'}</p><div class="nx-chips">
+    ${crew.map(n=>`<button type="button" class="nx-chip${n===me?' on':''}" onclick="nxPick(this.dataset.n)" data-n="${escHtml(n)}">${escHtml(n)}</button>`).join('')}
+    <button type="button" class="nx-chip nx-add" onclick="nxAddName()">＋ Add my name</button></div></section>`;
+  // still to do: each area is a whole block in one of two columns. The split uses the night's FULL job list,
+  // so blocks never jump columns as jobs are ticked; a just-ticked job stays put for a few seconds.
+  const order=NX_MODE_AREAS.concat(['Other jobs']),nowMs=Date.now();
+  const groups=order.map(a=>({a,all:jobs.filter(j=>nxArea(j.job)===a)})).filter(g=>g.all.length);
+  const cols=[[],[]],h=[0,0];groups.forEach(g=>{const c=h[0]<=h[1]?0:1;cols[c].push(g);h[c]+=g.all.length+1;});
+  const showJob=j=>{const just=nxRecent[j.id]&&nxRecent[j.id]>nowMs&&nxIsDone(j);
+    return just?`<button type="button" class="nx-job just" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(nxJobText(j.job))}<small>✓ Ticked for ${escHtml(j.assignedTo)}. Tap to undo</small></span></button>`
+      :(r=>`<div class="nx-jrow${r?' flagged':''}"><button type="button" class="nx-job" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(nxJobText(j.job))}${r?`<small class="nx-why">⚑ Not done: ${escHtml(r)}</small>`:''}</span></button><button type="button" class="nx-flag" aria-label="${r?'Clear the reason':'Can’t do it'}" onclick="nxFlag(${j.id},this,event)">${r?'✕':'⚑'}</button></div>`)(nxReason(j));};
+  const grpHtml=g=>{const js=g.all.filter(j=>!isDone(j)||(nxRecent[j.id]&&nxRecent[j.id]>nowMs));
+    return `<div class="nx-grp"><div class="nx-area">${g.a} · ${g.all.filter(isDone).length}/${g.all.length}</div>${js.length?js.map(showJob).join(''):'<div class="nx-grp-done">✓ All done</div>'}</div>`;};
+  const todo=left.length||Object.keys(nxRecent).length?`<div class="nx-cols2">${cols.map(c=>`<div class="nx-c">${c.map(grpHtml).join('')}</div>`).join('')}</div>`:'';
+  // each person's column of jobs done tonight
+  const names=[];doneJobs.forEach(j=>{const n=j.assignedTo||'Someone';if(!names.includes(n))names.push(n);});crew.forEach(n=>{if(!names.includes(n))names.push(n);});
+  const people=names.map(n=>{const js=doneJobs.filter(j=>(j.assignedTo||'Someone')===n).sort((x,y)=>(y.timestamp||'').localeCompare(x.timestamp||''));
+    return `<section class="nx-col${n===me?' me':''}"><h3><span class="nx-av">${escHtml(n[0]||'?')}</span>${escHtml(n)}<small>${js.length} done</small></h3><div class="nx-list">${
+      js.map(j=>`<div class="nx-done"><span class="nx-tick">✓</span><span>${escHtml(nxJobText(j.job))}<small>${j.timestamp?fmtTime(j.timestamp):''}</small></span><button type="button" class="nx-grab" aria-label="Change who did this" onclick="nxMenu(${j.id},this,event)">⋮⋮</button></div>`).join('')||'<div class="nx-empty">Nothing ticked yet</div>'}</div></section>`;}).join('');
+  const pct=jobs.length?Math.round(doneJobs.length/jobs.length*100):0;
   const signOffCard=signOff
-    ?`<div class="job-card" style="border-color:var(--green);background:var(--green-dim);margin-top:4px;">
-        <div class="job-done-toggle done">
-          <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="job-info">
-          <div class="job-name" style="color:var(--green)">✦ Manager Sign-Off</div>
-          <div class="job-assignee assigned">${signOff}</div>
-        </div>
-        <div class="job-controls">
-          <button class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="clearSignOff('eon-signoff-${dk}','${day}','${dk}')">Undo</button>
-        </div>
-      </div>`
-    :`<div class="job-card" style="border-color:var(--red);border-style:dashed;margin-top:4px;animation:glow-pulse 2s ease-in-out infinite;">
-        <div class="job-done-toggle">
-          <svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="job-info">
-          <div class="job-name" style="color:var(--red)">✦ Manager Sign-Off</div>
-          <div class="job-assignee">Not signed off</div>
-        </div>
-        <div class="job-controls">
-          <select class="assign-select" onchange="doSignOffByName('eon-signoff-${dk}','${day}','${dk}',this.value)">
-            <option value="">— Sign Off —</option>
-            ${onShift.map(n=>`<option value="${n}">${n}</option>`).join('')}
-          </select>
-        </div>
-      </div>`;
-
+    ?`<div class="job-card" style="border-color:var(--green);background:var(--green-dim);margin-top:14px;"><div class="job-info"><div class="job-name" style="color:var(--green)">✦ Duty Manager Sign-Off</div><div class="job-assignee assigned">${signOff}</div></div>
+       <div class="job-controls"><button class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="clearSignOff('${NX_SO}${dk}','${day}','${dk}')">Undo</button></div></div>`
+    :`<div class="job-card" style="border-color:var(--red);border-style:dashed;margin-top:14px;"><div class="job-info"><div class="job-name" style="color:var(--red)">✦ Duty Manager Sign-Off</div><div class="job-assignee">${left.length?left.length+' jobs still to tick'+(left.filter(j=>!nxReason(j)).length?' · '+left.filter(j=>!nxReason(j)).length+' without a reason':' · all have a reason'):'All ticked, ready to sign off'}</div></div>
+       <div class="job-controls"><select class="assign-select" onchange="nxSignOff('${day}','${dk}',this.value)"><option value="">— Duty manager —</option>${onShift.map(n=>`<option value="${escHtml(n)}">${escHtml(n)}</option>`).join('')}</select></div></div>`;
   el.innerHTML=`
-    <div class="jobs-header">
-      <div class="section-title">${day}</div>
-      <div class="jobs-meta"><div class="pill todo">${jobs.length-done} to do</div><div class="pill done">${done} done</div></div>
-    </div>
-    <div class="job-list">${jobs.map(j=>jobCard(j,onShift,dk)).join('')}</div>
+    <div class="nx-head"><div><div class="section-title">${NX_MODE==='opening'?'Opening · ':''}${day}${tonight?(NX_MODE==='opening'?' · today':' · tonight'):''}</div><div class="nx-sub">${doneJobs.length} of ${jobs.length} ticked</div></div><div class="nx-prog"><i style="width:${pct}%"></i></div><button type="button" class="nx-jump" onclick="nxJump('${dk}')">📝 Write a handover note ↓</button>${isManager?`<button type="button" class="nx-edit" onclick="(function(d){if(d){d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'});}})(document.querySelector('#page-${dk} .nx-manage'))">✎ Edit job list</button>`:''}</div>
+    ${lastHtml}${whoHtml}
+    <div class="nx-board"><section class="nx-col nx-todo"><h3>Still to do<small>${left.length} jobs</small></h3><div class="nx-list">${todo||'<div class="nx-empty" style="grid-column:1/-1">Everything is ticked. The duty manager or supervisor can sign off.</div>'}</div></section>
+      <div class="nx-people">${people}</div></div>
     ${signOffCard}
-    ${isManager?`<div class="add-job-row">
-      <input class="add-job-input" id="new-job-${dk}" placeholder="Add a job for ${day}…" onkeydown="if(event.key==='Enter')addJob('${day}','${dk}')"/>
-      <button class="btn btn-accent" onclick="addJob('${day}','${dk}')">+ Add</button>
-    </div>`:''}
+    ${isManager?`<details class="nx-manage"><summary>✎ Add or remove ${day}'s jobs (manager)</summary><div class="job-list">${jobs.map(j=>jobCard(j,onShift,dk)).join('')}</div>
+      <div class="add-job-row"><input class="add-job-input" id="new-job-${dk}" placeholder="Add a job for ${day}…" onkeydown="if(event.key==='Enter')addJob('${day}','${dk}')"/><button class="btn btn-accent" onclick="addJob('${day}','${dk}')">+ Add</button></div></details>`:''}
     <div class="notes-section">
       <div class="notes-title">📝 Handover Notes</div>
       <div id="handover-list-${dk}" class="ho-list"><div class="muted-text" style="font-size:13px">Loading…</div></div>
       <div class="ho-add">
-        <select class="assign-select" id="ho-author-${dk}"><option value="">— Your name —</option>${onShift.map(n=>`<option value="${n}">${n}</option>`).join('')}</select>
+        <select class="assign-select" id="ho-author-${dk}"><option value="">— Your name —</option>${onShift.map(n=>`<option value="${escHtml(n)}"${n===me?' selected':''}>${escHtml(n)}</option>`).join('')}</select>
         <textarea class="notes-textarea" id="ho-ta-${dk}" placeholder="Add a handover note for day staff…"></textarea>
-        <div class="notes-save-row">
-          <button class="btn btn-accent" onclick="addHandover('${day}','${dk}')">Add Note</button>
-          <span class="notes-saved" id="ho-saved-${dk}">✓ Added</span>
-        </div>
+        <div class="notes-save-row"><button class="btn btn-accent" onclick="addHandover('${day}','${dk}')">Add Note</button><span class="notes-saved" id="ho-saved-${dk}">✓ Added</span></div>
       </div>
     </div>`;
   loadHandover(day);
@@ -898,15 +1695,15 @@ async function addHandover(day,dk){
   const author=sel?sel.value:'';
   const saved=document.getElementById('ho-saved-'+dk);
   if(saved){ saved.textContent='Adding…'; saved.style.display='inline'; }
-  let ok=false;
+  let ok=false,why='';
   try{
     const res=await fetch(NOTES_SCRIPT_URL,{method:'POST',body:JSON.stringify({board:'notes',op:'add',src:HANDOVER_APP+' - '+day,author:author,note:text})});
     const data=await res.json();
-    if(data&&data.ok){ ok=true; handoverNotes=Array.isArray(data.notes)?data.notes:handoverNotes; handoverLoaded=true; }
-  }catch(e){}
+    if(data&&data.ok){ ok=true; handoverNotes=Array.isArray(data.notes)?data.notes:handoverNotes; handoverLoaded=true; } else why=(data&&(data.error||data.message||JSON.stringify(data).slice(0,80)))||'empty reply';
+  }catch(e){why=(e&&e.message)||'no connection';}
   if(ok){ ta.value=''; if(saved)saved.textContent='✓ Added'; renderHandoverList(day); }
-  else if(saved){ saved.textContent='Couldn’t save — try again'; }
-  if(saved) setTimeout(()=>{saved.style.display='none';saved.textContent='✓ Added';},2500);
+  else if(saved){ saved.textContent='Couldn’t save: '+why; }
+  if(saved) setTimeout(()=>{saved.style.display='none';saved.textContent='✓ Added';},ok?2500:15000);
 }
 
 function editHandover(id,dk){
@@ -980,7 +1777,7 @@ async function loadFromSheet(){
       fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Jobs`)
     ]);
     if(!sr.ok||!jr.ok)throw new Error();
-    parseStaffCSV(await sr.text());parseJobsCSV(await jr.text());
+    parseStaffCSV(await sr.text());parseJobsCSV(await jr.text());brSeed();
     // Safety net: if the sheet was empty, fall back to the built-in defaults
     if(!state.jobs||!state.jobs.length){state.jobs=DEFAULT_JOBS.map(j=>({...j,assignedTo:'',done:false,timestamp:'',notes:''}));}
     saveState();
@@ -1008,7 +1805,7 @@ async function saveStaffToSheet(){await pushToSheet();}
 async function sendEmailReport(){
   const addr=localStorage.getItem('bl_eon_email')||'';
   await fetchHandover();
-  let body='BLACK ROSE TAVERN — END OF NIGHT REPORT\n';
+  let body='BANSHEE LABYRINTH — END OF NIGHT REPORT\n';
   body+='Generated: '+new Date().toLocaleString('en-GB')+'\n'+'='.repeat(44)+'\n\n';
   DAYS.forEach(day=>{
     const jobs=state.jobs.filter(j=>j.day===day),done=jobs.filter(j=>j.done).length;
@@ -1091,7 +1888,7 @@ function startFireworks(){
   function burst(){
     const x=Math.random()*canvas.width;
     const y=Math.random()*canvas.height*0.6+50;
-    const colors=['#e8b84b','#e85d5d','#3ecf6e','#a78bfa','#ffffff','#60a5fa','#f97316'];
+    const colors=['#4fb8a8','#e85d5d','#3ecf6e','#a78bfa','#ffffff','#60a5fa','#f97316'];
     const color=colors[Math.floor(Math.random()*colors.length)];
     for(let i=0;i<60;i++) particles.push(new Particle(x,y,color));
   }

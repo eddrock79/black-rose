@@ -13,7 +13,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   :root {
     --bg:#0d0d0f; --surface:#17171a; --surface2:#1f1f24; --border:#2a2a30;
-    --accent:#e8b84b; --accent-dim:rgba(232,184,75,0.12);
+    --accent:#4fb8a8; --accent-dim:rgba(79,184,168,0.12);
     --green:#3ecf6e; --green-dim:rgba(62,207,110,0.12);
     --red:#e85d5d; --red-dim:rgba(232,93,93,0.1);
     --purple:#a78bfa; --purple-dim:rgba(167,139,250,0.12);
@@ -181,9 +181,103 @@
   .modal p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px;}
   .modal-buttons{display:flex;gap:10px;justify-content:flex-end;}
   @media(max-width:500px){.job-card{flex-wrap:wrap}.assign-select{max-width:100%}}
+
+/* ===== new day page: pick your name, tap the jobs you've done ===== */
+.nx-trial{background:#4fb8a81f;border-bottom:1px solid #4fb8a855;color:var(--accent);font-size:13px;text-align:center;padding:7px 12px}
+.nx-trial a{color:var(--accent);text-decoration:underline}
+.nx-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.nx-head .section-title{margin:0}
+.nx-sub{color:var(--muted);font-size:14px;margin-top:2px}
+.nx-prog{flex:1;min-width:160px;height:10px;border-radius:5px;background:#ffffff12;overflow:hidden}
+.nx-prog i{display:block;height:100%;background:var(--green);border-radius:5px}
+.nx-last{background:var(--red-dim);border:1px solid #e85d5d66;border-radius:12px;padding:10px 14px;font-size:14px;margin-bottom:12px}
+.nx-last b{color:var(--red)}
+.nx-who{position:sticky;top:0;z-index:20;background:var(--bg);padding:10px 0 12px;margin-bottom:8px;border-bottom:1px solid var(--border)}
+.nx-who p{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nx-who p b{color:var(--accent)}
+.nx-chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.nx-chip{font:600 18px 'DM Sans',sans-serif;padding:12px 22px;border-radius:999px;border:2px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;min-width:92px}
+.nx-chip.on{background:var(--accent);border-color:var(--accent);color:#06221e}
+.nx-other{font:500 15px 'DM Sans',sans-serif;padding:12px 14px;border-radius:999px;border:2px dashed var(--border);background:transparent;color:var(--muted)}
+.nx-board{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px;align-items:start}
+.nx-col{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.nx-col h3{margin:0;padding:12px 14px;display:flex;align-items:center;gap:10px;font:400 22px/1 'Bebas Neue',sans-serif;letter-spacing:.04em;border-bottom:1px solid var(--border)}
+.nx-col h3 small{margin-left:auto;font:600 13px 'DM Sans',sans-serif;color:var(--muted);letter-spacing:0}
+.nx-col.me{border-color:var(--accent)}
+.nx-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 13px 'DM Sans',sans-serif;background:var(--accent-dim);color:var(--accent)}
+.nx-list{padding:8px 10px 10px}
+.nx-todo .nx-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.nx-area{grid-column:1/-1;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:8px 4px 0}
+.nx-job{display:flex;gap:12px;align-items:center;min-height:64px;padding:12px;border-radius:12px;background:#1f1f24;border:1px solid var(--border);font:500 15px/1.3 'DM Sans',sans-serif;cursor:pointer;text-align:left;color:var(--text);width:100%}
+.nx-job:active{transform:scale(.98)}
+.nx-box{flex:none;width:28px;height:28px;border-radius:8px;border:2px solid #55555f}
+.nx-people{display:grid;gap:12px}
+.nx-done{display:flex;gap:10px;align-items:center;padding:9px 10px;border-radius:10px;background:var(--done-bg);border:1px solid #3ecf6e44;font-size:14px;margin-bottom:6px}
+.nx-done .nx-tick{flex:none;width:22px;height:22px;border-radius:7px;background:var(--green);display:grid;place-items:center;font-size:12px;color:#062a12}
+.nx-done small{display:block;font-size:11px;color:var(--muted)}
+.nx-grab{margin-left:auto;padding:6px 10px;border-radius:6px;color:#88888f;font-size:18px;background:none;border:0;cursor:pointer}
+.nx-empty{color:var(--muted);font-size:13px;padding:6px 4px}
+.nx-menu{position:absolute;z-index:60;background:#1f1f24;border:1px solid #3a3a44;border-radius:12px;padding:6px;box-shadow:0 10px 30px #000a;min-width:200px}
+.nx-menu button{display:block;width:100%;text-align:left;font:600 16px 'DM Sans',sans-serif;padding:12px 14px;border:0;background:none;color:var(--text);border-radius:8px;cursor:pointer}
+.nx-menu button.on,.nx-menu button:hover{background:var(--accent-dim);color:var(--accent)}
+.nx-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--accent);color:#06221e;font:700 15px 'DM Sans',sans-serif;padding:12px 18px;border-radius:999px;box-shadow:0 8px 24px #000a;z-index:70}
+.nx-manage{margin-top:16px}
+.nx-manage summary{cursor:pointer;color:var(--muted);font-size:14px;padding:8px 0}
+.nx-manage{background:#0f0f11;border:1px dashed #a3304e;border-radius:12px;padding:4px 14px 10px}
+.nx-manage summary{color:#f0a8b8!important;font:600 16px "Outfit",sans-serif!important;padding:10px 0 6px!important}
+.nx-edit{font:600 14px "Outfit",sans-serif;padding:8px 14px;border-radius:999px;border:1px solid #a3304e;background:rgba(139,29,56,.18);color:#f0a8b8;cursor:pointer;white-space:nowrap}
+.nx-jump+.nx-edit{margin-left:0}.nx-head>.nx-edit:first-of-type{margin-left:auto}
+@media(max-width:900px){.nx-board{grid-template-columns:1fr}}
+@media(max-width:560px){.nx-todo .nx-list{grid-template-columns:1fr}.nx-chip{font-size:16px;padding:10px 16px;min-width:0}}
+
+/* areas as whole columns: each area block stays in its column all night */
+.nx-todo .nx-list{display:block}
+.nx-cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.nx-c{display:grid;gap:12px;align-content:start}
+.nx-grp{background:#0f0f11;border:1px solid var(--border);border-radius:12px;padding:8px}
+.nx-grp .nx-area{margin:2px 4px 8px}
+.nx-grp .nx-job{margin-bottom:8px}.nx-grp .nx-job:last-child{margin-bottom:0}
+.nx-grp-done{color:var(--accent);font-size:14px;font-weight:600;padding:6px 6px 4px}
+/* just ticked: stays put for a few seconds so the next tap can't land on the wrong job */
+.nx-job.just{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+.nx-jrow{display:flex;gap:6px;align-items:stretch;margin-bottom:8px}.nx-jrow .nx-job{flex:1;min-width:0;margin-bottom:0}
+.nx-flag{flex:none;width:46px;border-radius:12px;border:1px solid #333338;background:#1b1b1e;color:#ff6b8b;font-size:17px;cursor:pointer}
+.nx-jrow.flagged .nx-job{border-color:#ff6b8b88}.nx-why{display:block;color:#ff6b8b!important;font-weight:600;margin-top:3px}
+.nx-menu-h{font:700 12px "Outfit",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#a9a9b2;padding:6px 10px 4px}
+.nx-jump{margin-left:auto;font:600 14px "Outfit",sans-serif;padding:8px 14px;border-radius:999px;border:1px solid #e8a93a;background:rgba(232,169,58,.08);color:#e8a93a;cursor:pointer;white-space:nowrap}
+.nx-job.just .nx-box{background:var(--accent);border-color:var(--accent);position:relative}
+.nx-job.just .nx-box::after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;color:#0a0a0b;font-weight:700}
+.nx-job.just small{display:block;font-size:12px;opacity:.85;margin-top:2px}
+@media(max-width:700px){.nx-cols2{grid-template-columns:1fr}}
+
+/* ===== Banshee look (navy, purple, lime) to match the Banshee board ===== */
+html:root{--bg:#0a0a0b;--surface:#111113;--border:#2a2a2e;--text:#ffffff;--muted:#a9a9b2;--accent:#e8a93a;--accent-dim:rgba(232,169,58,.14);
+ --green:#e8a93a;--green-dim:rgba(232,169,58,.12);--done-bg:rgba(232,169,58,.08);--purple:#a3304e;--purple-dim:rgba(139,29,56,.2);--red:#ff6b8b;--red-dim:rgba(255,107,139,.1)}
+html body{background:radial-gradient(900px 420px at 85% -5%,#8b1d3855 0,transparent 65%),repeating-linear-gradient(135deg,#ffffff03 0 2px,transparent 2px 14px),#0a0a0b!important;font-family:"Outfit",system-ui,sans-serif!important}
+.section-title,.nx-col h3,.notes-title{font-family:"Alfa Slab One",Georgia,serif!important;text-transform:uppercase;letter-spacing:.01em;text-shadow:2px 2px 0 #3b0a14}
+.nx-col h3{font-size:18px}
+.nx-col{background:linear-gradient(180deg,#141416,#0f0f11);border-color:#333338}
+.nx-col.me{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.nx-job{background:#1b1b1e;border-color:#333338;font-family:"Outfit",sans-serif}
+.nx-box{border-color:#4a4a52}
+.nx-chip{font-family:"Outfit",sans-serif;background:#1b1b1e;border-color:#333338}
+.nx-chip.on{color:#0a0a0b}
+.nx-other{font-family:"Outfit",sans-serif;border-color:#333338}
+.nx-who{background:#0a0a0bf2;border-bottom:2px solid #8b1d38}
+.nx-av{background:#8b1d3866;color:#fff}
+.nx-done{border-color:#e8a93a55}
+.nx-done .nx-tick{color:#0a0a0b}
+.nx-prog{background:#ffffff14}.nx-prog i{background:linear-gradient(90deg,#8b1d38,#e8a93a)}
+.nx-menu{background:#1b1b1e;border-color:#333338}
+.nx-toast{color:#0a0a0b}
+.nx-trial{background:#8b1d3833;border-bottom-color:#8b1d38;color:#e4d6ff}
+.nx-last{background:#ff6b8b14;border-color:#ff6b8b66}
 </style>
 <script src="../bl-config.js"></script>
 <script src="../bl-auth.js"></script>
+<script src="../bl-header.js" defer></script>
+<link rel="stylesheet" href="../bl-style.css">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -216,14 +310,15 @@
     </div>
   </div>
   <div class="nav-bar">
-    <a class="nav-btn" id="nav-home" href="../home">🏠 Home</a>
-    <span class="nav-btn current">📋 Weekly Jobs</span>
-    <a class="nav-btn" href="../end-of-night">🌙 End Of Night</a>
-    <a class="nav-btn" href="../rotas">📅 Rotas</a>
-    <a class="nav-btn" href="../cocktails">🍸 Cocktails</a>
-    <a class="nav-btn" id="nav-dash" href="../dashboard" style="display:none;background:var(--purple-dim);color:var(--purple);border-color:var(--purple)">📊 Dashboard</a>
-    <button class="nav-btn" type="button" onclick="BLAuth.switchVenue()" style="cursor:pointer">🏘️ Switch Venue</button>
-    <button class="nav-btn" id="nav-logout" onclick="logOut()" style="display:none;cursor:pointer;color:var(--red);border-color:var(--red)">🔒 Log Out</button>
+    <a class="nav-btn" id="nav-home" href="../home">Home</a>
+    <a class="nav-btn" href="../end-of-night/?mode=opening">Opening</a>
+    <a class="nav-btn" href="../end-of-night">End Of Night</a>
+    <span class="nav-btn current">Weekly Jobs</span>
+    <a class="nav-btn" href="../cocktails">Cocktails</a>
+    <a class="nav-btn" href="http://eddrock79nas:8101/">Pub Dashboard</a>
+    <a class="nav-btn" id="nav-dash" href="../dashboard" style="display:none;background:var(--purple-dim);color:var(--purple);border-color:var(--purple)">Dashboard</a>
+    <button class="nav-btn" type="button" onclick="BLAuth.switchVenue()" style="cursor:pointer">Switch Venue</button>
+    <button class="nav-btn" id="nav-logout" onclick="logOut()" style="cursor:pointer;color:var(--red);border-color:var(--red)">Log Out</button>
   </div>
   <div class="tabbar">
     <div class="tab active" onclick="switchTab('staff')">Staff</div>
@@ -336,29 +431,32 @@ const DAY_KEYS=['monday','tuesday','wednesday','thursday','friday','saturday','s
 const PIN_SHEET_ID=BL_CFG.weeklyJobs;
 const HANDOVER_KEY='bl_handover_notes';
 // Shared notes sheet (handover sync). Same /exec URL the Home page uses.
-const NOTES_SCRIPT_URL=BL_CFG.notesScript;
-const DEFAULT_STAFF=['Alix','Blue','Connor','Craig','David','Edd','Esje','Eva','Hannah','Jennifer','Maja','Richard','Rory','Ryan','Simon','Theresa'];
+Object.defineProperty(window,'NOTES_SCRIPT_URL',{get:()=>BL_CFG.sharedScript||BL_CFG.notesScript});
+const DEFAULT_STAFF=["Dave", "Keefe", "Callan", "Chloe", "Chaz", "Aaron", "Stuart", "Junior", "Allanah", "Laura", "Frank", "Scott M."];
 const DEFAULT_JOBS=[
-  {id:1,day:'Monday',job:'Restock bar fridges',homeDay:'Monday'},{id:2,day:'Monday',job:'Clean glasswasher filters',homeDay:'Monday'},
-  {id:3,day:'Monday',job:'Check cellar gas levels',homeDay:'Monday'},{id:4,day:'Monday',job:'Wipe down bar surfaces',homeDay:'Monday'},
-  {id:5,day:'Monday',job:'Restock spirits shelf',homeDay:'Monday'},{id:6,day:'Tuesday',job:'Deep clean ice machine',homeDay:'Tuesday'},
-  {id:7,day:'Tuesday',job:'Bar stock count',homeDay:'Tuesday'},{id:8,day:'Tuesday',job:'Check CO2/gas cylinders',homeDay:'Tuesday'},
-  {id:9,day:'Tuesday',job:'Clean beer taps',homeDay:'Tuesday'},{id:10,day:'Tuesday',job:'Empty bottle bins',homeDay:'Tuesday'},
-  {id:11,day:'Wednesday',job:'Restock bar fridges',homeDay:'Wednesday'},{id:12,day:'Wednesday',job:'Clean glasswasher filters',homeDay:'Wednesday'},
-  {id:13,day:'Wednesday',job:'Wipe down bar surfaces',homeDay:'Wednesday'},{id:14,day:'Wednesday',job:'Check cellar gas levels',homeDay:'Wednesday'},
-  {id:15,day:'Wednesday',job:'Restock mixers/soft drinks',homeDay:'Wednesday'},{id:16,day:'Thursday',job:'Restock bar fridges',homeDay:'Thursday'},
-  {id:17,day:'Thursday',job:'Deep clean speed rail',homeDay:'Thursday'},{id:18,day:'Thursday',job:'Bar stock count',homeDay:'Thursday'},
-  {id:19,day:'Thursday',job:'Clean glasswasher filters',homeDay:'Thursday'},{id:20,day:'Thursday',job:'Check cellar gas levels',homeDay:'Thursday'},
-  {id:21,day:'Friday',job:'Restock bar fridges',homeDay:'Friday'},{id:22,day:'Friday',job:'Restock spirits shelf',homeDay:'Friday'},
-  {id:23,day:'Friday',job:'Clean glasswasher filters',homeDay:'Friday'},{id:24,day:'Friday',job:'Wipe down bar surfaces',homeDay:'Friday'},
-  {id:25,day:'Friday',job:'Check CO2/gas cylinders',homeDay:'Friday'},{id:26,day:'Friday',job:'Empty bottle bins',homeDay:'Friday'},
-  {id:27,day:'Saturday',job:'Restock bar fridges',homeDay:'Saturday'},{id:28,day:'Saturday',job:'Restock spirits shelf',homeDay:'Saturday'},
-  {id:29,day:'Saturday',job:'Restock mixers/soft drinks',homeDay:'Saturday'},{id:30,day:'Saturday',job:'Clean glasswasher filters',homeDay:'Saturday'},
-  {id:31,day:'Saturday',job:'Wipe down bar surfaces',homeDay:'Saturday'},{id:32,day:'Saturday',job:'Check cellar gas levels',homeDay:'Saturday'},
-  {id:33,day:'Saturday',job:'Bar stock count',homeDay:'Saturday'},{id:34,day:'Sunday',job:'Restock bar fridges',homeDay:'Sunday'},
-  {id:35,day:'Sunday',job:'Clean glasswasher filters',homeDay:'Sunday'},{id:36,day:'Sunday',job:'Wipe down bar surfaces',homeDay:'Sunday'},
-  {id:37,day:'Sunday',job:'Check cellar gas levels',homeDay:'Sunday'},{id:38,day:'Sunday',job:'Weekly deep clean cellar',homeDay:'Sunday'},
-  {id:39,day:'Sunday',job:'Full bar stock count',homeDay:'Sunday'}
+  {"id": 1, "day": "Monday", "job": "Clean glassware on the bottom shelf, renovate glassware and clean shelves", "homeDay": "Monday"},
+  {"id": 2, "day": "Monday", "job": "Update the “what’s on this week” board", "homeDay": "Monday"},
+  {"id": 3, "day": "Monday", "job": "Refill water bulbs in the plants", "homeDay": "Monday"},
+  {"id": 4, "day": "Tuesday", "job": "Deep clean both the kitchen and bar dishwashers", "homeDay": "Tuesday"},
+  {"id": 5, "day": "Tuesday", "job": "Clean toilet mirrors", "homeDay": "Tuesday"},
+  {"id": 6, "day": "Tuesday", "job": "Clean optics", "homeDay": "Tuesday"},
+  {"id": 7, "day": "Wednesday", "job": "Kitchen: clean the grease trap and the area around it", "homeDay": "Wednesday"},
+  {"id": 8, "day": "Wednesday", "job": "Wipe down the front of the bar", "homeDay": "Wednesday"},
+  {"id": 9, "day": "Wednesday", "job": "Cellar: check dates on all stock and rotate where needed", "homeDay": "Wednesday"},
+  {"id": 10, "day": "Thursday", "job": "Clean beer lines", "homeDay": "Thursday"},
+  {"id": 11, "day": "Thursday", "job": "Clean stairs and cellar", "homeDay": "Thursday"},
+  {"id": 12, "day": "Thursday", "job": "Clean and refill all sauces", "homeDay": "Thursday"},
+  {"id": 13, "day": "Thursday", "job": "Refill all batch cocktails", "homeDay": "Thursday"},
+  {"id": 14, "day": "Thursday", "job": "Kitchen: check dates on all stock and rotate where needed", "homeDay": "Thursday"},
+  {"id": 15, "day": "Friday", "job": "Till and card rolls stocked up in the wee box", "homeDay": "Friday"},
+  {"id": 16, "day": "Friday", "job": "Wipe down all bins inside and out", "homeDay": "Friday"},
+  {"id": 17, "day": "Friday", "job": "Clean all back bar bottles with a damp cloth, and the shelves underneath", "homeDay": "Friday"},
+  {"id": 18, "day": "Saturday", "job": "Deep clean the kitchen dishwasher", "homeDay": "Saturday"},
+  {"id": 19, "day": "Saturday", "job": "Clean toilet mirrors", "homeDay": "Saturday"},
+  {"id": 20, "day": "Saturday", "job": "Make a list of things needing fixed, leave it on the office desk", "homeDay": "Saturday"},
+  {"id": 21, "day": "Sunday", "job": "Kitchen: clean the grease trap and the area around it", "homeDay": "Sunday"},
+  {"id": 22, "day": "Sunday", "job": "Remove anything that doesn’t need to be behind the bar", "homeDay": "Sunday"},
+  {"id": 23, "day": "Sunday", "job": "Keg count", "homeDay": "Sunday"}
 ];
 
 // ── STATE ──
@@ -479,6 +577,7 @@ function initApp(){
   if(DAY_KEYS.includes(today)){
     const el=document.getElementById('tab-'+today);
     if(el){el.style.fontWeight='700';el.style.color='var(--accent)';}
+    switchTab(today);
   }
 }
 
@@ -538,7 +637,9 @@ function rotaDayISO(){
   if(n.getHours()<7) d.setDate(d.getDate()-1);
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
-function tonightCrew(){ const days=(rotaShifts&&rotaShifts.days)||{}; return (days[rotaDayISO()]||[]).map(x=>x.name); }
+function tonightCrew(){ const days=(rotaShifts&&rotaShifts.days)||{}, iso=rotaDayISO();
+  let k=days[iso]?iso:Object.keys(days).filter(x=>x.slice(5)===iso.slice(5)).pop();   // rota sometimes has the wrong year
+  return (k?days[k]:[]).map(x=>x.name).filter(Boolean); }
 async function loadShifts(){ try{const r=await fetch(SHIFTS_URL+'?t='+Date.now()); if(r.ok) rotaShifts=await r.json();}catch(e){} }
 function applyRotaCrew(replace){
   const crew=tonightCrew();
@@ -551,6 +652,7 @@ function applyRotaCrew(replace){
 }
 async function maybeSeedShifts(){
   await loadShifts();
+  if(DAY_KEYS.includes(currentTab)) renderDay(DAYS[DAY_KEYS.indexOf(currentTab)]);
   if(tonightCrew().length && !state.staff.some(s=>s.onShift)) applyRotaCrew(true);  // auto-fill only when nobody is on yet
 }
 function addStaffMember(){
@@ -564,34 +666,115 @@ function removeStaff(i){
 }
 
 // ── JOBS ──
-function renderDay(day){
-  const dk=day.toLowerCase(),el=document.getElementById('page-'+dk);
-  const jobs=state.jobs.filter(j=>j.day===day);
-  const onShift=state.staff.filter(s=>s.onShift).map(s=>s.name);
-  const done=jobs.filter(j=>j.done).length;
+
+// ── BLACK ROSE: first open replaces the Banshee copy in the sheet with the Black Rose lists ──
+function brSeed(){let changed=false;const mark=DEFAULT_JOBS[0].job;
+  if(!state.jobs.some(j=>j.job===mark)){state.jobs=DEFAULT_JOBS.map(j=>({...j,assignedTo:'',done:false,timestamp:'',notes:''}));changed=true;}
+  if(!state.staff.some(s=>DEFAULT_STAFF.includes(s.name))){state.staff=DEFAULT_STAFF.map(n=>({name:n,onShift:false}));changed=true;}
+  if(changed){saveState();setTimeout(pushToSheet,800);}}
+function nxAddName(){let n=prompt('Your first name (as you want it to show):');if(!n)return;n=n.replace(/\s+/g,' ').trim().slice(0,24);if(!n)return;
+  n=n.charAt(0).toUpperCase()+n.slice(1);const ex=state.staff.find(s=>s.name.toLowerCase()===n.toLowerCase());
+  if(!ex){state.staff.push({name:n,onShift:true});saveState();queueSheetSync();nxToast('Added '+n);}nxPick(ex?ex.name:n);}
+// ── NEW PAGE: pick your name, tap the jobs you've done ──
+const NX_AREAS=[["Kitchen",/kitchen|grease|sauce/i],["Cellar and stock",/cellar|keg|batch|till|beer lines/i],["Bar",/bar|optic|glass|bottle|dishwasher/i],["Front of house",/toilet|mirror|board|plant|bin|fix/i]];
+const NX_LIST=DAYS, NX_KEYS=DAY_KEYS, NX_KIND='day';
+function nxArea(job){for(const a of NX_AREAS){if(a[1].test(job))return a[0];}return "Other jobs";}
+function nxNow(){const d=new Date();if(NX_KIND==='day'&&d.getHours()<7)d.setDate(d.getDate()-1);return d;}
+function nxStamp(){const d=nxNow();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+(NX_KIND==='day'?d.getDate():1);}
+function nxCur(){const d=nxNow();return NX_KIND==='day'?NX_LIST[(d.getDay()+6)%7]:NX_LIST[d.getMonth()];}
+function nxStart(p){const now=nxNow();let s;
+  if(NX_KIND==='day'){s=new Date(now);s.setHours(0,0,0,0);const back=(((s.getDay()+6)%7)-NX_LIST.indexOf(p)+7)%7;s.setDate(s.getDate()-back);}
+  else{s=new Date(now.getFullYear(),NX_LIST.indexOf(p),1);if(s>now)s.setFullYear(s.getFullYear()-1);}
+  return s;}
+function nxIsDone(j){if(!j.done)return false;if(!j.timestamp)return true;const t=new Date(j.timestamp),s=nxStart(j.day),e=new Date(s);
+  if(NX_KIND==='day')e.setDate(e.getDate()+7);else e.setFullYear(e.getFullYear()+1);return isNaN(t)||(t>=s&&t<e);}
+function nxMe(){try{const m=JSON.parse(localStorage.getItem('wj_new_me')||'null');return m&&m.d===nxStamp()?m.n:'';}catch(e){return '';}}
+function nxSetMe(n){localStorage.setItem('wj_new_me',JSON.stringify({d:nxStamp(),n:n}));}
+function nxCrew(){const set=state.staff.map(s=>s.name).filter(Boolean);const me=nxMe();if(me&&!set.includes(me))set.push(me);return set;}
+function nxToast(t){const o=document.querySelector('.nx-toast');if(o)o.remove();const d=document.createElement('div');d.className='nx-toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800);}
+function nxRedraw(p){if(currentTab===String(p).toLowerCase())renderDay(p);}
+function nxPick(n){if(!n)return;nxSetMe(n);const s=state.staff.find(x=>x.name.toLowerCase()===n.toLowerCase());if(s&&!s.onShift){s.onShift=true;saveState();queueSheetSync();}
+  const i=NX_KEYS.indexOf(currentTab);renderDay(i>=0?NX_LIST[i]:nxCur());}
+const NX_HOLD=3500, nxRecent={};
+function nxTick(id){const me=nxMe();if(!me){nxToast('Tap your name at the top first');const w=document.querySelector('.nx-who');if(w)w.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  const j=state.jobs.find(x=>x.id===id);if(!j)return;
+  if(nxRecent[id]&&nxRecent[id]>Date.now()){nxUndo(id);return;}
+  j.assignedTo=me;j.done=true;j.timestamp=new Date().toISOString();if(/^Not done:/i.test(j.notes||''))j.notes='';nxRecent[id]=Date.now()+NX_HOLD;
+  saveState();renderDay(j.day);queueSheetSync();
+  setTimeout(()=>{if(nxRecent[id]&&nxRecent[id]<=Date.now()+50){delete nxRecent[id];nxRedraw(j.day);}},NX_HOLD+60);}
+function nxUndo(id){const j=state.jobs.find(x=>x.id===id);if(!j)return;delete nxRecent[id];j.assignedTo='';j.done=false;j.timestamp='';
+  saveState();renderDay(j.day);queueSheetSync();nxToast('Unticked');}
+function nxSet(id,name){const j=state.jobs.find(x=>x.id===id);if(!j)return;if(name){j.assignedTo=name;j.done=true;j.timestamp=j.timestamp||new Date().toISOString();if(/^Not done:/i.test(j.notes||''))j.notes='';}else{j.assignedTo='';j.done=false;j.timestamp='';}
+  saveState();renderDay(j.day);queueSheetSync();}
+function nxMenu(id,btn,ev){ev.stopPropagation();const old=document.querySelector('.nx-menu');if(old)old.remove();const j=state.jobs.find(x=>x.id===id);if(!j)return;
+  const m=document.createElement('div');m.className='nx-menu';
+  m.innerHTML=nxCrew().map(n=>`<button type="button" class="${j.assignedTo===n?'on':''}" data-n="${escHtml(n)}">Done by ${escHtml(n)}</button>`).join('')+'<button type="button" data-n="">Not done (untick)</button>';
+  const r=btn.getBoundingClientRect();m.style.left=Math.max(8,Math.min(innerWidth-220,r.right+scrollX-200))+'px';m.style.top=(r.bottom+scrollY+4)+'px';document.body.appendChild(m);
+  m.onclick=e=>{const b=e.target.closest('[data-n]');if(!b)return;m.remove();nxSet(id,b.getAttribute('data-n'));};}
+// "can't do it": the reason goes in the job's Notes column (and the time in Timestamp) so it reaches the sheet
+const NX_REASONS=['Ran out of time','Area still in use','Broken or needs fixing','Out of stock or supplies'];
+function nxReason(j){if(!j||j.done||!/^Not done:/i.test(j.notes||''))return '';
+  if(j.timestamp){const t=new Date(j.timestamp),s=nxStart(j.day),e=new Date(s);if(NX_KIND==='day')e.setDate(e.getDate()+7);else e.setFullYear(e.getFullYear()+1);
+    if(!isNaN(t)&&(t<s||t>=e))return '';}
+  return j.notes.replace(/^Not done:\s*/i,'');}
+function nxSetReason(id,txt){const j=state.jobs.find(x=>x.id===id);if(!j)return;const me=nxMe();
+  txt=(txt||'').replace(/[\r\n,]+/g,' ').trim().slice(0,120);
+  j.done=false;j.assignedTo='';j.notes=txt?'Not done: '+txt+(me?' ('+me+')':''):'';j.timestamp=txt?new Date().toISOString():'';
+  saveState();renderDay(j.day);queueSheetSync();nxToast(txt?'Reason saved':'Reason cleared');}
+function nxFlag(id,btn,ev){ev.stopPropagation();const old=document.querySelector('.nx-menu');if(old)old.remove();
+  if(!nxMe()){nxToast('Tap your name at the top first');return;}
+  const j=state.jobs.find(x=>x.id===id);if(!j)return;
+  if(nxReason(j)){nxSetReason(id,'');return;}
+  const m=document.createElement('div');m.className='nx-menu';
+  m.innerHTML='<div class="nx-menu-h">Why can’t it be done?</div>'+NX_REASONS.map(r=>`<button type="button" data-r="${escHtml(r)}">${escHtml(r)}</button>`).join('')+'<button type="button" data-r="*">Something else…</button>';
+  const r=btn.getBoundingClientRect();m.style.left=Math.max(8,Math.min(innerWidth-240,r.right+scrollX-230))+'px';m.style.top=(r.bottom+scrollY+4)+'px';document.body.appendChild(m);
+  m.onclick=e=>{const b=e.target.closest('[data-r]');if(!b)return;m.remove();let t=b.getAttribute('data-r');
+    if(t==='*'){t=prompt('Why can’t "'+j.job+'" be done?');if(!t)return;}nxSetReason(id,t);};}
+function nxJump(pk){const sec=document.querySelector('#page-'+pk+' .notes-section');if(!sec)return;sec.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>{const ta=document.getElementById('ho-ta-'+pk);if(ta)ta.focus({preventScroll:true});},500);}
+document.addEventListener('click',e=>{if(!e.target.closest('.nx-menu')){const m=document.querySelector('.nx-menu');if(m)m.remove();}});
+
+function renderDay(p){
+  const pk=p.toLowerCase(),el=document.getElementById('page-'+pk);
+  const jobs=state.jobs.filter(j=>j.day===p),isDone=nxIsDone;
+  const doneJobs=jobs.filter(isDone),left=jobs.filter(j=>!isDone(j)),me=nxMe(),crew=nxCrew();
+  const onShift=crew.length?crew:state.staff.filter(s=>s.onShift).map(s=>s.name);
+  const cur=p===nxCur();
+  const others=state.staff.map(s=>s.name).filter(n=>!crew.includes(n));
+  const whoHtml=`<section class="nx-who"><p>${me?`Ticking as <b>${escHtml(me)}</b>. Tap the jobs you've finished`:'Who are you? Tap your name (or add it)'}</p><div class="nx-chips">
+    ${crew.map(n=>`<button type="button" class="nx-chip${n===me?' on':''}" onclick="nxPick(this.dataset.n)" data-n="${escHtml(n)}">${escHtml(n)}</button>`).join('')}
+    <button type="button" class="nx-chip nx-add" onclick="nxAddName()">＋ Add my name</button></div></section>`;
+  const order=NX_AREAS.map(a=>a[0]).concat(['Other jobs']),nowMs=Date.now();
+  const groups=order.map(a=>({a,all:jobs.filter(j=>nxArea(j.job)===a)})).filter(g=>g.all.length);
+  const cols=[[],[]],h=[0,0];groups.forEach(g=>{const c=h[0]<=h[1]?0:1;cols[c].push(g);h[c]+=g.all.length+1;});
+  const showJob=j=>{const just=nxRecent[j.id]&&nxRecent[j.id]>nowMs&&nxIsDone(j);
+    return just?`<button type="button" class="nx-job just" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(j.job)}<small>✓ Ticked for ${escHtml(j.assignedTo)}. Tap to undo</small></span></button>`
+      :(r=>`<div class="nx-jrow${r?' flagged':''}"><button type="button" class="nx-job" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(j.job)}${r?`<small class="nx-why">⚑ Not done: ${escHtml(r)}</small>`:''}</span></button><button type="button" class="nx-flag" aria-label="${r?'Clear the reason':'Can’t do it'}" onclick="nxFlag(${j.id},this,event)">${r?'✕':'⚑'}</button></div>`)(nxReason(j));};
+  const grpHtml=g=>{const js=g.all.filter(j=>!isDone(j)||(nxRecent[j.id]&&nxRecent[j.id]>nowMs));
+    return `<div class="nx-grp"><div class="nx-area">${g.a} · ${g.all.filter(isDone).length}/${g.all.length}</div>${js.length?js.map(showJob).join(''):'<div class="nx-grp-done">✓ All done</div>'}</div>`;};
+  const todo=left.length||Object.keys(nxRecent).length?`<div class="nx-cols2">${cols.map(c=>`<div class="nx-c">${c.map(grpHtml).join('')}</div>`).join('')}</div>`:'';
+  const names=[];doneJobs.forEach(j=>{const n=j.assignedTo||'Someone';if(!names.includes(n))names.push(n);});crew.forEach(n=>{if(!names.includes(n))names.push(n);});
+  const people=names.map(n=>{const js=doneJobs.filter(j=>(j.assignedTo||'Someone')===n).sort((x,y)=>(y.timestamp||'').localeCompare(x.timestamp||''));
+    return `<section class="nx-col${n===me?' me':''}"><h3><span class="nx-av">${escHtml(n[0]||'?')}</span>${escHtml(n)}<small>${js.length} done</small></h3><div class="nx-list">${
+      js.map(j=>`<div class="nx-done"><span class="nx-tick">✓</span><span>${escHtml(j.job)}<small>${j.timestamp?fmtTime(j.timestamp):''}</small></span><button type="button" class="nx-grab" aria-label="Change who did this" onclick="nxMenu(${j.id},this,event)">⋮⋮</button></div>`).join('')||'<div class="nx-empty">Nothing ticked yet</div>'}</div></section>`;}).join('');
+  const pct=jobs.length?Math.round(doneJobs.length/jobs.length*100):0;
   el.innerHTML=`
-    <div class="jobs-header">
-      <div class="section-title">${day}</div>
-      <div class="jobs-meta"><div class="pill todo">${jobs.length-done} to do</div><div class="pill done">${done} done</div></div>
-    </div>
-    <div class="job-list">${jobs.map(j=>jobCard(j,onShift,dk)).join('')}</div>
-    ${isManager?`<div class="add-job-row">
-      <input class="add-job-input" id="new-job-${dk}" placeholder="Add a job for ${day}…" onkeydown="if(event.key==='Enter')addJob('${day}','${dk}')"/>
-      <button class="btn btn-accent" onclick="addJob('${day}','${dk}')">+ Add</button>
-    </div>`:''}
+    <div class="nx-head"><div><div class="section-title">${p}${cur?' · today':''}</div><div class="nx-sub">${doneJobs.length} of ${jobs.length} ticked</div></div><div class="nx-prog"><i style="width:${pct}%"></i></div><button type="button" class="nx-jump" onclick="nxJump('${pk}')">📝 Write a handover note ↓</button>${isManager?`<button type="button" class="nx-edit" onclick="(function(d){if(d){d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'});}})(document.querySelector('#page-${pk} .nx-manage'))">✎ Edit job list</button>`:''}</div>
+    ${whoHtml}
+    <div class="nx-board"><section class="nx-col nx-todo"><h3>Still to do<small>${left.length} jobs</small></h3><div class="nx-list">${todo||'<div class="nx-empty" style="grid-column:1/-1">Everything is ticked.</div>'}</div></section>
+      <div class="nx-people">${people}</div></div>
+    ${isManager?`<details class="nx-manage"><summary>✎ Add or remove ${p}'s jobs (manager)</summary><div class="job-list">${jobs.map(j=>jobCard(j,onShift,pk)).join('')}</div>
+      <div class="add-job-row"><input class="add-job-input" id="new-job-${pk}" placeholder="Add a job for ${p}…" onkeydown="if(event.key==='Enter')addJob('${p}','${pk}')"/><button class="btn btn-accent" onclick="addJob('${p}','${pk}')">+ Add</button></div></details>`:''}
     <div class="notes-section">
       <div class="notes-title">📝 Handover Notes</div>
-      <div id="handover-list-${dk}" class="ho-list"><div class="muted-text" style="font-size:13px">Loading…</div></div>
+      <div id="handover-list-${pk}" class="ho-list"><div class="muted-text" style="font-size:13px">Loading…</div></div>
       <div class="ho-add">
-        <select class="assign-select" id="ho-author-${dk}"><option value="">— Your name —</option>${onShift.map(n=>`<option value="${n}">${n}</option>`).join('')}</select>
-        <textarea class="notes-textarea" id="ho-ta-${dk}" placeholder="Add a handover note for day staff…"></textarea>
-        <div class="notes-save-row">
-          <button class="btn btn-accent" onclick="addHandover('${day}','${dk}')">Add Note</button>
-          <span class="notes-saved" id="ho-saved-${dk}">✓ Added</span>
-        </div>
+        <select class="assign-select" id="ho-author-${pk}"><option value="">— Your name —</option>${onShift.map(n=>`<option value="${escHtml(n)}"${n===me?' selected':''}>${escHtml(n)}</option>`).join('')}</select>
+        <textarea class="notes-textarea" id="ho-ta-${pk}" placeholder="Add a handover note…"></textarea>
+        <div class="notes-save-row"><button class="btn btn-accent" onclick="addHandover('${p}','${pk}')">Add Note</button><span class="notes-saved" id="ho-saved-${pk}">✓ Added</span></div>
       </div>
     </div>`;
-  loadHandover(day);
+  loadHandover(p);
 }
 
 function jobCard(j,onShift,dk){
@@ -671,15 +854,15 @@ async function addHandover(day,dk){
   const author=sel?sel.value:'';
   const saved=document.getElementById('ho-saved-'+dk);
   if(saved){ saved.textContent='Adding…'; saved.style.display='inline'; }
-  let ok=false;
+  let ok=false,why='';
   try{
     const res=await fetch(NOTES_SCRIPT_URL,{method:'POST',body:JSON.stringify({board:'notes',op:'add',src:HANDOVER_APP+' - '+day,author:author,note:text})});
     const data=await res.json();
-    if(data&&data.ok){ ok=true; handoverNotes=Array.isArray(data.notes)?data.notes:handoverNotes; handoverLoaded=true; }
-  }catch(e){}
+    if(data&&data.ok){ ok=true; handoverNotes=Array.isArray(data.notes)?data.notes:handoverNotes; handoverLoaded=true; } else why=(data&&(data.error||data.message||JSON.stringify(data).slice(0,80)))||'empty reply';
+  }catch(e){why=(e&&e.message)||'no connection';}
   if(ok){ ta.value=''; if(saved)saved.textContent='✓ Added'; renderHandoverList(day); }
-  else if(saved){ saved.textContent='Couldn’t save — try again'; }
-  if(saved) setTimeout(()=>{saved.style.display='none';saved.textContent='✓ Added';},2500);
+  else if(saved){ saved.textContent='Couldn’t save: '+why; }
+  if(saved) setTimeout(()=>{saved.style.display='none';saved.textContent='✓ Added';},ok?2500:15000);
 }
 
 function editHandover(id,dk){
@@ -753,7 +936,7 @@ async function loadFromSheet(){
       fetch(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Jobs`)
     ]);
     if(!sr.ok||!jr.ok)throw new Error();
-    parseStaffCSV(await sr.text());parseJobsCSV(await jr.text());
+    parseStaffCSV(await sr.text());parseJobsCSV(await jr.text());brSeed();
     if(!state.jobs||!state.jobs.length){state.jobs=DEFAULT_JOBS.map(j=>({...j,assignedTo:'',done:false,timestamp:'',notes:''}));}
     saveState();
     document.getElementById('gsStatus').textContent='✓ Connected';
@@ -780,7 +963,7 @@ async function saveStaffToSheet(){await pushToSheet();}
 async function sendEmailReport(){
   const addr=localStorage.getItem('bl_email')||'';
   await fetchHandover();
-  let body='BLACK ROSE TAVERN — WEEKLY JOBS REPORT\n';
+  let body='BANSHEE LABYRINTH — WEEKLY JOBS REPORT\n';
   body+='Generated: '+new Date().toLocaleString('en-GB')+'\n'+'='.repeat(44)+'\n\n';
   DAYS.forEach(day=>{
     const jobs=state.jobs.filter(j=>j.day===day),done=jobs.filter(j=>j.done).length;
