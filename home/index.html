@@ -8,7 +8,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
   :root {
     --bg:#0d0d0f; --surface:#17171a; --surface2:#1f1f24; --border:#2a2a30;
-    --accent:#e8b84b; --accent-dim:rgba(232,184,75,0.12);
+    --accent:#4fb8a8; --accent-dim:rgba(79,184,168,0.12);
     --green:#3ecf6e; --green-dim:rgba(62,207,110,0.12);
     --red:#e85d5d; --red-dim:rgba(232,93,93,0.1);
     --purple:#a78bfa; --purple-dim:rgba(167,139,250,0.12);
@@ -50,6 +50,11 @@
   .nav-btn{padding:7px 14px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--muted);text-decoration:none;display:inline-block;-webkit-tap-highlight-color:transparent;}
   .nav-btn.current{background:var(--accent-dim);color:var(--accent);border-color:var(--accent);}
   .nav-btn.mgr{background:var(--purple-dim);color:var(--purple);border-color:var(--purple);}
+  .nav-holiday-wrap{position:relative;display:inline-flex}
+  .holiday-badge{position:absolute;top:-7px;right:-7px;background:var(--red);color:#fff;
+    border-radius:99px;font-size:10px;font-weight:700;min-width:18px;height:18px;
+    display:none;align-items:center;justify-content:center;padding:0 4px;
+    border:2px solid var(--bg);pointer-events:none;line-height:1}
 
   .main{max-width:720px;margin:0 auto;padding:16px 16px;display:flex;flex-direction:column;gap:14px;}
 
@@ -86,6 +91,21 @@
   .event-desc{font-size:11px;color:var(--muted);margin-top:2px;}
   .crew-chip{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:5px 12px;margin:3px 5px 0 0;font-size:13px;color:var(--text);}
   .crew-time{color:var(--muted);font-size:11px;}
+  .tn-card{margin-bottom:14px}
+  .tn-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+  .tn-wx{font-size:15px;color:var(--text);white-space:nowrap}.tn-wx small{color:var(--muted);font-size:13px}.tn-wxi{font-size:18px;margin-right:6px}
+  .tn-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .tn-lbl{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .tn-ev{padding:6px 0;border-bottom:1px solid var(--border);font-size:15px}.tn-ev:last-child{border-bottom:0}.tn-ev b{color:var(--accent);margin-right:6px}.tn-ev small{display:block;color:var(--muted);font-size:12px}
+  .tn-eon{display:block;margin-top:14px;text-align:center;padding:13px;border-radius:10px;background:var(--accent);color:#0a0a0b;font-weight:700;font-size:17px;text-decoration:none}
+  .tn-sub{font-family:inherit;font-size:13px;letter-spacing:0;color:var(--muted);text-shadow:none;text-transform:none;font-weight:400;margin-left:6px}
+  @media(max-width:640px){.tn-grid{grid-template-columns:1fr}.tn-wx small{display:none}}
+  .tn-eon small{display:block;font-size:13px;font-weight:600;margin-top:3px;opacity:.85}.tn-eon small:empty{display:none}
+  .tn-eon .tn-warn{color:#7a0f2b}
+  .tn-wj{display:flex;justify-content:space-between;gap:10px;margin-top:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);text-decoration:none;font-size:15px}
+  .tn-wj b{color:var(--accent)}.tn-wj .tn-open{color:var(--muted)}
+  .hm-cols{display:grid;grid-template-columns:1fr;gap:14px}.hm-col{display:flex;flex-direction:column;gap:14px;min-width:0}
+  @media(min-width:1000px){.main{max-width:1180px}.hm-cols{grid-template-columns:1.15fr 1fr;align-items:start}}
 
   /* Notice board */
   .notice-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
@@ -110,15 +130,35 @@
   .joke-btn{margin-top:10px;font-size:12px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;}
   .joke-btn:hover{color:var(--text);}
   .muted-text{font-size:13px;color:var(--muted);font-style:italic;}
+  .tn-opening{background:transparent!important;color:#a3c43a!important;border:2px solid #a3c43a;margin-bottom:8px}
+  .br-crew{margin:0 0 12px}.br-crew .tn-lbl span{font-weight:500;letter-spacing:0;text-transform:none}
+  #br-crew-chips{display:flex;flex-wrap:wrap;gap:6px}.br-c{font:600 14px Outfit,sans-serif;padding:7px 13px;border-radius:999px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer}
+  .br-c.on{background:#a3c43a;border-color:#a3c43a;color:#0a0a0b}.br-c.clr{background:transparent;color:var(--muted)}
+  .gd-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.gd-line{font-size:16px}
+  .gd-badge{font:700 13px Outfit,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:2px solid currentColor}
+  .gd-badge.ok{color:#7ad38a}.gd-badge.amber{color:#f2b552}.gd-badge.red{color:#ff6b8b}
+  .gd-now{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-bottom:12px}.gd-now b{color:var(--text);font-size:16px}
+  .gd-chart{position:relative;display:flex;align-items:flex-end;gap:6px;height:120px;padding:0 0 18px;border-bottom:1px solid var(--border)}
+  .gd-b{flex:1;position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+  .gd-b i{display:block;width:100%;max-width:34px;border-radius:5px 5px 0 0}.gd-b i.ok{background:#7ad38a}.gd-b i.amber{background:#f2b552}.gd-b i.red{background:#ff6b8b}
+  .gd-b u{position:absolute;bottom:-4px;width:70%;height:3px;background:#5aa9e6;border-radius:2px}.gd-b small{position:absolute;bottom:-18px;font-size:11px;color:var(--muted)}
+  .gd-lim{position:absolute;left:0;right:0;border-top:1px dashed #f2b55299;pointer-events:none}.gd-lim.red{border-top-color:#ff6b8b99}
+  .gd-lim em{position:absolute;right:0;top:-15px;font:600 10px Outfit,sans-serif;font-style:normal;color:var(--muted)}
+  .gd-key{font-size:12px;color:var(--muted);margin-top:22px}.gd-notes{margin:10px 0 0;padding:0;list-style:none;font-size:15px;line-height:1.7}
+  @media(min-width:1000px){.hm-cols{grid-template-columns:1fr!important}.hm-col:first-child{display:grid!important;grid-template-columns:1fr 1fr;align-items:start}}
 </style>
 <script src="../bl-config.js"></script>
 <script src="../bl-auth.js"></script>
+<script src="../bl-header.js" defer></script>
+<link rel="stylesheet" href="../bl-style.css">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
 
 <!-- PIN SCREEN — unchanged from original -->
 <div id="pin-screen" style="display:none">
-  <div class="pin-logo">🌹 Black Rose</div>
+  <div class="pin-logo">Black Rose Tavern</div>
   <div class="pin-sub">Staff Hub</div>
   <div class="pin-dots">
     <div class="pin-dot" id="pd0"></div>
@@ -146,7 +186,7 @@
 <!-- MAIN APP -->
 <div id="app">
   <div class="topbar" style="position:relative;">
-    <div class="topbar-logo">🌹 Black Rose Tavern</div>
+    <div class="topbar-logo">⚡ Black Rose Tavern Labyrinth</div>
     <img class="topbar-centre-logo" src="../logo.jpg" alt="The Black Rose Tavern">
     <div class="topbar-right">
       <div class="topbar-role" id="topbar-role" style="display:none"></div>
@@ -155,14 +195,15 @@
   </div>
 
   <div class="nav-bar">
-    <span class="nav-btn current">🏠 Home</span>
-    <a class="nav-btn" id="nav-wj" href="#">📋 Weekly Jobs</a>
-    <a class="nav-btn" href="../end-of-night">🌙 End Of Night</a>
-    <a class="nav-btn" href="../rotas">📅 Rotas</a>
-    <a class="nav-btn" href="../cocktails">🍸 Cocktails</a>
-    <a class="nav-btn mgr" id="nav-dash" href="../dashboard" style="display:none">📊 Dashboard</a>
-    <button class="nav-btn" type="button" onclick="BLAuth.switchVenue()" style="cursor:pointer">🏘️ Switch Venue</button>
-    <button class="nav-btn" onclick="logOut()" style="cursor:pointer;color:var(--red);border-color:var(--red)">🔒 Log Out</button>
+    <span class="nav-btn current">Home</span>
+    <a class="nav-btn" href="../end-of-night/?mode=opening">Opening</a>
+    <a class="nav-btn" href="../end-of-night">End Of Night</a>
+    <a class="nav-btn" id="nav-wj" href="#">Weekly Jobs</a>
+    <a class="nav-btn" href="../cocktails">Cocktails</a>
+    <a class="nav-btn" href="http://eddrock79nas:8102/">Pub Dashboard</a>
+    <a class="nav-btn mgr" id="nav-dash" href="../dashboard" style="display:none">Dashboard</a>
+    <button class="nav-btn" type="button" onclick="BLAuth.switchVenue()" style="cursor:pointer">Switch Venue</button>
+    <button class="nav-btn" onclick="logOut()" style="cursor:pointer;color:var(--red);border-color:var(--red)">Log Out</button>
   </div>
 
   <div class="main">
@@ -173,39 +214,49 @@
       <div class="win"><div class="track" id="ticker-track"></div></div>
     </div>
 
-    <!-- On Tonight + Weather (weather hides on busy nights) -->
-    <div class="top-row" id="top-row">
-      <div class="card" id="tonight-card" style="display:none">
-        <div class="card-title" id="tonight-title">🌙 On Tonight</div>
-        <div id="tonight-content"></div>
+    <!-- Tonight: who's on, what's on, the weather in one line, and the closing jobs button -->
+    <div class="card tn-card" id="tonight-card">
+      <div class="tn-head"><div class="card-title" id="tonight-title" style="margin-bottom:0">Tonight</div><div class="tn-wx" id="wx-content"></div></div>
+      <div class="br-greet" id="br-greet"></div><div class="br-crew"><div class="tn-lbl">Select today’s heroes <span id="br-crew-n"></span></div><div id="br-crew-chips"></div></div>
+      <div class="tn-grid" style="display:none">
+        <div><div class="tn-lbl">On shift</div><div id="tonight-content"><div class="muted-text">Loading the rota…</div></div></div>
+        <div><div class="tn-lbl">On tonight</div><div id="tonight-events"><div class="muted-text">Loading…</div></div></div>
       </div>
-      <div class="card" id="weather-card">
-        <div class="card-title">🌤 Edinburgh</div>
-        <div id="wx-content"><div class="muted-text">Loading…</div></div>
-      </div>
+      <a class="tn-eon tn-opening" href="../end-of-night/?mode=opening">☀ Opening checks<small id="tn-open-prog"></small></a>
+      <a class="tn-eon" href="../end-of-night/">✓ Tick tonight's closing jobs<small id="tn-eon-prog"></small></a>
+      <a class="tn-wj" href="../weekly-cleaning/" id="tn-wj" style="display:none"></a>
     </div>
 
+    <div class="hm-cols"><div class="hm-col">
     <!-- Notice Board -->
     <div class="card">
       <div class="notice-header">
-        <div class="card-title" style="margin-bottom:0">📋 Notice Board</div>
+        <div class="card-title" style="margin-bottom:0">📋 Duty Manager Messages</div>
         <button class="notice-edit-btn" id="notice-edit-btn" onclick="requestNoticeEdit()" style="display:none">✏ Edit</button>
       </div>
       <div class="notice-content" id="notice-content"></div>
-      <textarea class="notice-textarea" id="notice-textarea" placeholder="Type a message for staff here…"></textarea>
+      <textarea class="notice-textarea" id="notice-textarea" placeholder="Type a message for the team…"></textarea>
       <button class="notice-save-btn" id="notice-save-btn" onclick="saveNotice()">Save Notice</button>
     </div>
 
     <!-- Handover Notes -->
     <div class="card">
-      <div class="card-title">📝 Handover Notes</div>
-      <div id="handover-content"><div class="muted-text">No handover notes yet.</div></div>
+      <div class="card-title">📝 Staff Messages <span class="tn-sub">from the daily handover notes</span></div>
+      <div id="handover-content"><div class="muted-text">No staff messages yet.</div></div>
     </div>
 
+    </div><div class="hm-col" style="display:none">
     <!-- Upcoming Events -->
     <div class="card">
-      <div class="card-title">📅 Upcoming Events</div>
+      <div class="card-title">📅 Coming Up</div>
       <div id="events-content"></div>
+    </div>
+    </div></div>
+
+    <!-- Beer garden: wind, rain, frost and dark -->
+    <div class="card gd-card">
+      <div class="card-title">🌹 Beer garden</div>
+      <div id="garden-content"><div class="muted-text">Loading the forecast…</div></div>
     </div>
 
   </div>
@@ -248,26 +299,174 @@ const HANDOVER_KEY='bl_handover_notes';
 
 // Shared Notice Board + Handover, synced via the dedicated notes sheet's Apps Script.
 // Paste the deployed /exec URL of notes-AppsScript.gs here:
-const NOTES_SCRIPT_URL=BL_CFG.notesScript;
+// Notice board + handover notes — original script handles getShared/postNotice
+Object.defineProperty(window,'NOTES_SCRIPT_URL',{get:()=>BL_CFG.sharedScript||BL_CFG.notesScript});
+// Holiday requests — Banshee Sync script handles holiday actions
+const HOLIDAYS_SCRIPT_URL=BL_CFG.notesScript;
+
+async function checkHolidayBadge(){return;
+  if(!BLAuth.isManager()) return;
+  try{
+    const res  = await fetch(HOLIDAYS_SCRIPT_URL+'?action=pending&_='+Date.now());
+    const data = await res.json();
+    const n    = (data.ok && data.pending) ? data.pending : 0;
+    const badge = document.getElementById('holiday-badge');
+    if(badge){
+      badge.textContent    = n;
+      badge.style.display  = n > 0 ? 'flex' : 'none';
+    }
+  }catch(e){ /* silent — badge just won't show */ }
+}
 const NOTICE_CACHE='bl_notice_list';     // cached JSON of the notice entries
 const HANDOVER_CACHE='bl_handover_list'; // cached JSON of the handover entries
 let sharedSyncFailed=false;
 
-// ── EVENTS — auto-fed from the rota's room rows (events.json, published by the NAS) ──
-const EVENTS_URL='../rotas/events.json';
-const EVENTS_CACHE='bl_events';
+// ── EVENTS — the same listings as the What's On screens: Molly's Chamber gigs (venue calendar) + cinema listings ──
+// Rules copied from whatson/board.html: booking/hold rows are skipped, and anything below a divider line in the notes is private and never read.
+const WO_GIGS_CSV='https://docs.google.com/spreadsheets/d/170lfqgVTY2JRou-44NMlGR80BtvQDR7GBQZRlUmbYqQ/gviz/tq?tqx=out:csv';
+const WO_CINEMA_API='https://script.google.com/macros/s/AKfycbzj8sdKBSn9Kfc5o5_Aoj07q62VxGGtIvW5Mt4Y6MfjkDxqUaLq5ckKzb8eYUlKQACv/exec';
+const WO_GIG_CAL=/mollys chamber|stage bar/i;
+const WO_BLOCK=/^\s*(template\b.*|private\s+booking|possible\s+booking|potential\s+booking|booking(?:\s+tbc)?|booked|tbc|hold)\s*$/i;
+const EVENTS_CACHE='bl_events_wo';
 let eventsFailed=false;
 function cachedEvents(){ try{return JSON.parse(localStorage.getItem(EVENTS_CACHE)||'[]');}catch(e){return [];} }
-async function loadEvents(){
-  renderEvents();                                   // show cached copy immediately
-  try{
-    const res=await fetch(EVENTS_URL+'?t='+Date.now());
-    if(!res.ok) throw new Error('http '+res.status);
-    const data=await res.json();
-    localStorage.setItem(EVENTS_CACHE,JSON.stringify(data.events||[]));
-    eventsFailed=false;
-  }catch(e){ eventsFailed=true; }
+function woCSV(t){const rows=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];
+  if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}
+  else if(c==='"')q=true;else if(c===','){r.push(f);f='';}else if(c==='\n'){r.push(f);rows.push(r);r=[];f='';}else if(c!=='\r')f+=c;}
+  if(f||r.length){r.push(f);rows.push(r);}return rows;}
+function woPlain(s){return String(s||'').replace(/<br\s*\/?>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&nbsp;/gi,' ').replace(/&amp;/gi,'&').replace(/&#39;|&rsquo;/gi,"'").replace(/&quot;/gi,'"').replace(/\s+/g,' ').trim();}
+function woTime(text,cell){
+  let m=text.match(/(?:doors?\s*(?:open(?:s|ing)?)?(?:\s*at)?|start\s*time)\s*:?\.?\s*(\d{1,2})(?:[:.](\d{2}))?\s*(am|pm)?/i),bare=true;
+  if(!m){m=String(cell||'').match(/(\d{1,2})(?::(\d{2}))?(?::\d{2})?\s*(am|pm)?/i);bare=false;}
+  if(!m)return '';let h=+m[1];const mn=m[2]?+m[2]:0,ap=(m[3]||'').toLowerCase();
+  if(ap==='pm'&&h<12)h+=12;if(ap==='am'&&h===12)h=0;if(bare&&!ap&&h>=1&&h<=11)h+=12;
+  if(h>23||mn>59)return '';return String(h).padStart(2,'0')+':'+String(mn).padStart(2,'0');}
+function woType(plain,title){const m=plain.match(/event ?type\s*:?\s*([a-z &]+?)(?=\s+(?:start|blurb|band|doors|cost|web|ffo|dj)\b|$)/i);const t=((m&&m[1])||title).toLowerCase();
+  if(/karaoke/.test(t))return 'Karaoke';if(/\bdj\b|techno|disco|club night/.test(t))return 'DJ set';if(/open ?mic|take the stage|jam/.test(t))return 'Open mic';
+  if(/quiz/.test(t))return 'Quiz';if(/comedy/.test(t))return 'Comedy';if(/live|gig|band/.test(t))return 'Live music';return '';}
+function woGigs(text){const rows=woCSV(text);let hi=rows.findIndex(r=>r.some(c=>/event title/i.test(c))&&r.some(c=>/start date/i.test(c)));if(hi<0)return [];
+  const H=rows[hi].map(c=>(c||'').trim().toLowerCase()),col=n=>H.indexOf(n);
+  const C={cal:col('calendar name'),title:col('event title'),desc:col('description'),date:col('start date'),time:col('start time'),all:col('all day')};const out=[];
+  for(const r of rows.slice(hi+1)){
+    if(!WO_GIG_CAL.test(r[C.cal]||''))continue;const title=(r[C.title]||'').trim();
+    if(!title||WO_BLOCK.test(title)||/rehearsal/i.test(title)||/^\s*(booked|booking|private|possible|potential|hold)\b/i.test(title))continue;
+    const d=(r[C.date]||'').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(!d)continue;
+    let plain=woPlain(r[C.desc]);const cut=plain.search(/_{3,}|-{5,}|={5,}|[—–]{3,}/);if(cut>=0)plain=plain.slice(0,cut).trim();
+    if(/^hold\b/i.test(plain))continue;
+    const allDay=/^(true|yes|1)$/i.test((r[C.all]||'').trim());
+    out.push({date:d[3]+'-'+d[2].padStart(2,'0')+'-'+d[1].padStart(2,'0'),what:title,room:"Molly's Chamber",time:woTime(plain,allDay?'':r[C.time]),type:woType(plain,title)});}
+  return out;}
+function woFilms(list){return (Array.isArray(list)?list:[]).map(f=>{const d=new Date(f.date);const t=f.time?new Date(f.time):null;
+  if(isNaN(d)||!f.title||WO_BLOCK.test(f.title)||/private/i.test(f.title))return null;
+  return {date:d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),what:f.title.replace(/\b\w/g,c=>c.toUpperCase())+(f.year?' ('+f.year+')':''),
+    room:'Cinema',time:(t&&!isNaN(t))?String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0'):'',type:'Film'};}).filter(Boolean);}
+async function loadEvents(){ try{localStorage.setItem(EVENTS_CACHE,'[]');}catch(e){} renderEvents(); return;   // no What's On feed for the Black Rose yet
+
+  renderEvents();                                   // show the saved copy straight away
+  const got=await Promise.allSettled([
+    fetch(WO_GIGS_CSV+'&t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.text();}).then(woGigs),
+    fetch(WO_CINEMA_API+'?action=list&t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json();}).then(woFilms)]);
+  const ok=got.filter(g=>g.status==='fulfilled');
+  if(ok.length){const all=[].concat(...ok.map(g=>g.value)).sort((x,y)=>(x.date+(x.time||'99')).localeCompare(y.date+(y.time||'99')));
+    try{localStorage.setItem(EVENTS_CACHE,JSON.stringify(all));}catch(e){}}
+  eventsFailed=ok.length<got.length;
   renderEvents();
+}
+
+
+// ── WORKING TODAY: pick who's in; the job pages then show only those names (kept on this iPad, resets at 7am) ──
+const BR_STAFF0=["Dave", "Keefe", "Callan", "Chloe", "Chaz", "Aaron", "Stuart", "Junior", "Alannah", "Laura", "Frank", "Scott M."];
+let brStaff=[];
+function brDay(){const n=new Date();if(n.getHours()<7)n.setDate(n.getDate()-1);return n.getFullYear()+'-'+(n.getMonth()+1)+'-'+n.getDate();}
+function brCrewGet(){try{const c=JSON.parse(localStorage.getItem('br_crew')||'null');return c&&c.d===brDay()&&Array.isArray(c.n)?c.n:[];}catch(e){return [];}}
+function brCrewSet(a){try{localStorage.setItem('br_crew',JSON.stringify({d:brDay(),n:a}));}catch(e){}renderBrCrew();}
+function brToggle(n){const s=brCrewGet();const i=s.indexOf(n);if(i>=0)s.splice(i,1);else s.push(n);brCrewSet(s);}
+async function loadBrStaff(){
+  try{const r=await fetch('https://docs.google.com/spreadsheets/d/'+BL_CFG.endOfNight+'/gviz/tq?tqx=out:csv&sheet=Staff&t='+Date.now(),{cache:'no-store'});
+    if(r.ok){const t=await r.text();brStaff=t.split('\n').slice(1).map(l=>l.split(',')[0].replace(/"/g,'').trim()).filter(n=>n&&!/set onshift/i.test(n));}}catch(e){}
+  if(!brStaff.length)brStaff=BR_STAFF0.slice();renderBrCrew();}
+function renderBrCrew(){const el=document.getElementById('br-crew-chips'),c=document.getElementById('br-crew-n');if(!el)return;const sel=brCrewGet().filter(n=>brStaff.includes(n));
+  el.innerHTML=brStaff.map(n=>`<button type="button" class="br-c${sel.includes(n)?' on':''}" data-n="${escHtml(n)}" onclick="brToggle(this.dataset.n)">${sel.includes(n)?'✓ ':''}${escHtml(n)}</button>`).join('')
+    +(sel.length?'<button type="button" class="br-c clr" onclick="brCrewSet([])">Clear</button>':'');
+  if(c)c.textContent=sel.length?'· '+sel.length+' hero'+(sel.length>1?'es':'')+' picked, only they show on the checklists today':'· tap who’s in today';
+  const g=document.getElementById('br-greet');if(g){const h=new Date().getHours(),hi=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+    const names=sel.length>1?sel.slice(0,-1).join(', ')+' and '+sel[sel.length-1]:sel[0];g.textContent=sel.length?'🌹 '+hi+', '+names:'';g.style.display=sel.length?'':'none';}}
+
+// ── BEER GARDEN: wind, rain, frost and dark for the outside area ──
+// Same limits as the Black Rose report: gusts 19 mph = no parasols, 31 mph = caution. Garden 9am–9pm (Sunday 11am).
+const GD={amber:19,red:31,open:9,close:21,sunOpen:11,show:12};
+const GD_URL='https://api.open-meteo.com/v1/forecast?latitude=55.9526&longitude=-3.1990'
+  +'&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,wind_gusts_10m,precipitation'
+  +'&hourly=temperature_2m,precipitation_probability,precipitation,wind_speed_10m,wind_gusts_10m'
+  +'&daily=sunrise,sunset&wind_speed_unit=mph&timezone=Europe%2FLondon&forecast_days=3';
+const GD_DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function gdStatus(g){return g>=GD.red?'red':g>=GD.amber?'amber':'ok';}
+function gdHM(iso){return iso.slice(11,16);}
+function gdOpenH(dayISO){return new Date(dayISO+'T12:00').getDay()===0?GD.sunOpen:GD.open;}
+function gdWhen(x,today){return x.day===today?gdHM(x.t):GD_DOW[new Date(x.day+'T12:00').getDay()]+' '+gdHM(x.t);}
+async function loadGarden(){
+  const el=document.getElementById('garden-content');if(!el)return;
+  try{
+    const r=await fetch(GD_URL);if(!r.ok)throw 0;const d=await r.json();
+    const now=new Date(),today=d.daily.time[0],nowH=now.getHours();
+    const H=d.hourly.time.map((t,i)=>({t,h:+t.slice(11,13),day:t.slice(0,10),g:d.hourly.wind_gusts_10m[i],w:d.hourly.wind_speed_10m[i],
+      p:d.hourly.precipitation_probability[i],mm:d.hourly.precipitation[i],T:d.hourly.temperature_2m[i]}));
+    const ahead=H.filter(x=>x.day>today||x.h>=nowH);
+    // the next garden opening hours, running on into tomorrow once today's are nearly over
+    const hrs=ahead.filter(x=>x.h>=gdOpenH(x.day)&&x.h<GD.close).slice(0,GD.show);
+    if(!hrs.length)throw 0;
+    const span=hrs[0].day===today?(hrs[hrs.length-1].day===today?'today':'today and tomorrow'):'tomorrow';
+    const peak=hrs.reduce((m,x)=>x.g>m.g?x:m,{g:-1});
+    const st=gdStatus(peak.g);
+    const badge={ok:'Wind OK',amber:'No parasols',red:'Caution'}[st];
+    const line=st==='ok'?`Gusts up to ${Math.round(peak.g)} mph ${span}, fine for parasols.`
+      :st==='amber'?`Gusts up to ${Math.round(peak.g)} mph around ${gdWhen(peak,today)}. Keep parasols down.`
+      :`Gusts up to ${Math.round(peak.g)} mph around ${gdWhen(peak,today)}. Check tables, chairs and parasols are secured.`;
+    const notes=[];
+    const wet=hrs.filter(x=>x.p>=50||x.mm>=0.3);
+    if(wet.length) notes.push(`🌧 Rain likely from ${gdWhen(wet[0],today)}: tarp on the outside tables.`);
+    const cold=ahead.slice(0,18).filter(x=>x.T<=1);
+    if(cold.length) notes.push(`❄ Frost or ice risk from ${gdWhen(cold[0],today)} (down to ${Math.round(Math.min(...cold.map(x=>x.T)))}°C): watch the steps and the garden.`);
+    const sunset=d.daily.sunset[0];
+    if(sunset&&sunset>now.toISOString().slice(0,11)) notes.push(new Date()<new Date(sunset)?`🌇 Sunset ${gdHM(sunset)}: candles out when it gets dark.`:`🌙 Sunset was ${gdHM(sunset)}: candles should be out.`);
+    const c=d.current;
+    const max=Math.max(GD.red+4,...hrs.map(x=>x.g));
+    const bars=hrs.map((x,i)=>`<div class="gd-b" title="${gdWhen(x,today)}: gusts ${Math.round(x.g)} mph, wind ${Math.round(x.w)} mph, rain ${x.p}%"><i class="${gdStatus(x.g)}" style="height:${Math.max(6,Math.round(x.g/max*100))}%"></i>${x.p>=50?'<u></u>':''}<small>${(i===0||x.day!==hrs[i-1].day)&&x.day!==today?GD_DOW[new Date(x.day+'T12:00').getDay()]+' ':''}${x.h}</small></div>`).join('');
+    el.innerHTML=`<div class="gd-top"><span class="gd-badge ${st}">${badge}</span><span class="gd-line">${line}</span></div>
+      <div class="gd-now"><span><b>${Math.round(c.temperature_2m)}°C</b> feels ${Math.round(c.apparent_temperature)}°</span><span>Wind <b>${Math.round(c.wind_speed_10m)}</b> mph</span><span>Gusts <b>${Math.round(c.wind_gusts_10m)}</b> mph</span><span>Garden ${gdOpenH(today)}am–${GD.close-12}pm</span></div>
+      <div class="gd-chart"><div class="gd-lim" style="bottom:${Math.round(GD.amber/max*100)}%"><em>${GD.amber} mph · no parasols</em></div><div class="gd-lim red" style="bottom:${Math.round(GD.red/max*100)}%"><em>${GD.red} mph · caution</em></div>${bars}</div>
+      <div class="gd-key">Gusts for the next garden hours (${span}) · a blue line under a bar means rain is likely</div>
+      ${notes.length?`<ul class="gd-notes">${notes.map(n=>`<li>${n}</li>`).join('')}</ul>`:''}`;
+  }catch(e){ el.innerHTML='<div class="muted-text">Couldn’t load the garden forecast.</div>'; }
+}
+
+// ── JOB PROGRESS: closing jobs (last night and tonight) and today's weekly jobs, read from the same sheets the job pages save to ──
+function jpCSV(t){const rows=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];
+  if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}
+  else if(c==='"')q=true;else if(c===','){r.push(f);f='';}else if(c==='\n'){r.push(f);rows.push(r);r=[];f='';}else if(c!=='\r')f+=c;}
+  if(f||r.length){r.push(f);rows.push(r);}const H=(rows.shift()||[]).map(h=>h.trim().toLowerCase());
+  return rows.map(x=>{const o={};H.forEach((h,i)=>o[h]=(x[i]||'').trim());return o;});}
+function jpTime(v){if(!v)return null;const m=v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2}))?/);
+  if(m)return new Date(+m[3],m[2]-1,+m[1],+(m[4]||0),+(m[5]||0));const d=new Date(v);return isNaN(d)?null:d;}
+function jpDone(j){return /^(true|yes|1|done)$/i.test(j.done||'')||!!(j.assignedto&&j.timestamp);}
+const BR_OPEN=["Opening: bar", "Opening: kitchen", "4–5pm: bar", "4–5pm: kitchen"];function brIsOpen(j){const i=(j.job||'').indexOf(' | ');return i>0&&BR_OPEN.includes(j.job.slice(0,i));}
+function jpCount(rows,day,from,to,f){const js=rows.filter(j=>(j.day||'').toLowerCase()===day.toLowerCase()&&(!f||f(j)));
+  return {n:js.filter(j=>{if(!jpDone(j))return false;const t=jpTime(j.timestamp);return !t||(t>=from&&t<to);}).length,of:js.length};}
+async function jpSheet(id){const r=await fetch('https://docs.google.com/spreadsheets/d/'+id+'/gviz/tq?tqx=out:csv&sheet=Jobs&t='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0;return jpCSV(await r.text());}
+async function loadJobProgress(){
+  const n=new Date(),night=new Date(n);if(n.getHours()<7)night.setDate(night.getDate()-1);night.setHours(0,0,0,0);
+  const last=new Date(night);last.setDate(last.getDate()-1);
+  const at=(d,h)=>{const x=new Date(d);x.setHours(h,0,0,0);return x;},plus=(d,k)=>{const x=new Date(d);x.setDate(x.getDate()+k);return x;};
+  const p=document.getElementById('tn-eon-prog'),w=document.getElementById('tn-wj');
+  try{ if(!BL_CFG.endOfNight)throw 0; const rows=await jpSheet(BL_CFG.endOfNight);
+    const cl=j=>!brIsOpen(j),a=jpCount(rows,DOW_FULL[last.getDay()],at(last,7),at(plus(last,1),14),cl),b=jpCount(rows,DOW_FULL[night.getDay()],at(night,7),at(plus(night,1),14),cl),o=jpCount(rows,DOW_FULL[night.getDay()],at(night,7),at(plus(night,1),7),brIsOpen);
+    const op=document.getElementById('tn-open-prog');if(op)op.textContent='Today: '+o.n+' of '+o.of+' ticked';
+    if(p) p.innerHTML='<span class="'+(a.of&&a.n<a.of?'tn-warn':'')+'">Last night: '+a.n+' of '+a.of+' ticked</span> · Tonight: '+b.n+' of '+b.of;
+  }catch(e){ if(p) p.textContent=''; }
+  try{ if(!BL_CFG.weeklyJobs)throw 0; const rows=await jpSheet(BL_CFG.weeklyJobs);
+    const c=jpCount(rows,DOW_FULL[night.getDay()],night,plus(night,7));
+    if(w){ w.style.display=c.of?'':'none'; w.innerHTML='<span>'+DOW_FULL[night.getDay()]+"'s weekly jobs: <b>"+c.n+' of '+c.of+' done</b></span><span class="tn-open">Open ›</span>'; }
+  }catch(e){ if(w) w.style.display='none'; }
 }
 
 // ── ON TONIGHT (rota crew, 7am-aware: a night counts until 7am next morning) ──
@@ -281,6 +480,8 @@ function rotaDayInfo(){
   return {iso, name:DOW_FULL[d.getDay()]};
 }
 function cachedShifts(){ try{return JSON.parse(localStorage.getItem(SHIFTS_CACHE)||'{}');}catch(e){return {};} }
+function tonightCrewRows(){ const days=cachedShifts()||{}, iso=rotaDayInfo().iso;   // the rota sometimes has the wrong year: match on day and month
+  const k=days[iso]?iso:Object.keys(days).filter(x=>x.slice(5)===iso.slice(5)).pop(); return (k&&days[k])||[]; }
 async function loadTonight(){
   renderTonight();
   try{
@@ -291,25 +492,16 @@ async function loadTonight(){
 }
 const HIDE_WEATHER_CREW=7;   // busy night: this many+ rota'd hides weather & lets On Tonight fill the row
 function renderTonight(){
-  const card=document.getElementById('tonight-card');
-  const el=document.getElementById('tonight-content');
-  const wx=document.getElementById('weather-card');
-  const row=document.getElementById('top-row');
-  if(!card||!el) return;
-  const info=rotaDayInfo();
-  const crew=(cachedShifts()||{})[info.iso]||[];
-  const hasCrew=crew.length>0;
-  const busy=crew.length>=HIDE_WEATHER_CREW;
-  card.style.display=hasCrew?'':'none';
-  if(wx) wx.style.display=(hasCrew&&busy)?'none':'';
-  if(row) row.classList.toggle('solo',(!hasCrew)||busy);   // single column when only one card shows
-  if(hasCrew){
-    document.getElementById('tonight-title').textContent='🌙 On Tonight — '+info.name;
-    el.innerHTML=crew.map(c=>`<span class="crew-chip">${escHtml(c.name)}${c.start?` <span class="crew-time">${escHtml(c.start)}</span>`:''}</span>`).join('');
-  }
+  const el=document.getElementById('tonight-content'), ev=document.getElementById('tonight-events');
+  if(!el) return;
+  const info=rotaDayInfo(), crew=tonightCrewRows();
+  document.getElementById('tonight-title').textContent='Tonight · '+info.name;
+  el.innerHTML=crew.length?crew.map(c=>`<span class="crew-chip">${escHtml(c.name)}${c.start?` <span class="crew-time">${escHtml(c.start)}</span>`:''}</span>`).join(''):'<div class="muted-text">Nobody on the rota for tonight yet.</div>';
+  if(ev){ const list=cachedEvents().filter(e=>e.date===info.iso).sort((x,y)=>(x.time||'99').localeCompare(y.time||'99'));
+    ev.innerHTML=list.length?list.map(e=>`<div class="tn-ev"><b>${escHtml(e.time||'Tonight')}</b> ${escHtml(e.what||'Event')}<small>${escHtml([e.room,e.type].filter(Boolean).join(' · '))}</small></div>`).join(''):'<div class="muted-text">Nothing listed in Molly’s Chamber or the cinema.</div>'; }
 }
 
-let livePin=null, liveSuper=null, pinEntry='', superEntry='', sheetId='', isManager=false;
+let livePin=null, liveSuper=null, liveMaster=null, pinEntry='', superEntry='', sheetId='', isManager=false;
 
 // ── CSV / HELPERS ──
 function parseCSV(line){const cols=[];let cur='',inQ=false;for(let i=0;i<line.length;i++){const c=line[i];if(c==='"'){inQ=!inQ;}else if(c===','&&!inQ){cols.push(cur.trim());cur='';}else{cur+=c;}}cols.push(cur.trim());return cols;}
@@ -318,32 +510,16 @@ function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').rep
 
 // ── LOAD PINS — same logic as original, reads B1/B2 ──
 async function loadPINFromSheet(id){
-  try{
-    const url=`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=Settings`;
-    const res=await fetch(url);if(!res.ok)throw new Error();
-    const csv=await res.text();
-    const lines=csv.split('\n').filter(l=>l.trim());
-    const found=[];
-    for(const line of lines){
-      const cols=parseCSV(line);
-      const val=(clean(cols[1])||clean(cols[0])).trim();
-      if(/^\d+$/.test(val))found.push(val);
-      if(found.length===2)break;
-    }
-    livePin=found[0]||'1234';
-    liveSuper=found[1]||'1111';
-    // Also grab script URL from B3
-    for(const line of lines){
-      const cols=parseCSV(line);
-      const val=(clean(cols[1])||clean(cols[0])).trim();
-      if(val.startsWith('https://script.google.com')){localStorage.setItem('bl_script_url',val);break;}
-    }
-  }catch(e){livePin='1234';liveSuper='1111';}
+  // Always use BL_CFG pins — hardcoded and reliable, never affected by cache
+  livePin    = (BL_CFG.staffPin   || '1234').trim();
+  liveSuper  = (BL_CFG.managerPin || '1111').trim();
+  liveMaster = (BL_CFG.masterPin  || '8350').trim();
 }
 
 // ── BOOT ──
 (async function boot(){
-  if(window.BLConfig&&BLConfig.refresh){try{await BLConfig.refresh();}catch(e){}}  // load central config first
+  if(window.BLConfig&&BLConfig.refresh){try{await BLConfig.refresh();}catch(e){}}
+  await loadPINFromSheet(); // always loads from BL_CFG now
   const urlParams=new URLSearchParams(window.location.search);
   const urlSheet=urlParams.get('sheet');
   if(urlSheet)localStorage.setItem(SHEET_ID_KEY,urlSheet);
@@ -357,15 +533,16 @@ function pinKey(d){if(pinEntry.length>=4)return;pinEntry+=d;updateDots('pd',pinE
 function pinDel(){pinEntry=pinEntry.slice(0,-1);updateDots('pd',pinEntry);document.getElementById('pin-error').textContent='';}
 function updateDots(prefix,entry){for(let i=0;i<4;i++)document.getElementById(prefix+i).className='pin-dot'+(i<entry.length?' filled':'');}
 function checkPIN(){
-  if(pinEntry.trim()===(livePin||'').trim()){
-    isManager=false;
-    sessionStorage.setItem('bl_home_unlocked','yes');
-    sessionStorage.removeItem('bl_home_super');
-    showApp();
-  } else if(pinEntry.trim()===(liveSuper||'').trim()){
+  const v = pinEntry.trim();
+  if(v===(liveMaster||'').trim()||v===(liveSuper||'').trim()){
     isManager=true;
     sessionStorage.setItem('bl_home_unlocked','yes');
     sessionStorage.setItem('bl_home_super','yes');
+    showApp();
+  } else if(v===(livePin||'').trim()){
+    isManager=false;
+    sessionStorage.setItem('bl_home_unlocked','yes');
+    sessionStorage.removeItem('bl_home_super');
     showApp();
   } else {
     for(let i=0;i<4;i++)document.getElementById('pd'+i).className='pin-dot error';
@@ -395,6 +572,7 @@ function closeSuperModal(){document.getElementById('super-modal').style.display=
 // ── SHOW APP ──
 function showApp(){
   isManager=BLAuth.isManager();
+  checkHolidayBadge();
   document.getElementById('pin-screen').classList.add('hidden');
   document.getElementById('app').style.display='block';
   document.getElementById('topbar-date').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
@@ -404,6 +582,7 @@ function showApp(){
     const r=document.getElementById('topbar-role');
     r.textContent='⭐ Manager';r.className='topbar-role manager';r.style.display='inline-block';
     document.getElementById('nav-dash').style.display='inline-block';
+    (document.getElementById('nav-whatson')||{style:{}}).style.display='inline-block';
     document.getElementById('notice-edit-btn').style.display='inline-block';
   }else{
     document.getElementById('nav-dash').style.display='none';
@@ -419,9 +598,12 @@ function showApp(){
 
   loadNotice();
   renderHandover();
-  loadEvents().then(buildTicker);
+  loadEvents().then(()=>{renderTonight();buildTicker();});
   loadTonight().then(buildTicker);
   loadWeather();
+  loadJobProgress();
+  loadGarden();setInterval(loadGarden,30*60*1000);
+  loadBrStaff();
   buildTicker();
   // pull the shared notice + handover from the sheet, then re-render
   fetchShared().then(()=>{ loadNotice(); renderHandover(); buildTicker(); });
@@ -468,7 +650,7 @@ function cachedNotice(){ try{return JSON.parse(localStorage.getItem(NOTICE_CACHE
 function cachedHandover(){ try{return JSON.parse(localStorage.getItem(HANDOVER_CACHE)||'[]');}catch(e){return [];} }
 
 function loadNotice(){
-  document.getElementById('notice-content').innerHTML=fmtList(cachedNotice(),'No notices in the last 10 days.');
+  document.getElementById('notice-content').innerHTML=fmtList(cachedNotice(),'No messages from the duty manager in the last 10 days.');
 }
 function openNoticeEdit(){
   document.getElementById('notice-textarea').value='';
@@ -507,7 +689,7 @@ function renderHandover(){
   const el=document.getElementById('handover-content');
   const notes=cachedHandover().filter(n=>n && (n.note||n.text));
   if(!notes.length){
-    el.innerHTML='<div class="muted-text">No handover notes'+(sharedSyncFailed?' (offline — showing last saved)':'')+'.</div>';
+    el.innerHTML='<div class="muted-text">No staff messages in the handover notes yet'+(sharedSyncFailed?' (offline — showing last saved)':'')+'.</div>';
     return;
   }
   const banner=sharedSyncFailed?'<div class="muted-text" style="color:var(--red);margin-bottom:6px">⚠ Couldn’t sync — showing last saved copy</div>':'';
@@ -534,10 +716,10 @@ function renderEvents(){
   const upcoming=cachedEvents().map(e=>{
     const p=(e.date||'').split('-');                 // YYYY-MM-DD
     return {...e, d:new Date(+p[0],(+p[1])-1,+p[2])};
-  }).filter(e=>!isNaN(e.d) && e.d>=today).sort((a,b)=>a.d-b.d).slice(0,12);
+  }).filter(e=>!isNaN(e.d) && e.d>today).sort((a,b)=>a.d-b.d||(a.time||'99').localeCompare(b.time||'99')).slice(0,12);
 
   if(!upcoming.length){
-    el.innerHTML='<div class="muted-text">No upcoming events'+(eventsFailed?' (offline — showing last saved)':'')+'.</div>';
+    el.innerHTML='<div class="muted-text">Nothing listed for the coming days'+(eventsFailed?' (offline — showing last saved)':'')+'.</div>';
     return;
   }
 
@@ -549,7 +731,7 @@ function renderEvents(){
       <div class="event-date" style="${isToday?'color:var(--accent)':''}">${lbl}</div>
       <div>
         <div class="event-name">${escHtml(e.what||'Event')}</div>
-        <div class="event-desc">${escHtml(e.room||'')}</div>
+        <div class="event-desc">${escHtml([e.room,e.time,e.type].filter(Boolean).join(' · '))}</div>
       </div>
     </div>`;
   }).join('');
@@ -561,17 +743,12 @@ const WX_DESC={0:'Clear',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog
 async function loadWeather(){
   const el=document.getElementById('wx-content');
   try{
-    const res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=55.9533&longitude=-3.1883&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m&timezone=Europe/London');
+    const res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=55.9533&longitude=-3.1883&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m&wind_speed_unit=mph&timezone=Europe/London');
     if(!res.ok)throw new Error();
     const d=await res.json();
     const c=d.current;
-    el.innerHTML=`
-      <div class="wx-icon">${WX_ICONS[c.weathercode]||'🌡'}</div>
-      <div class="wx-temp">${Math.round(c.temperature_2m)}°C</div>
-      <div class="wx-desc">${WX_DESC[c.weathercode]||'Variable'}</div>
-      <div class="wx-meta">Feels <span>${Math.round(c.apparent_temperature)}°</span></div>
-      <div class="wx-meta">💨 <span>${Math.round(c.windspeed_10m)} km/h</span></div>`;
-  }catch(e){el.innerHTML='<div class="muted-text">Unavailable</div>';}
+    el.innerHTML=`<span class="tn-wxi">${WX_ICONS[c.weathercode]||'🌡'}</span><b>${Math.round(c.temperature_2m)}°C</b> ${WX_DESC[c.weathercode]||''}<small> · feels ${Math.round(c.apparent_temperature)}° · wind ${Math.round(c.windspeed_10m)} mph</small>`;
+  }catch(e){el.innerHTML='';}
 }
 
 function logOut(){
@@ -639,7 +816,7 @@ function noticeBit(){
   const n0=list[0];
   const txt=(typeof n0==='string')?n0:(n0.note||n0.text||n0.message||'');
   if(!txt) return '';
-  return `<b>📋 Notice:</b> ${escHtml(String(txt).split('\n')[0]).slice(0,140)}`;
+  return `<b>📋 Duty manager:</b> ${escHtml(String(txt).split('\n')[0]).slice(0,140)}`;
 }
 function nextEventBit(){
   const today=new Date(new Date().toDateString());
@@ -655,7 +832,7 @@ async function buildTicker(){
   if(!bar||!track) return;
   await ensureJokes();
   const bits=[];
-  const info=rotaDayInfo(); const crew=(cachedShifts()||{})[info.iso]||[];
+  const info=rotaDayInfo(); const crew=tonightCrewRows();
   if(crew.length) bits.push(`<b>🎬 On tonight:</b> ${crew.map(c=>escHtml(c.name)).join(', ')}`);
   const nb=noticeBit(); if(nb) bits.push(nb);
   const eb=nextEventBit(); if(eb) bits.push(eb);

@@ -10,7 +10,7 @@
 <style>
   :root{
     --bg:#0d0d0f; --surface:#17171a; --surface2:#1f1f24; --border:#2a2a30;
-    --accent:#e8b84b; --accent-dim:rgba(232,184,75,0.12);
+    --accent:#4fb8a8; --accent-dim:rgba(79,184,168,0.12);
     --red:#e85d5d; --red-dim:rgba(232,93,93,0.1);
     --purple:#a78bfa; --purple-dim:rgba(167,139,250,0.12);
     --text:#e8e8ec; --muted:#6b6b78;
@@ -54,6 +54,10 @@
     display:flex;flex-direction:column}
   .card h3{font-family:'Bebas Neue';letter-spacing:1.5px;font-size:21px;margin:0;padding:14px 16px;
     background:linear-gradient(180deg,#241019,#1a0c11);color:#fff;border-bottom:2px solid var(--red)}
+  .grp-title{font-family:'Alfa Slab One',Georgia,serif;font-size:22px;margin:18px 0 10px;color:#fff;text-shadow:2px 2px 0 #3d0f24}
+  .grp-title:first-child{margin-top:4px}.grp-title small{font:600 14px 'Outfit',sans-serif;color:var(--accent,#a3c43a);margin-left:6px;text-shadow:none}
+  .src-note{font-size:12px;font-weight:500;letter-spacing:0;text-transform:none;opacity:.7;margin-left:8px}
+  .card.off{opacity:.55}.off-tag{float:right;font:700 12px 'Outfit',sans-serif;letter-spacing:.06em;color:#ff6b8b;border:1px solid #ff6b8b88;border-radius:999px;padding:2px 8px;margin-top:3px}
   .card .body{padding:14px 16px;white-space:pre-wrap;line-height:1.5;font-size:15px;color:#d9d6e0}
  
   .state{text-align:center;padding:46px 20px;color:var(--muted)}
@@ -61,7 +65,7 @@
     border-top-color:var(--accent);animation:spin 1s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
   .retry{margin-top:14px;padding:10px 20px;border-radius:10px;border:1px solid var(--accent);
-    background:rgba(232,184,75,.12);color:var(--accent);font-weight:600;cursor:pointer}
+    background:rgba(79,184,168,.12);color:var(--accent);font-weight:600;cursor:pointer}
  
   .lib-intro{color:var(--muted);font-size:14px;margin:0 4px 14px}
   .lib-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
@@ -73,7 +77,7 @@
   .chip{display:inline-flex;align-items:center;gap:7px;background:#241d10;border:1px solid var(--accent);
     color:var(--accent);border-radius:16px;padding:5px 8px 5px 12px;font-size:13px;font-weight:600}
   .chip b{font-weight:600}
-  .chip .rm{cursor:pointer;width:18px;height:18px;border-radius:50%;background:rgba(232,184,75,.2);
+  .chip .rm{cursor:pointer;width:18px;height:18px;border-radius:50%;background:rgba(79,184,168,.2);
     display:grid;place-items:center;font-size:12px;line-height:1}
   .res-group-title{font-weight:700;font-size:15px;margin:18px 4px 10px;color:var(--ink)}
   .res-group-title.good{color:#5fd08a} .res-group-title.almost{color:var(--accent)}
@@ -115,8 +119,37 @@
     width:54px;height:80px;display:grid;place-items:center;user-select:none}
   .lb .arrow:hover{background:rgba(255,255,255,.08)}
   .lb .prev{left:8px} .lb .next{right:8px}
+  /* ---- Banshee look: navy, purple, lime ---- */
+  .card{background:#141416!important;border-color:#333338!important}
+  .card h3,.recipe-detail .rd-head{background:linear-gradient(180deg,#232327,#1b1b1e)!important;border-bottom:2px solid #a8336d!important;font-family:'Alfa Slab One',Georgia,serif!important;letter-spacing:.01em!important;font-size:18px!important}
+  .recipe-detail{background:#141416!important;border-color:#333338!important}
+  .recipe-detail .rd-head .meta{color:#a9a9b2!important}
+  .card .body,.recipe-detail .method{color:#e2ddd5!important}
+  .lib-tab.active{background:rgba(163,196,58,.12)!important;border-color:#a3c43a!important;color:#a3c43a!important}
+  .chip{background:rgba(138,40,88,.18)!important;border-color:#a8336d!important}
+  .chip .rm{background:rgba(138,40,88,.35)!important}
+  .section-label{color:#a3c43a!important}
+  .section-label::after{background:#333338!important}
+  .btn:hover{border-color:#a3c43a!important;color:#a3c43a!important}
+  .ing-line .miss,.badge.miss{color:#ff8fa8!important}
+  /* menu list: Cocktails and Shooters side by side, one compact row per drink */
+  .mx-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+  @media(max-width:700px){.mx-cols{grid-template-columns:1fr}}
+  .mx-grp .grp-title{margin:0 0 8px}
+  .mx-list{background:#141416;border:1px solid #333338;border-radius:12px;overflow:hidden}
+  .mx-row{padding:9px 14px;border-bottom:1px solid #26262a}
+  .mx-row:last-child{border-bottom:0}
+  .mx-row:nth-child(even){background:#161618}
+  .mx-name{font:600 16px 'Outfit',sans-serif;color:#fff}
+  .mx-desc{font:400 14px/1.35 'Outfit',sans-serif;color:#a9a9b2;margin-top:1px}
+  .mx-row.off{opacity:.5}.mx-row.off .mx-name{text-decoration:line-through;text-decoration-color:#ff6b8b}
+  .off-tag{float:right;font:700 11px 'Outfit',sans-serif;letter-spacing:.06em;color:#ff6b8b;border:1px solid #ff6b8b88;border-radius:999px;padding:1px 8px;margin-top:2px;text-decoration:none}
 </style>
 <script src="../bl-config.js"></script>
+<script src="../bl-header.js" defer></script>
+<link rel="stylesheet" href="../bl-style.css">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
  
@@ -126,13 +159,16 @@
   <div class="topbar-right"></div>
 </div>
 <div class="nav-bar">
-  <a class="nav-btn" id="nav-home" href="../home">🏠 Home</a>
-  <a class="nav-btn" href="../weekly-cleaning">📋 Weekly Jobs</a>
-  <a class="nav-btn" href="../end-of-night">🌙 End Of Night</a>
-  <a class="nav-btn" href="../rotas">📅 Rotas</a>
-  <span class="nav-btn current">🍸 Cocktails</span>
-  <button class="nav-btn" type="button" onclick="try{var k=(window.BL_CFG&&BL_CFG.venueKey)||'v';localStorage.removeItem('bl_auth_'+k);localStorage.removeItem('bl_pin_cache_'+k);sessionStorage.clear();}catch(e){};location.href='/';" style="cursor:pointer">🏘️ Switch Venue</button>
-</div>
+  <a class="nav-btn" id="nav-home" href="../home">Home</a>
+  <a class="nav-btn" href="../end-of-night/?mode=opening">Opening</a>
+    <a class="nav-btn" href="../end-of-night">End Of Night</a>
+  <a class="nav-btn" href="../weekly-cleaning">Weekly Jobs</a>
+  <span class="nav-btn current">Cocktails</span>
+  <a class="nav-btn" href="http://eddrock79nas:8102/">Pub Dashboard</a>
+  <a class="nav-btn" id="nav-dash" href="../dashboard" style="display:none;background:var(--purple-dim);color:var(--purple);border-color:var(--purple)">Dashboard</a>
+  <button class="nav-btn" type="button" onclick="BLAuth.switchVenue()" style="cursor:pointer">Switch Venue</button>
+  <button class="nav-btn" onclick="BLAuth.logout()" style="cursor:pointer;color:var(--red);border-color:var(--red)">Log Out</button>
+  </div>
  
 <div class="wrap">
   <div class="section-label">Cocktail Library</div>
@@ -165,14 +201,12 @@
  
   <div id="lib-results"></div>
  
-  <div class="section-label">Our Cocktails</div>
+  <div class="section-label">Our Cocktails &amp; Shooters <span class="src-note">live from the drinks menu</span></div>
   <div class="controls">
     <button class="btn" onclick="loadRecipes()">↻ Refresh</button>
   </div>
   <div id="recipes"><div class="state"><div class="spinner"></div>Loading recipes…</div></div>
  
-  <div class="section-label">Recipe Cards (photos)</div>
-  <div class="photos" id="photos"></div>
  
 </div>
  
@@ -203,7 +237,26 @@
     return rows;
   }
  
+  // ---- live Cocktails + Shooters from the drinks menu (same database the menu site uses) ----
+  const MENU_DOC='https://firestore.googleapis.com/v1/projects/rockboard-2b240/databases/(default)/documents/blackrose/menu';
+  function fixText(t){return String(t||'').replace(/Kahl\uFFFDa/g,'Kahlúa').replace(/cr\uFFFDme/gi,'crème').replace(/Passo\uFFFD/g,'Passoã').replace(/\uFFFD/g,'').replace(/\s+/g,' ').trim();}
   async function loadRecipes(){
+    const host=document.getElementById('recipes');
+    host.innerHTML='<div class="state"><div class="spinner"></div>Loading the menu…</div>';
+    try{
+      const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),8000);
+      const res=await fetch(MENU_DOC+'?t='+Date.now(),{signal:ctrl.signal,cache:'no-store'}); clearTimeout(t);
+      if(!res.ok) throw new Error('menu not reachable');
+      const doc=await res.json(); const m=JSON.parse(doc.fields.json.stringValue);
+      const pick=(id,re)=>(m.categories||[]).find(c=>c.id===id)||(m.categories||[]).find(c=>re.test(c.name||''));
+      const groups=[['Cocktails',pick('cocktails',/cocktail/i)],['Shooters',pick('shooters',/shooter|shot/i)]].filter(g=>g[1]&&(g[1].items||[]).length);
+      if(!groups.length) throw new Error('no cocktails on the menu');
+      host.innerHTML='<div class="mx-cols">'+groups.map(([title,c])=>
+        `<section class="mx-grp"><div class="grp-title">${title} <small>${c.items.length}</small></div><div class="mx-list">${c.items.map(i=>
+          `<div class="mx-row${i.unavailable?' off':''}"><div class="mx-name">${esc(fixText(i.name))}${i.unavailable?'<span class="off-tag">86’d</span>':''}</div><div class="mx-desc">${esc(fixText(i.desc))}</div></div>`).join('')}</div></section>`).join('')+'</div>';
+    }catch(err){ loadSheetRecipes(); }
+  }
+  async function loadSheetRecipes(){
     const host=document.getElementById('recipes');
     host.innerHTML='<div class="state"><div class="spinner"></div>Loading recipes…</div>';
     try{
@@ -225,6 +278,7 @@
           return !(n==='name'||n==='cocktail'||n==='drink');              // drop the header row
         });
       render(recipes);
+      host.insertAdjacentHTML('afterbegin','<div class="state" style="padding:8px 0">Couldn’t reach the drinks menu, so this is the older recipe sheet.</div>');
     }catch(err){
       host.innerHTML='<div class="state">Couldn’t load recipes.<br><small>'+err+'</small>'+
         '<br><button class="retry" onclick="loadRecipes()">↻ Retry</button></div>';
@@ -251,7 +305,8 @@
   let lbIndex=0;
  
   function buildPhotos(){
-    document.getElementById('photos').innerHTML=PHOTOS.map((p,i)=>
+    const host=document.getElementById('photos'); if(!host) return;
+    host.innerHTML=PHOTOS.map((p,i)=>
       `<div class="photo" onclick="openLB(${i})">
         <img src="${p.src}" alt="${esc(p.cap)}" loading="lazy">
         <div class="zoom">⛶</div>

@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Outfit:wght@400;500;600;700&display=swap');
+/* Staff Hub - dashboard look. Loaded last on every page so it overrides each page's own colours.
+   To undo: remove the <link href="../bl-style.css"> line from the pages (or restore branch backup-before-dashboard-style). */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap');
+:root{
+  --bg:#0e1012;--surface:#17191c;--surface2:#121417;--border:#272b30;
+  --accent:#4fb8a8;--accent-dim:rgba(79,184,168,.14);
+  --text:#d6d9de;--muted:#8a919b;
+  --dash-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+}
+html,body{background:var(--bg)!important;color:var(--text)}
+body{font-family:Barlow,system-ui,-apple-system,"Segoe UI",sans-serif!important;font-size:16px;line-height:1.4}
+/* header */
+.topbar{background:transparent!important;border-bottom:1px solid var(--border)!important;margin:0 16px;padding-left:0!important;padding-right:0!important;position:static!important}
+/* tabs */
+.nav-bar{background:transparent!important;border:0!important;padding:6px 16px 8px!important;gap:6px!important}
+.nav-btn{font-family:Barlow,sans-serif!important;font-size:15px!important;line-height:1.4!important;padding:7px 16px!important;border-radius:6px!important;background:var(--surface2)!important;border:1px solid var(--border)!important}
+.nav-btn.current{background:var(--accent)!important;color:#0e1012!important;border-color:var(--accent)!important}
+.nav-btn.mgr{background:var(--surface2)!important}
+/* cards */
+.card{background:var(--surface)!important;border:1px solid var(--border)!important;border-radius:8px!important;padding:11px 13px!important}
+.card-title,.section-title,.card h2{font-family:var(--dash-display)!important;font-weight:600!important;font-size:16px!important;letter-spacing:.06em!important;text-transform:uppercase!important;color:var(--text)!important}
+.ticker{background:var(--surface)!important;border-radius:8px!important}
+/* inputs / buttons keep working, just match the palette */
+input,select,textarea{font-family:Barlow,sans-serif}
+/* link out to the pub dashboard (sits in the header, top right, under the date) */
+.bl-xlink{font-family:Barlow,sans-serif;font-size:15px;font-weight:600;line-height:1.4;padding:5px 14px;border:1px dashed var(--border);border-radius:6px;background:var(--surface2);color:var(--muted);text-decoration:none;white-space:nowrap}
+
+/* ===== Banshee look (navy, purple, lime; Bevan + Signika) - matches the Banshee board and the new end of night page ===== */
+html:root{
+  --bg:#0a0a0b;--surface:#111113;--surface2:#1b1b1e;--border:#2a2a2e;
+  --accent:#a3c43a;--accent-dim:rgba(163,196,58,.14);
+  --text:#ffffff;--muted:#a9a9b2;
+  --green:#a3c43a;--green-dim:rgba(163,196,58,.12);--done-bg:rgba(163,196,58,.08);
+  --purple:#a8336d;--purple-dim:rgba(138,40,88,.2);--red:#ff6b8b;--red-dim:rgba(255,107,139,.1);
+  --dash-display:"Alfa Slab One",Georgia,serif;
+}
+html,body{background:radial-gradient(900px 420px at 85% -5%,#8a285855 0,transparent 65%),repeating-linear-gradient(135deg,#ffffff03 0 2px,transparent 2px 14px),#0a0a0b!important;background-attachment:fixed!important}
+body{font-family:"Outfit",system-ui,-apple-system,"Segoe UI",sans-serif!important}
+input,select,textarea,button{font-family:"Outfit",sans-serif}
+.topbar{border-bottom:2px solid #8a2858!important}
+.topbar .bl-tag{color:#a3c43a!important;font-family:"Outfit",sans-serif!important;font-weight:600;letter-spacing:.18em!important;font-size:15px!important}
+.card{background:linear-gradient(180deg,#141416,#0f0f11)!important;border-color:#333338!important;border-radius:12px!important}
+.card-title,.section-title,.card h2{font-family:"Alfa Slab One",Georgia,serif!important;font-weight:400!important;letter-spacing:.01em!important;color:#fff!important;text-shadow:2px 2px 0 #3d0f24}
+/* tab row: compact and always one line (scrolls sideways only if the screen is too narrow) */
+.nav-bar{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:6px!important;padding:8px 16px!important}
+.nav-bar::-webkit-scrollbar{display:none}
+.nav-btn{flex:none;white-space:nowrap;font-family:"Outfit",sans-serif!important;font-size:15px!important;font-weight:600!important;padding:7px 13px!important;background:#1b1b1e!important;border-color:#333338!important;color:#e2ddd5!important}
+.nav-btn:hover{border-color:#a3c43a!important;color:#a3c43a!important}
+.nav-btn.current{background:#a3c43a!important;color:#0a0a0b!important;border-color:#a3c43a!important}
+/* Switch Venue / Log Out live in the header now (see bl-header.js) */
+.bl-acts{display:flex;gap:8px;align-items:center}
+.bl-mini{font:600 13px "Outfit",sans-serif!important;padding:5px 12px!important;border-radius:999px!important;border:1px solid #333338!important;background:#1b1b1e!important;color:#e2ddd5!important;cursor:pointer;white-space:nowrap}
+.bl-mini.out{color:#ff6b8b!important;border-color:#ff6b8b66!important}
+/* Pub Dashboard: a clear lime button everywhere, filled and larger on the Home page */
+.bl-xlink{font-family:"Outfit",sans-serif!important;color:#a3c43a!important;border:1px solid #a3c43a!important;background:rgba(163,196,58,.08)!important}
+.bl-xlink::after{content:" ↗"}
+.bl-xlink.hot{background:#a3c43a!important;color:#0a0a0b!important;font-size:17px!important;padding:9px 20px!important;border-radius:10px!important;box-shadow:0 0 0 4px rgba(163,196,58,.18)}
+@media(max-width:640px){.bl-mini{padding:4px 9px!important;font-size:12px!important}}
+/* PIN sign-in screen (each page has its own; these make them all match) */
+#pin-screen{background:radial-gradient(700px 360px at 50% 0%,#8a285866 0,transparent 70%),#0a0a0b!important}
+.pin-logo{font-family:"Alfa Slab One",Georgia,serif!important;letter-spacing:.02em!important;color:#fff!important;text-transform:uppercase;text-shadow:3px 3px 0 #8a2858}
+.pin-sub{color:#a3c43a!important;font-family:"Outfit",sans-serif!important;font-weight:600}
+.pin-key{background:#1b1b1e!important;border:1px solid #333338!important;color:#fff!important;font-family:"Outfit",sans-serif!important}
+.pin-key:active,.pin-key:hover{border-color:#a3c43a!important;background:#1b2550!important}
+.pin-dot{border-color:#4a4a52!important}.pin-dot.filled{background:#a3c43a!important;border-color:#a3c43a!important}
+/* the shared sign-in screen drawn by bl-auth.js */
+#bl-auth-overlay{background:radial-gradient(700px 360px at 50% 0%,#8a285866 0,transparent 70%),#0a0a0b!important;color:#fff!important}
+#bl-auth-overlay .bla-logo{font-family:"Alfa Slab One",Georgia,serif!important;letter-spacing:.02em!important;color:#fff!important;text-transform:uppercase;text-shadow:3px 3px 0 #8a2858}
+#bl-auth-overlay .bla-sub{color:#a3c43a!important;font-family:"Outfit",sans-serif!important;font-weight:600}
+#bl-auth-overlay .bla-key{background:#1b1b1e!important;border:1px solid #333338!important;color:#fff!important;font-family:"Outfit",sans-serif!important}
+#bl-auth-overlay .bla-key:active,#bl-auth-overlay .bla-key:hover{border-color:#a3c43a!important;background:#1b2550!important}
+#bl-auth-overlay .bla-dot{border-color:#4a4a52!important}
+#bl-auth-overlay .bla-dot.filled{background:#a3c43a!important;border-color:#a3c43a!important}
+#bl-auth-overlay .bla-dot.error{background:#ff6b8b!important;border-color:#ff6b8b!important}
+#bl-auth-overlay .bla-msg{font-family:"Outfit",sans-serif!important}
+#bl-auth-overlay .bla-chip,#bl-auth-overlay .bla-switch,#bl-auth-overlay .bla-logout,#bl-auth-overlay .bla-cancel,#bl-auth-overlay .bla-retry{font-family:"Outfit",sans-serif!important;border-color:#333338!important}
+/* the floating "Signed in: Staff · Logout" chip sat over the handover note box; Log Out is in the header on every page now */
+#bla-chip,.bla-chip{display:none!important}
+/* sheet status pill (Connected / Syncing / Error) matches the other header buttons */
+.gs-status{font:600 13px "Outfit",sans-serif!important;padding:5px 12px!important;border-radius:999px!important;background:#1b1b1e!important;border:1px solid #333338!important;color:#e2ddd5!important;white-space:nowrap}
+.gs-status.connected{color:#a3c43a!important;border-color:#a3c43a88!important}
+.gs-status.error{color:#ff6b8b!important;border-color:#ff6b8b88!important}
+
+/* Black Rose logo sits on black: let the black melt into the page */
+.bl-brand img,.topbar-centre-logo,#bl-auth-overlay .bla-logo img{mix-blend-mode:lighten}
+/* thorny stem under the header and between sections */
+.topbar{border-bottom:0!important;position:relative!important;z-index:auto!important;isolation:auto!important}
+.topbar::after,.nx-who::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:18px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='18'%3E%3Cpath d='M0 9 C40 4 80 14 160 9' stroke='%23a3c43a' stroke-width='1.6' fill='none' opacity='.7'/%3E%3Cpath d='M54 8 q7 -8 15 -5 q-5 7 -15 5z' fill='%23a3c43a' opacity='.75'/%3E%3Cpath d='M118 10 l4 -6 l1.5 6z' fill='%238a2858'/%3E%3Cpath d='M28 7 l3 -5 l2 5z' fill='%238a2858'/%3E%3C/svg%3E") left center/160px 18px repeat-x;pointer-events:none}
+.nx-who{border-bottom:0!important;position:relative}
+/* greeting on Home */
+.br-greet{font:600 19px Outfit,sans-serif;color:#fff;margin:-4px 0 10px}
+/* petals when every job is ticked */
+.br-petals{position:fixed;inset:0;pointer-events:none;z-index:100000;overflow:hidden}
+.br-petals i{position:absolute;top:-30px;display:block;border-radius:60% 0 60% 0;background:linear-gradient(135deg,#c2477e,#8a2858 60%,#4a0f2a);animation-name:brfall,brsway;animation-timing-function:linear,ease-in-out;animation-iteration-count:1,infinite;animation-direction:normal,alternate;animation-fill-mode:forwards}
+@keyframes brfall{to{transform:translateY(110vh) rotate(540deg)}}
+@keyframes brsway{from{margin-left:-24px}to{margin-left:24px}}
