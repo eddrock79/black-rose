@@ -316,6 +316,7 @@ html body{background:radial-gradient(900px 420px at 85% -5%,#8a285855 0,transpar
     <a class="nav-btn" href="../end-of-night/?mode=opening">Opening</a>
     <span class="nav-btn current">End Of Night</span>
     <a class="nav-btn" href="../weekly-cleaning">Weekly Jobs</a>
+    <a class="nav-btn" href="../monthly-cleaning">Monthly Jobs</a>
     <a class="nav-btn" href="../cocktails">Cocktails</a>
     <a class="nav-btn" href="http://eddrock79nas:8102/">Pub Dashboard</a>
     <a class="nav-btn" id="nav-dash" href="../dashboard" style="display:none;background:var(--purple-dim);color:var(--purple);border-color:var(--purple)">Dashboard</a>
@@ -1489,7 +1490,7 @@ function brSeed(){let changed=false;const mark=DEFAULT_JOBS[0].job;
   state.jobs.forEach(j=>{if(ren[j.assignedTo]){j.assignedTo=ren[j.assignedTo];changed=true;}});
   if(changed){saveState();setTimeout(pushToSheet,800);}}
 let nxEditNames=false;
-function nxRerender(){const i=DAY_KEYS.indexOf(currentTab);renderDay(i>=0?DAYS[i]:nxToday());}
+function nxRerender(){if(typeof renderMonth==='function'){const i=MONTH_KEYS.indexOf(currentTab);renderMonth(i>=0?MONTHS[i]:nxCur());return;}const i=DAY_KEYS.indexOf(currentTab);renderDay(i>=0?DAYS[i]:(typeof nxToday==='function'?nxToday():nxCur()));}
 function nxToggleNames(){nxEditNames=!nxEditNames;nxRerender();}
 function nxRemoveName(n){if(!n||!confirm('Take '+n+' off the list of names?'))return;state.staff=state.staff.filter(s=>s.name!==n);
   if(nxMe()===n)nxSetMe('');saveState();queueSheetSync();nxToast(n+' removed');nxRerender();}
@@ -1581,13 +1582,13 @@ function renderDay(day){
   // so blocks never jump columns as jobs are ticked; a just-ticked job stays put for a few seconds.
   const order=NX_MODE_AREAS.concat(['Other jobs']),nowMs=Date.now();
   const groups=order.map(a=>({a,all:jobs.filter(j=>nxArea(j.job)===a)})).filter(g=>g.all.length);
-  const barG=groups.filter(g=>!/kitchen/i.test(g.a)),kitG=groups.filter(g=>/kitchen/i.test(g.a)),wide=innerWidth>=1500&&barG.length>1;/* bar left, kitchen right; on a wide screen the bar time blocks split over two columns, in order */const cols=wide?[[],[],kitG]:[barG,kitG];if(wide){const tot=barG.reduce((n,g)=>n+g.all.length+1,0);let run=0;barG.forEach(g=>{cols[run<tot/2?0:1].push(g);run+=g.all.length+1;});}
+  const barG=groups.filter(g=>!/kitchen|quarterly/i.test(g.a)),kitG=groups.filter(g=>/kitchen|quarterly/i.test(g.a)),wide=innerWidth>=1500&&barG.length>1;/* bar left, kitchen right; on a wide screen the bar time blocks split over two columns, in order */const cols=wide?[[],[],kitG]:(kitG.length?[barG,kitG]:[barG]);if(wide){const tot=barG.reduce((n,g)=>n+g.all.length+1,0);let run=0;barG.forEach(g=>{cols[run<tot/2?0:1].push(g);run+=g.all.length+1;});}
   const showJob=j=>{const just=nxRecent[j.id]&&nxRecent[j.id]>nowMs&&nxIsDone(j);
     return just?`<button type="button" class="nx-job just" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(nxJobText(j.job))}<small>✓ Ticked for ${escHtml(j.assignedTo)}. Tap to undo</small></span></button>`
       :(r=>`<div class="nx-jrow${r?' flagged':''}"><button type="button" class="nx-job" onclick="nxTick(${j.id})"><span class="nx-box"></span><span>${escHtml(nxJobText(j.job))}${r?`<small class="nx-why">⚑ Not done: ${escHtml(r)}</small>`:''}</span></button><button type="button" class="nx-flag" aria-label="${r?'Clear the reason':'Can’t do it'}" onclick="nxFlag(${j.id},this,event)">${r?'✕':'⚑'}</button></div>`)(nxReason(j));};
   const grpHtml=g=>{const js=g.all.filter(j=>!isDone(j)||(nxRecent[j.id]&&nxRecent[j.id]>nowMs));
     return `<div class="nx-grp"><div class="nx-area">${g.a} · ${g.all.filter(isDone).length}/${g.all.length}</div>${js.length?js.map(showJob).join(''):'<div class="nx-grp-done">✓ All done</div>'}</div>`;};
-  const todo=left.length||Object.keys(nxRecent).length?`<div class="nx-cols2${cols.length===3?' nx-cols3':''}">${cols.map(c=>`<div class="nx-c">${c.map(grpHtml).join('')}</div>`).join('')}</div>`:'';
+  const todo=left.length||Object.keys(nxRecent).length?`<div class="nx-cols2${cols.length===3?' nx-cols3':cols.length===1?' nx-cols1':''}">${cols.map(c=>`<div class="nx-c">${c.map(grpHtml).join('')}</div>`).join('')}</div>`:'';
   // each person's column of jobs done tonight
   const names=[];doneJobs.forEach(j=>{const n=j.assignedTo||'Someone';if(!names.includes(n))names.push(n);});crew.forEach(n=>{if(!names.includes(n))names.push(n);});
   const people=names.map(n=>{const js=doneJobs.filter(j=>(j.assignedTo||'Someone')===n).sort((x,y)=>(y.timestamp||'').localeCompare(x.timestamp||''));

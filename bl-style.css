@@ -82,6 +82,10 @@ input,select,textarea,button{font-family:"Outfit",sans-serif}
 .gs-status.connected{color:#a3c43a!important;border-color:#a3c43a88!important}
 .gs-status.error{color:#ff6b8b!important;border-color:#ff6b8b88!important}
 
+/* Front page button beside Pub Dashboard */
+.bl-lrow{display:flex;gap:8px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
+.bl-front::after{content:none!important}
+
 /* Black Rose logo sits on black: let the black melt into the page */
 .bl-brand img,.topbar-centre-logo,#bl-auth-overlay .bla-logo img{mix-blend-mode:lighten}
 /* thorny stem under the header and between sections */
@@ -91,6 +95,9 @@ input,select,textarea,button{font-family:"Outfit",sans-serif}
 /* computer screens: wider page, three job columns from 1500px */
 @media(min-width:1200px){.page{max-width:min(1820px,96vw)!important}.nx-board{grid-template-columns:minmax(0,1fr) 330px!important}}
 .nx-cols3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+/* one list on its own (e.g. a month with no quarterly jobs): full width, jobs two per row */
+.nx-cols1{grid-template-columns:1fr!important}.nx-cols1 .nx-grp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.nx-cols1 .nx-area{grid-column:1/-1}.nx-cols1 .nx-jrow,.nx-cols1 .nx-job{margin-bottom:0}
+@media(max-width:700px){.nx-cols1 .nx-grp{grid-template-columns:1fr}}
 /* greeting on Home */
 .br-greet{font:600 19px Outfit,sans-serif;color:#fff;margin:-4px 0 10px}
 /* petals when every job is ticked */
