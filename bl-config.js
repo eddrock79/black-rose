@@ -12,6 +12,7 @@
   var DEFAULTS={venueKey:VENUE,venueName:"Black Rose Tavern",
     weeklyJobs:"PUT_WEEKLY_JOBS_SHEET_ID_HERE",endOfNight:"PUT_END_OF_NIGHT_SHEET_ID_HERE",cocktails:"PUT_COCKTAILS_SHEET_ID_HERE",
     notesScript:"PUT_NOTES_APPS_SCRIPT_EXEC_URL_HERE",cleaningScript:"PUT_CLEANING_APPS_SCRIPT_EXEC_URL_HERE",eonScript:"PUT_EON_APPS_SCRIPT_EXEC_URL_HERE",
+    monthlyJobs:"1557d5HfKowBHrGYyusMIKpduIXRwthsS4wbVVH1uRm8",monthlyScript:"https://script.google.com/macros/s/AKfycbyxVHsMYt74ewq5bY4Tlg2Dm4XH-b7Thdumk2ZTcsCzvxU7qJhmlzw_cFZT0K_MGIUiJQ/exec",
     staffPin:"4827",managerPin:"6193",masterPin:"8350"};
   var cached={}; try{cached=JSON.parse(localStorage.getItem(CACHE_KEY)||"{}");}catch(e){}
   window.BL_CFG=Object.assign({},DEFAULTS,cached);
@@ -27,7 +28,7 @@
       for(var r=1;r<rows.length;r++){var row=rows[r].map(cl),rec={};head.forEach(function(h,i){rec[h]=row[i]||"";});
         if(rec.venue_key===VENUE){out={venueKey:VENUE,venueName:rec.venue_name||DEFAULTS.venueName,
           weeklyJobs:rec.weekly_jobs_sheet_id,endOfNight:rec.end_of_night_sheet_id,cocktails:rec.cocktails_sheet_id,
-          notesScript:rec.notes_script_url,cleaningScript:rec.cleaning_script_url,eonScript:rec.eon_script_url,
+          notesScript:rec.notes_script_url,cleaningScript:rec.cleaning_script_url,eonScript:rec.eon_script_url,monthlyJobs:rec.monthly_jobs_sheet_id,monthlyScript:rec.monthly_script_url,
           staffPin:rec.staff_pin,managerPin:rec.manager_pin,masterPin:rec.master_pin};break;} }
       Object.keys(out).forEach(function(k){if(!out[k])delete out[k];});
       var m=Object.assign({},DEFAULTS,out);localStorage.setItem(CACHE_KEY,JSON.stringify(m));
