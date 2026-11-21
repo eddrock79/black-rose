@@ -1,4 +1,4 @@
-/* Shared Black Rose Tavern header: logo + "Staff Hub" on the left, today's date on the right.
+/* Shared Black Rose Tavern header: logo + "Checklists" on the left, today's date on the right.
    Keeps every existing element (role chip, status, refresh controls) - only swaps the title/logo and adds the date. */
 (function(){
   var css=document.createElement('style');
@@ -20,7 +20,7 @@
     var centre=tb.querySelector('.topbar-centre-logo');
     if(centre) centre.remove();
     var brand=document.createElement('div'); brand.className='bl-brand';
-    brand.innerHTML='<img src="'+(window.BL_LOGO||'../logo.jpg')+'" alt="The Black Rose Tavern"><span class="bl-tag">Staff Hub</span>';
+    brand.innerHTML='<img src="'+(window.BL_LOGO||'../logo.jpg')+'" alt="The Black Rose Tavern"><span class="bl-tag">Checklists</span>';
     if(old) old.replaceWith(brand); else tb.insertBefore(brand,tb.firstChild);
     var right=tb.querySelector('.topbar-right');
     if(!right){right=document.createElement('div');right.className='topbar-right';tb.appendChild(right);}
@@ -34,9 +34,9 @@
     row.appendChild(d); right.appendChild(row);
     var nl=document.querySelector('.nav-bar a[href*="eddrock79nas"]');
     // Front page: back to this pub's board on the NAS (target _top also leaves the board's viewer)
-    var fp=document.createElement('a');fp.className='bl-xlink bl-front';fp.href=window.BL_FRONT||'http://100.90.189.89:8114/board/br';fp.target='_top';fp.textContent='⌂ Front page';
+    var fp=document.createElement('a');fp.className='bl-xlink bl-front';fp.href=window.BL_FRONT||'http://100.90.189.89:8114/board/br';fp.target='_top';fp.textContent='⌂ Staff Hub';
     var lr=document.createElement('div');lr.className='bl-lrow';lr.appendChild(fp);
-    if(nl){nl.className='bl-xlink';nl.removeAttribute('id');lr.appendChild(nl);}
+    if(nl){nl.className='bl-xlink';nl.removeAttribute('id');nl.textContent='Manager Dashboard';lr.appendChild(nl);}
     right.appendChild(lr);
     // Pub Dashboard stands out on the Home page
     if(nl&&/\/home\/?$/.test(location.pathname)) nl.classList.add('hot');
