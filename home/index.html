@@ -134,6 +134,7 @@
   .br-crew{margin:0 0 12px}.br-crew .tn-lbl span{font-weight:500;letter-spacing:0;text-transform:none}
   #br-crew-chips{display:flex;flex-wrap:wrap;gap:6px}.br-c{font:600 14px Outfit,sans-serif;padding:7px 13px;border-radius:999px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer}
   .br-c.on{background:#a3c43a;border-color:#a3c43a;color:#0a0a0b}.br-c.clr{background:transparent;color:var(--muted)}
+  .br-c.add{background:transparent;border-style:dashed;color:var(--muted)}.br-c.del{border-color:#ff6b8b;color:#ff6b8b}
   .gd-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.gd-line{font-size:16px}
   .gd-badge{font:700 13px Outfit,sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:2px solid currentColor}
   .gd-badge.ok{color:#7ad38a}.gd-badge.amber{color:#f2b552}.gd-badge.red{color:#ff6b8b}
@@ -377,7 +378,17 @@ async function loadEvents(){ try{localStorage.setItem(EVENTS_CACHE,'[]');}catch(
 
 // ── WORKING TODAY: pick who's in; the job pages then show only those names (kept on this iPad, resets at 7am) ──
 const BR_STAFF0=["Dave", "Keefe", "Callan", "Chloe", "Chaz", "Aaron", "Stuart", "Junior", "Alannah", "Laura", "Frank", "Scott M."];
-let brStaff=[];
+let brStaff=[],brEdit=false;
+// save the list to every Black Rose sheet with a staff tab (staff only: the jobs are left alone)
+function brStaffSave(list){brStaff=list.slice();renderBrCrew();
+  const body=JSON.stringify({staff:list.map(n=>({name:n,onShift:brCrewGet().includes(n)}))});
+  [BL_CFG.eonScript,BL_CFG.cleaningScript,BL_CFG.monthlyScript].filter(u=>u&&String(u).indexOf('PUT_')!==0).forEach(u=>{
+    fetch(u,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:body}).catch(()=>{});});}
+function brAddName(){let n=prompt('Name to add (as it should show on the checklists):');if(!n)return;n=n.replace(/\s+/g,' ').trim().slice(0,24);if(!n)return;
+  n=n.charAt(0).toUpperCase()+n.slice(1);if(brStaff.some(x=>x.toLowerCase()===n.toLowerCase())){alert(n+' is already on the list.');return;}
+  brStaffSave(brStaff.concat(n));}
+function brRemoveName(n){if(!confirm('Take '+n+' off the staff list on every page?'))return;
+  brCrewSet(brCrewGet().filter(x=>x!==n));brStaffSave(brStaff.filter(x=>x!==n));}
 function brDay(){const n=new Date();if(n.getHours()<7)n.setDate(n.getDate()-1);return n.getFullYear()+'-'+(n.getMonth()+1)+'-'+n.getDate();}
 function brCrewGet(){try{const c=JSON.parse(localStorage.getItem('br_crew')||'null');return c&&c.d===brDay()&&Array.isArray(c.n)?c.n:[];}catch(e){return [];}}
 function brCrewSet(a){try{localStorage.setItem('br_crew',JSON.stringify({d:brDay(),n:a}));}catch(e){}renderBrCrew();}
@@ -387,8 +398,10 @@ async function loadBrStaff(){
     if(r.ok){const t=await r.text();brStaff=t.split('\n').slice(1).map(l=>l.split(',')[0].replace(/"/g,'').trim()).filter(n=>n&&!/set onshift/i.test(n));}}catch(e){}
   if(!brStaff.length)brStaff=BR_STAFF0.slice();renderBrCrew();}
 function renderBrCrew(){const el=document.getElementById('br-crew-chips'),c=document.getElementById('br-crew-n');if(!el)return;const sel=brCrewGet().filter(n=>brStaff.includes(n));
-  el.innerHTML=brStaff.map(n=>`<button type="button" class="br-c${sel.includes(n)?' on':''}" data-n="${escHtml(n)}" onclick="brToggle(this.dataset.n)">${sel.includes(n)?'✓ ':''}${escHtml(n)}</button>`).join('')
-    +(sel.length?'<button type="button" class="br-c clr" onclick="brCrewSet([])">Clear</button>':'');
+  el.innerHTML=brStaff.map(n=>`<button type="button" class="br-c${brEdit?' del':sel.includes(n)?' on':''}" data-n="${escHtml(n)}" onclick="brEdit?brRemoveName(this.dataset.n):brToggle(this.dataset.n)">${brEdit?'':sel.includes(n)?'✓ ':''}${escHtml(n)}${brEdit?' ✕':''}</button>`).join('')
+    +(sel.length&&!brEdit?'<button type="button" class="br-c clr" onclick="brCrewSet([])">Clear</button>':'')
+    +'<button type="button" class="br-c add" onclick="brAddName()">＋ Add name</button>'
+    +'<button type="button" class="br-c add" onclick="brEdit=!brEdit;renderBrCrew()">'+(brEdit?'✓ Done':'✎ Edit names')+'</button>';
   if(c)c.textContent=sel.length?'· '+sel.length+' hero'+(sel.length>1?'es':'')+' picked, only they show on the checklists today':'· tap who’s in today';
   const g=document.getElementById('br-greet');if(g){const h=new Date().getHours(),hi=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
     const names=sel.length>1?sel.slice(0,-1).join(', ')+' and '+sel[sel.length-1]:sel[0];g.textContent=sel.length?'🌹 '+hi+', '+names:'';g.style.display=sel.length?'':'none';}}
