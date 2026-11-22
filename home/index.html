@@ -377,7 +377,7 @@ async function loadEvents(){ try{localStorage.setItem(EVENTS_CACHE,'[]');}catch(
 }
 
 
-// ── WORKING TODAY: pick who's in; the job pages then show only those names (kept on this iPad, resets at 7am) ──
+// ── WORKING TODAY: filled from tonight's rota automatically; tap to change it for today, + Add name for anyone not on the rota (resets at 6am) ──
 const BR_STAFF0=["Dave", "Keefe", "Callan", "Chloe", "Chaz", "Aaron", "Stuart", "Junior", "Alannah", "Laura", "Frank", "Scott M."];
 let brStaff=[],brEdit=false;
 // save the list to every Black Rose sheet with a staff tab (staff only: the jobs are left alone)
@@ -387,23 +387,26 @@ function brStaffSave(list){brStaff=list.slice();renderBrCrew();
     fetch(u,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:body}).catch(()=>{});});}
 function brAddName(){let n=prompt('Name to add (as it should show on the checklists):');if(!n)return;n=n.replace(/\s+/g,' ').trim().slice(0,24);if(!n)return;
   n=n.charAt(0).toUpperCase()+n.slice(1);if(brStaff.some(x=>x.toLowerCase()===n.toLowerCase())){alert(n+' is already on the list.');return;}
-  brStaffSave(brStaff.concat(n));}
+  brStaffSave(brStaff.concat(n));const t=brCrewGet().slice();t.push(n);brCrewSet(t);}
 function brRemoveName(n){if(!confirm('Take '+n+' off the staff list on every page?'))return;
   brCrewSet(brCrewGet().filter(x=>x!==n));brStaffSave(brStaff.filter(x=>x!==n));}
-function brDay(){const n=new Date();if(n.getHours()<7)n.setDate(n.getDate()-1);return n.getFullYear()+'-'+(n.getMonth()+1)+'-'+n.getDate();}
-function brCrewGet(){try{const c=JSON.parse(localStorage.getItem('br_crew')||'null');return c&&c.d===brDay()&&Array.isArray(c.n)?c.n:[];}catch(e){return [];}}
+function brDay(){const n=new Date();if(n.getHours()<6)n.setDate(n.getDate()-1);return n.getFullYear()+'-'+(n.getMonth()+1)+'-'+n.getDate();}
+function brRotaNames(){try{return tonightCrewRows().map(c=>c.name).filter(Boolean);}catch(e){return [];}}
+function brCrewPicked(){try{const c=JSON.parse(localStorage.getItem('br_crew')||'null');return c&&c.d===brDay()&&Array.isArray(c.n)?c.n:null;}catch(e){return null;}}
+function brCrewGet(){return brCrewPicked()||brRotaNames();}
+{const _rt=renderTonight;renderTonight=function(){_rt();renderBrCrew();};}   // the rota arriving refreshes the names
 function brCrewSet(a){try{localStorage.setItem('br_crew',JSON.stringify({d:brDay(),n:a}));}catch(e){}renderBrCrew();}
 function brToggle(n){const s=brCrewGet();const i=s.indexOf(n);if(i>=0)s.splice(i,1);else s.push(n);brCrewSet(s);}
 async function loadBrStaff(){
   try{const r=await fetch('https://docs.google.com/spreadsheets/d/'+BL_CFG.endOfNight+'/gviz/tq?tqx=out:csv&sheet=Staff&t='+Date.now(),{cache:'no-store'});
     if(r.ok){const t=await r.text();brStaff=t.split('\n').slice(1).map(l=>l.split(',')[0].replace(/"/g,'').trim()).filter(n=>n&&!/set onshift/i.test(n));}}catch(e){}
   if(!brStaff.length)brStaff=BR_STAFF0.slice();renderBrCrew();}
-function renderBrCrew(){const el=document.getElementById('br-crew-chips'),c=document.getElementById('br-crew-n');if(!el)return;const sel=brCrewGet().filter(n=>brStaff.includes(n));
+function renderBrCrew(){const el=document.getElementById('br-crew-chips'),c=document.getElementById('br-crew-n');if(!el)return;brRotaNames().forEach(n=>{if(!brStaff.some(x=>x.toLowerCase()===n.toLowerCase()))brStaff.push(n);});const sel=brCrewGet().filter(n=>brStaff.includes(n)),auto=!brCrewPicked()&&sel.length;
   el.innerHTML=brStaff.map(n=>`<button type="button" class="br-c${brEdit?' del':sel.includes(n)?' on':''}" data-n="${escHtml(n)}" onclick="brEdit?brRemoveName(this.dataset.n):brToggle(this.dataset.n)">${brEdit?'':sel.includes(n)?'✓ ':''}${escHtml(n)}${brEdit?' ✕':''}</button>`).join('')
-    +(sel.length&&!brEdit?'<button type="button" class="br-c clr" onclick="brCrewSet([])">Clear</button>':'')
+    +(brCrewPicked()&&!brEdit?'<button type="button" class="br-c clr" onclick="try{localStorage.removeItem(\'br_crew\')}catch(e){}renderBrCrew()">Back to the rota</button>':'')
     +'<button type="button" class="br-c add" onclick="brAddName()">＋ Add name</button>'
     +'<button type="button" class="br-c add" onclick="brEdit=!brEdit;renderBrCrew()">'+(brEdit?'✓ Done':'✎ Edit names')+'</button>';
-  if(c)c.textContent=sel.length?'· '+sel.length+' hero'+(sel.length>1?'es':'')+' picked, only they show on the checklists today':'· tap who’s in today';
+  if(c)c.textContent=auto?'· from tonight’s rota: only they show on the checklists (tap to change, ＋ Add name if someone else is in)':sel.length?'· '+sel.length+' hero'+(sel.length>1?'es':'')+' picked for today, only they show on the checklists':'· nobody on the rota tonight: tap who’s in';
   const g=document.getElementById('br-greet');if(g){const h=new Date().getHours(),hi=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
     const names=sel.length>1?sel.slice(0,-1).join(', ')+' and '+sel[sel.length-1]:sel[0];g.textContent=sel.length?'🌹 '+hi+', '+names:'';g.style.display=sel.length?'':'none';}}
 
@@ -469,7 +472,7 @@ function jpCount(rows,day,from,to,f){const js=rows.filter(j=>(j.day||'').toLower
   return {n:js.filter(j=>{if(!jpDone(j))return false;const t=jpTime(j.timestamp);return !t||(t>=from&&t<to);}).length,of:js.length};}
 async function jpSheet(id){const r=await fetch('https://docs.google.com/spreadsheets/d/'+id+'/gviz/tq?tqx=out:csv&sheet=Jobs&t='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0;return jpCSV(await r.text());}
 async function loadJobProgress(){
-  const n=new Date(),night=new Date(n);if(n.getHours()<7)night.setDate(night.getDate()-1);night.setHours(0,0,0,0);
+  const n=new Date(),night=new Date(n);if(n.getHours()<6)night.setDate(night.getDate()-1);night.setHours(0,0,0,0);
   const last=new Date(night);last.setDate(last.getDate()-1);
   const at=(d,h)=>{const x=new Date(d);x.setHours(h,0,0,0);return x;},plus=(d,k)=>{const x=new Date(d);x.setDate(x.getDate()+k);return x;};
   const p=document.getElementById('tn-eon-prog'),w=document.getElementById('tn-wj');
@@ -484,13 +487,13 @@ async function loadJobProgress(){
   }catch(e){ if(w) w.style.display='none'; }
 }
 
-// ── ON TONIGHT (rota crew, 7am-aware: a night counts until 7am next morning) ──
+// ── ON TONIGHT (rota crew, 6am-aware: a night counts until 6am next morning) ──
 const SHIFTS_URL='../rotas/shifts.json';
 const SHIFTS_CACHE='bl_shifts';
 const DOW_FULL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 function rotaDayInfo(){
   const n=new Date(); const d=new Date(n);
-  if(n.getHours()<7) d.setDate(d.getDate()-1);
+  if(n.getHours()<6) d.setDate(d.getDate()-1);
   const iso=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
   return {iso, name:DOW_FULL[d.getDay()]};
 }

@@ -967,7 +967,7 @@ function brSyncStaff(){const body=JSON.stringify({staff:state.staff.map(s=>({nam
 ['addStaffMember','removeStaff'].forEach(fn=>{const f=window[fn];if(typeof f==='function')window[fn]=function(){const r=f.apply(this,arguments);setTimeout(brSyncStaff,400);return r;};});
 function nxAddName(){let n=prompt('Your first name (as you want it to show):');if(!n)return;n=n.replace(/\s+/g,' ').trim().slice(0,24);if(!n)return;
   n=n.charAt(0).toUpperCase()+n.slice(1);const ex=state.staff.find(s=>s.name.toLowerCase()===n.toLowerCase());
-  if(!ex){state.staff.push({name:n,onShift:true});saveState();queueSheetSync();brSyncStaff();nxToast('Added '+n);}nxPick(ex?ex.name:n);}
+  if(!ex){state.staff.push({name:n,onShift:true});saveState();queueSheetSync();brSyncStaff();nxToast('Added '+n);}if(typeof brCrewAdd==='function')brCrewAdd(ex?ex.name:n);nxPick(ex?ex.name:n);}
 
 function BR_CHOICES(){return [["",["Monthly","Quarterly bonus"]]];}
 
@@ -980,7 +980,7 @@ const NX_AREAS=[["Quarterly bonus",/^Quarterly: /],["Monthly",/./]];
 const NX_LIST=MONTHS, NX_KEYS=MONTH_KEYS, NX_KIND='month';
 function nxArea(job){const s=String(job),i=s.indexOf(" | ");if(i>0)return s.slice(0,i);for(const a of NX_AREAS){if(a[1]&&a[1].test(s))return a[0];}return "Other jobs";}
 function nxJobText(job){const s=String(job),i=s.indexOf(" | ");return i>0?s.slice(i+3):s;}
-function nxNow(){const d=new Date();if(NX_KIND==='day'&&d.getHours()<7)d.setDate(d.getDate()-1);return d;}
+function nxNow(){const d=new Date();if(NX_KIND==='day'&&d.getHours()<6)d.setDate(d.getDate()-1);return d;}
 function nxStamp(){const d=nxNow();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+(NX_KIND==='day'?d.getDate():1);}
 function nxCur(){const d=nxNow();return NX_KIND==='day'?NX_LIST[(d.getDay()+6)%7]:NX_LIST[d.getMonth()];}
 function nxStart(p){const now=nxNow();let s;
@@ -991,7 +991,7 @@ function nxIsDone(j){if(!j.done)return false;if(!j.timestamp)return true;const t
   if(NX_KIND==='day')e.setDate(e.getDate()+7);else e.setFullYear(e.getFullYear()+1);return isNaN(t)||(t>=s&&t<e);}
 function nxMe(){try{const m=JSON.parse(localStorage.getItem('mj_new_me')||'null');return m&&m.d===nxStamp()?m.n:'';}catch(e){return '';}}
 function nxSetMe(n){localStorage.setItem('mj_new_me',JSON.stringify({d:nxStamp(),n:n}));}
-function brDay(){const n=new Date();if(n.getHours()<7)n.setDate(n.getDate()-1);return n.getFullYear()+"-"+(n.getMonth()+1)+"-"+n.getDate();}function brCrewToday(){try{const c=JSON.parse(localStorage.getItem("br_crew")||"null");return c&&c.d===brDay()&&Array.isArray(c.n)?c.n:[];}catch(e){return [];}}function nxCrew(){const all=state.staff.map(s=>s.name).filter(Boolean);const t=brCrewToday().filter(n=>all.includes(n));const set=(typeof nxEditNames!=="undefined"&&nxEditNames)||!t.length?all.slice():t.slice();const me=nxMe();if(me&&!set.includes(me))set.push(me);return set;}
+function brNight(){const n=new Date();if(n.getHours()<6)n.setDate(n.getDate()-1);return n;}function brDay(){const n=brNight();return n.getFullYear()+"-"+(n.getMonth()+1)+"-"+n.getDate();}function brISO(){const n=brNight();return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");}function brRota(){try{if(typeof tonightCrew==="function"){const t=tonightCrew();if(t.length)return t;}const days=JSON.parse(localStorage.getItem("bl_shifts")||"{}"),iso=brISO();const k=days[iso]?iso:Object.keys(days).filter(x=>x.slice(5)===iso.slice(5)).pop();return((k&&days[k])||[]).map(x=>x.name).filter(Boolean);}catch(e){return [];}}function brCrewPicked(){try{const c=JSON.parse(localStorage.getItem("br_crew")||"null");return c&&c.d===brDay()&&Array.isArray(c.n)?c.n:null;}catch(e){return null;}}function brCrewToday(){const p=brCrewPicked();return p||brRota();}function brCrewAdd(n){const t=brCrewToday().slice();if(!t.some(x=>x.toLowerCase()===n.toLowerCase()))t.push(n);try{localStorage.setItem("br_crew",JSON.stringify({d:brDay(),n:t}));}catch(e){}}function nxCrew(){const all=state.staff.map(s=>s.name).filter(Boolean);const t=brCrewToday();const set=(typeof nxEditNames!=="undefined"&&nxEditNames)||!t.length?all.slice():t.slice();const me=nxMe();if(me&&!set.includes(me))set.push(me);return set;}
 function nxToast(t){const o=document.querySelector('.nx-toast');if(o)o.remove();const d=document.createElement('div');d.className='nx-toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1800);}
 function nxRedraw(p){if(currentTab===String(p).toLowerCase())renderMonth(p);}
 function nxPick(n){if(!n)return;nxSetMe(n);const s=state.staff.find(x=>x.name.toLowerCase()===n.toLowerCase());if(s&&!s.onShift){s.onShift=true;saveState();queueSheetSync();}
