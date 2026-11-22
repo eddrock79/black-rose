@@ -1,1 +1,513 @@
-{"generated":"","days":{}}
+{
+  "generated": "2026-11-22T16:05:46",
+  "days": {
+    "2026-11-16": [
+      {
+        "name": "Dave",
+        "start": "9:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Mali",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Aaron",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-17": [
+      {
+        "name": "Dave",
+        "start": "9:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chloe",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Jane",
+        "start": "4:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Stuart",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-18": [
+      {
+        "name": "Dave",
+        "start": "6:45 AM",
+        "end": "11:00 AM"
+      },
+      {
+        "name": "Keefe",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Chloe",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Jane",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Stuart",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Junior",
+        "start": "11:00 AM",
+        "end": "4:30 PM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-19": [
+      {
+        "name": "Keefe",
+        "start": "8:00 AM",
+        "end": "4:00 PM"
+      },
+      {
+        "name": "Chloe",
+        "start": "4:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Aaron",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Stuart",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-20": [
+      {
+        "name": "Dave",
+        "start": "8:00 AM",
+        "end": "11:00 AM"
+      },
+      {
+        "name": "Keefe",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chaz",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Mali",
+        "start": "4:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Stuart",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Junior",
+        "start": "11:00 AM",
+        "end": "4:30 PM"
+      },
+      {
+        "name": "Laura",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      }
+    ],
+    "2026-11-21": [
+      {
+        "name": "Keefe",
+        "start": "9:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chaz",
+        "start": "3:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Mali",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Aaron",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Allanah",
+        "start": "11:00 AM",
+        "end": "6:00 PM"
+      },
+      {
+        "name": "Laura",
+        "start": "10:00 AM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-22": [
+      {
+        "name": "Chloe",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chaz",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Aaron",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Jane",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "10:00 AM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-23": [
+      {
+        "name": "Dave",
+        "start": "9:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Keefe",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chaz",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-24": [
+      {
+        "name": "Dave",
+        "start": "9:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Keefe",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Mali",
+        "start": "2:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Jane",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-25": [
+      {
+        "name": "Dave",
+        "start": "6:45 AM",
+        "end": "11:00 AM"
+      },
+      {
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chloe",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Aaron",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Junior",
+        "start": "11:00 AM",
+        "end": "4:30 PM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-26": [
+      {
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chloe",
+        "start": "8:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Aaron",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Stuart",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-27": [
+      {
+        "name": "Dave",
+        "start": "8:00 AM",
+        "end": "11:00 AM"
+      },
+      {
+        "name": "Keefe",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chloe",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Aaron",
+        "start": "4:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Jane",
+        "start": "2:00 PM",
+        "end": "8:00 PM"
+      },
+      {
+        "name": "Stuart",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Junior",
+        "start": "11:00 AM",
+        "end": "4:30 PM"
+      },
+      {
+        "name": "Laura",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Frank",
+        "start": "10:00 AM",
+        "end": "5:00 PM"
+      }
+    ],
+    "2026-11-28": [
+      {
+        "name": "Keefe",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chaz",
+        "start": "9:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Mali",
+        "start": "4:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Jane",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Stuart",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Allanah",
+        "start": "11:00 AM",
+        "end": "6:00 PM"
+      },
+      {
+        "name": "Laura",
+        "start": "10:00 AM",
+        "end": "10:00 PM"
+      }
+    ],
+    "2026-11-29": [
+      {
+        "name": "Chloe",
+        "start": "10:00 AM",
+        "end": "6:00 PM"
+      },
+      {
+        "name": "Chaz",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Mali",
+        "start": "1:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Jane",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
+      },
+      {
+        "name": "Stuart",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Scott M.",
+        "start": "10:00 AM",
+        "end": "10:00 PM"
+      }
+    ]
+  }
+}
