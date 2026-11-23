@@ -1,96 +1,6 @@
 {
-  "generated": "2026-11-22T16:05:44",
+  "generated": "2026-11-23T08:00:13",
   "events": [
-    {
-      "date": "2026-11-16",
-      "room": "Events",
-      "what": "board games"
-    },
-    {
-      "date": "2026-11-16",
-      "room": "Kitchen",
-      "what": "Xmas Market"
-    },
-    {
-      "date": "2026-11-17",
-      "room": "Events",
-      "what": "quiz"
-    },
-    {
-      "date": "2026-11-17",
-      "room": "Kitchen",
-      "what": "Xmas Market"
-    },
-    {
-      "date": "2026-11-17",
-      "room": "Main Duties",
-      "what": "bid food delivery"
-    },
-    {
-      "date": "2026-11-18",
-      "room": "Events",
-      "what": "karaoke"
-    },
-    {
-      "date": "2026-11-18",
-      "room": "Kitchen",
-      "what": "Xmas Market"
-    },
-    {
-      "date": "2026-11-18",
-      "room": "Other",
-      "what": "Keefe office"
-    },
-    {
-      "date": "2026-11-19",
-      "room": "Events",
-      "what": "live music"
-    },
-    {
-      "date": "2026-11-19",
-      "room": "Kitchen",
-      "what": "Xmas Market"
-    },
-    {
-      "date": "2026-11-19",
-      "room": "Other",
-      "what": "Keefe lines"
-    },
-    {
-      "date": "2026-11-20",
-      "room": "Events",
-      "what": "live music"
-    },
-    {
-      "date": "2026-11-20",
-      "room": "Kitchen",
-      "what": "Xmas Market"
-    },
-    {
-      "date": "2026-11-20",
-      "room": "Main Duties",
-      "what": "drink delivery"
-    },
-    {
-      "date": "2026-11-21",
-      "room": "Events",
-      "what": "live music"
-    },
-    {
-      "date": "2026-11-21",
-      "room": "Kitchen",
-      "what": "Xmas Market"
-    },
-    {
-      "date": "2026-11-22",
-      "room": "Events",
-      "what": "open mic"
-    },
-    {
-      "date": "2026-11-22",
-      "room": "Kitchen",
-      "what": "Xmas Market"
-    },
     {
       "date": "2026-11-23",
       "room": "Events",
@@ -180,6 +90,96 @@
       "date": "2026-11-29",
       "room": "Kitchen",
       "what": "Xmas Market"
+    },
+    {
+      "date": "2026-11-30",
+      "room": "Calendar",
+      "what": "St. Andrews Day"
+    },
+    {
+      "date": "2026-11-30",
+      "room": "Events",
+      "what": "board games"
+    },
+    {
+      "date": "2026-12-01",
+      "room": "Calendar",
+      "what": "GOTHMAS BEGINS"
+    },
+    {
+      "date": "2026-12-01",
+      "room": "Events",
+      "what": "quiz"
+    },
+    {
+      "date": "2026-12-01",
+      "room": "Main Duties",
+      "what": "bid food delivery"
+    },
+    {
+      "date": "2026-12-02",
+      "room": "Calendar",
+      "what": "Xmas Market"
+    },
+    {
+      "date": "2026-12-02",
+      "room": "Events",
+      "what": "karaoke"
+    },
+    {
+      "date": "2026-12-02",
+      "room": "Other",
+      "what": "Keefe Office"
+    },
+    {
+      "date": "2026-12-03",
+      "room": "Calendar",
+      "what": "Xmas Market"
+    },
+    {
+      "date": "2026-12-03",
+      "room": "Events",
+      "what": "live music"
+    },
+    {
+      "date": "2026-12-03",
+      "room": "Other",
+      "what": "Keefe lines"
+    },
+    {
+      "date": "2026-12-04",
+      "room": "Calendar",
+      "what": "Xmas Market"
+    },
+    {
+      "date": "2026-12-04",
+      "room": "Events",
+      "what": "live music"
+    },
+    {
+      "date": "2026-12-04",
+      "room": "Main Duties",
+      "what": "drink delivery"
+    },
+    {
+      "date": "2026-12-05",
+      "room": "Calendar",
+      "what": "Xmas Market"
+    },
+    {
+      "date": "2026-12-05",
+      "room": "Events",
+      "what": "live music"
+    },
+    {
+      "date": "2026-12-06",
+      "room": "Calendar",
+      "what": "Xmas Market"
+    },
+    {
+      "date": "2026-12-06",
+      "room": "Events",
+      "what": "open mic"
     }
   ]
 }
