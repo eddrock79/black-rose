@@ -1539,8 +1539,11 @@ const NX_MODE=/[?&]mode=opening/.test(location.search)?"opening":"closing";
 const NX_CLOSE=["Bar 9–10pm", "Bar 10pm–12:30am", "Bar 12:45–1am", "Bar after close", "Kitchen close"],NX_OPEN=["Opening: bar", "Opening: kitchen", "4–5pm: bar", "4–5pm: kitchen"];
 const NX_MODE_AREAS=NX_MODE==="opening"?NX_OPEN:NX_CLOSE, NX_SO=NX_MODE==="opening"?"open-signoff-":"eon-signoff-";
 const NX_AREAS=NX_MODE_AREAS.map(a=>[a,null]);
-function nxArea(job){const i=String(job).indexOf(" | ");return i>0?String(job).slice(0,i):"Other jobs";}
-function nxJobText(job){const i=String(job).indexOf(" | ");return i>0?String(job).slice(i+3):String(job);}
+/* candles: Edinburgh sunset worked out on the tablet; dark = 30 min after sunset. Dark before 6pm: the job moves to 4-5pm */
+function nxDark(){const d=new Date(),r=Math.PI/180,lat=55.95,lng=-3.19,n=Math.round((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(d.getFullYear(),0,0))/864e5),lh=lng/15,t=n+(18-lh)/24,M=0.9856*t-3.289;let L=(M+1.916*Math.sin(M*r)+0.02*Math.sin(2*M*r)+282.634+360)%360,RA=(Math.atan(0.91764*Math.tan(L*r))/r+360)%360;RA=(RA+Math.floor(L/90)*90-Math.floor(RA/90)*90)/15;const sd=0.39782*Math.sin(L*r),cd=Math.cos(Math.asin(sd)),ch=(Math.cos(90.833*r)-sd*Math.sin(lat*r))/(cd*Math.cos(lat*r));if(ch<-1||ch>1)return null;const UT=((Math.acos(ch)/r)/15+RA-0.06571*t-6.622-lh+48)%24;return new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())+UT*36e5+30*60000);}
+const NX_CANDLE=/candles out when dark/i;
+function nxArea(job){const i=String(job).indexOf(" | ");if(NX_CANDLE.test(job)){const dk=nxDark();return dk&&dk.getHours()<18?"4–5pm: bar":"Bar 9–10pm";}return i>0?String(job).slice(0,i):"Other jobs";}
+function nxJobText(job){const i=String(job).indexOf(" | ");if(NX_CANDLE.test(job)){const dk=nxDark();return "Put candles out at dusk"+(dk?" (dark about "+dk.toLocaleTimeString("en-GB",{hour:"numeric",minute:"2-digit",hour12:true}).replace(" ","")+" tonight)":"");}return i>0?String(job).slice(i+3):String(job);}
 function nxInMode(j){const a=nxArea(j.job);return NX_MODE==="opening"?NX_OPEN.includes(a):!NX_OPEN.includes(a);}
 if(NX_MODE==="opening"){const go=()=>{document.querySelectorAll(".nav-bar .nav-btn").forEach(b=>{const t=b.textContent.trim();if(t==="Opening")b.classList.add("current");else if(t==="End Of Night"&&b.classList.contains("current")){b.classList.remove("current");b.style.cursor="pointer";b.onclick=()=>{location.href="../end-of-night/";};}});};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",go):go();}
 function nxJobText(job){const s=nxBarStrip(job),i=s.indexOf(" | ");return i>0?s.slice(i+3):s;}
