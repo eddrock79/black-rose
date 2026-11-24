@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T08:00:15",
+  "generated": "2026-11-24T08:00:18",
   "days": {
     "2026-11-23": [
       {
@@ -262,19 +262,19 @@
         "end": "5:00 PM"
       },
       {
-        "name": "Callan",
+        "name": "Chloe",
         "start": "5:00 PM",
         "end": "1:30 AM"
       },
       {
         "name": "Mali",
-        "start": "5:00 PM",
-        "end": "1:30 AM"
+        "start": "11:00 AM",
+        "end": "5:00 PM"
       },
       {
         "name": "Jane",
-        "start": "11:00 AM",
-        "end": "5:00 PM"
+        "start": "5:00 PM",
+        "end": "1:30 AM"
       },
       {
         "name": "Frank",
@@ -294,17 +294,22 @@
         "end": "5:00 PM"
       },
       {
-        "name": "Chaz",
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "10:00 PM"
+      },
+      {
+        "name": "Chloe",
         "start": "5:00 PM",
         "end": "1:30 AM"
       },
       {
-        "name": "Jane",
+        "name": "Mali",
         "start": "11:00 AM",
         "end": "5:00 PM"
       },
       {
-        "name": "Stuart",
+        "name": "Jane",
         "start": "5:00 PM",
         "end": "1:30 AM"
       },
@@ -327,16 +332,11 @@
       },
       {
         "name": "Keefe",
-        "start": "9:00 AM",
+        "start": "10:00 AM",
         "end": "5:00 PM"
       },
       {
         "name": "Chloe",
-        "start": "11:00 AM",
-        "end": "5:00 PM"
-      },
-      {
-        "name": "Chaz",
         "start": "5:00 PM",
         "end": "1:30 AM"
       },
@@ -344,6 +344,11 @@
         "name": "Jane",
         "start": "5:00 PM",
         "end": "1:30 AM"
+      },
+      {
+        "name": "Stuart",
+        "start": "11:00 AM",
+        "end": "5:00 PM"
       },
       {
         "name": "Junior",
@@ -368,19 +373,19 @@
         "end": "5:00 PM"
       },
       {
+        "name": "Callan",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
         "name": "Chloe",
         "start": "5:00 PM",
         "end": "1:30 AM"
       },
       {
-        "name": "Aaron",
+        "name": "Chaz",
         "start": "11:00 AM",
         "end": "5:00 PM"
-      },
-      {
-        "name": "Jane",
-        "start": "5:00 PM",
-        "end": "1:30 AM"
       },
       {
         "name": "Frank",
@@ -410,14 +415,9 @@
         "end": "1:30 AM"
       },
       {
-        "name": "Mali",
-        "start": "4:00 PM",
-        "end": "10:00 PM"
-      },
-      {
         "name": "Aaron",
-        "start": "11:00 AM",
-        "end": "5:00 PM"
+        "start": "12:00 PM",
+        "end": "10:00 PM"
       },
       {
         "name": "Stuart",
@@ -442,12 +442,12 @@
     ],
     "2026-12-05": [
       {
-        "name": "Keefe",
+        "name": "Callan",
         "start": "5:00 PM",
         "end": "1:30 AM"
       },
       {
-        "name": "Chloe",
+        "name": "Chaz",
         "start": "9:00 AM",
         "end": "5:00 PM"
       },
@@ -458,13 +458,13 @@
       },
       {
         "name": "Aaron",
-        "start": "5:00 PM",
-        "end": "1:30 AM"
+        "start": "12:00 PM",
+        "end": "10:00 PM"
       },
       {
         "name": "Stuart",
-        "start": "4:00 PM",
-        "end": "10:00 PM"
+        "start": "5:00 PM",
+        "end": "1:30 AM"
       },
       {
         "name": "Alannah",
@@ -479,29 +479,24 @@
     ],
     "2026-12-06": [
       {
-        "name": "Chloe",
+        "name": "Keefe",
+        "start": "5:00 PM",
+        "end": "1:30 AM"
+      },
+      {
+        "name": "Chaz",
         "start": "10:00 AM",
         "end": "5:00 PM"
       },
       {
-        "name": "Chaz",
-        "start": "5:00 PM",
-        "end": "1:30 AM"
-      },
-      {
-        "name": "Mali",
-        "start": "11:00 AM",
-        "end": "5:00 PM"
-      },
-      {
         "name": "Aaron",
-        "start": "5:00 PM",
-        "end": "1:30 AM"
+        "start": "12:00 PM",
+        "end": "8:00 PM"
       },
       {
         "name": "Stuart",
-        "start": "11:00 AM",
-        "end": "5:00 PM"
+        "start": "5:00 PM",
+        "end": "1:30 AM"
       },
       {
         "name": "Scott M.",
